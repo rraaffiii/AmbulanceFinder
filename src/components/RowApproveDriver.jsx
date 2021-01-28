@@ -2,16 +2,13 @@ import React, { useState } from 'react'
 import Button from './Button'
 
 const RowApproveDriver = ({ id, username, name, statusData, docs }) => {
-  const [status, setStatus] = useState(null)
+  const [status, setStatus] = useState(0)
   const [doc, setDoc] = useState(null)
-  const handleApprove = () => {
-    setStatus(true)
-  }
-  const handleReject = () => {
-    setStatus(false)
-  }
   const handleDetails = () => {
     setDoc(!doc)
+  }
+  const handleChange = (id) => {
+    setStatus(id)
   }
   return (
     <>
@@ -19,24 +16,27 @@ const RowApproveDriver = ({ id, username, name, statusData, docs }) => {
         <td>{username}</td>
         <td>{name}</td>
         <td>
-          {(status && 'Approved') || (!status && 'Rejected') || 'Not Reviewed'}
+          {(status == 0 && 'Not Reviewed') ||
+            (status == 1 && 'Approved') ||
+            (status == 2 && 'Rejected')}
         </td>
         <td>
           <>
             <Button className='sm' event={handleDetails} text='Docs' />
             <Button
-              className={`sm action-1 ${status !== null && 'disabled'}`}
+              className={`sm action-1 ${status !== 0 && 'disabled'}`}
               color='action-1'
               link='# '
               text={(status && 'Approved') || 'Approve'}
-              event={handleApprove}
+              event={handleChange}
+              id={1}
             />
             <Button
-              className={`sm action-2 ${status !== null && 'disabled'}`}
+              className={`sm action-2 ${status !== 0 && 'disabled'}`}
               link='# '
               text='Reject'
-              event={handleReject}
-              id={id}
+              event={handleChange}
+              id={2}
             />
           </>
         </td>
