@@ -1,17 +1,20 @@
-import React, { useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import Section from '../components/Section'
 import SubHeadingTitle from '../components/SubHeadingTitle'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import StaticImg from '../assets/signup.jpg'
 
 const Signup = () => {
   const user = new URLSearchParams(useLocation().search).get('u')
 
+  const [dob, setDob] = useState(new Date())
+
   const fname = useRef(null)
   const lname = useRef(null)
   const email = useRef(null)
   const password = useRef(null)
-  const dob = useRef(null)
   const gender = useRef(null)
   const city = useRef(null)
   const country = useRef(null)
@@ -28,7 +31,7 @@ const Signup = () => {
       email: email.current.value,
       password: password.current.value,
       type: null,
-      dob: dob.current.value,
+      dob: dob,
       gender: gender.current.value,
       city: city.current.value,
       country: country.current.value,
@@ -42,7 +45,7 @@ const Signup = () => {
     } else if (user == 'driver') {
       userData.type = 1
     }
-    console.log(userData.proPic)
+    console.log(userData)
   }
 
   return (
@@ -115,28 +118,7 @@ const Signup = () => {
                     className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
                   />
                 </div>
-                <div className='input-group mb-15'>
-                  <input
-                    ref={dob}
-                    type='text'
-                    name='dob'
-                    placeholder='Date of Birth'
-                    required='required'
-                    className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-                  />
-                  <select
-                    ref={gender}
-                    defaultValue='Gender'
-                    required='required'
-                    className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-                    aria-label='Default select example'
-                    id='type'
-                  >
-                    <option disabled>Gender</option>
-                    <option value='0'>Male</option>
-                    <option value='1'>Female</option>
-                  </select>
-                </div>
+
                 <input
                   type='text'
                   name=''
@@ -161,6 +143,28 @@ const Signup = () => {
                     required='required'
                     className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
                   />
+                </div>
+                <div className='input-group mb-15'>
+                  <DatePicker
+                    className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left z-index-master'
+                    selected={dob}
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode='select'
+                    onChange={(date) => setDob(date)}
+                  />
+                  <select
+                    ref={gender}
+                    defaultValue='Gender'
+                    required='required'
+                    className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+                    aria-label='Default select example'
+                    id='type'
+                  >
+                    <option disabled>Gender</option>
+                    <option value='0'>Male</option>
+                    <option value='1'>Female</option>
+                  </select>
                 </div>
                 <div className='input-group mb-15'>
                   <span className='f-18 bold'>Profile Picture:</span>
