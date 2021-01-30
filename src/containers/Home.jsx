@@ -24,7 +24,7 @@ const Home = () => {
       <Section className='bg-dark content_1' align='left'>
         <div className='col-lg-6'>
           <h1 className='color-white text-center'>Request a ride now</h1>
-          <div className='mw-620 mx-auto mt-10 f-22 color-white op-7 text-center text-adaptive'>
+          <div className='mw-620 mx-auto mt-10  mb-40 f-22 color-white op-7 text-center text-adaptive'>
             We help you rent ambulance everywhere!
           </div>
 
@@ -42,7 +42,7 @@ const Home = () => {
       {/* Content */}
       <Section className='bg-light' align='center'>
         <SubHeadingTitle
-          subheading='Find an Ambulance!!'
+          subheading='Find an Ambulance!'
           heading='Sign Up to Book'
           size='h2'
           to='/signup?u=client'

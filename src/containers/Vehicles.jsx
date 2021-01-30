@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Section from '../components/Section'
 import Vehicle from '../components/Vehicle'
 import Select from '../components/Select'
+import PageTitle from '../components/PageTitle'
 import { vehiclesData } from '../data'
 
 const Vehicles = () => {
@@ -31,10 +32,11 @@ const Vehicles = () => {
   return (
     <>
       <Section className='bg-light ecommerce_2' align='center'>
-        <div className='top-row pb-20 d-flex'>
-          <h2 className='me-auto'>Search Result</h2>
+        <div className='d-flex'>
+          <PageTitle title='Search Result' />
+
           <Select
-            className='pl-4'
+            className='pl-4 ms-auto'
             event={handleChange}
             selectedValue={type}
             options={selectOptions}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Section from '../components/Section'
 import RowBookingRequest from '../components/RowBookingRequest'
+import PageTitle from '../components/PageTitle'
 import { bookingRequests as requestsData } from '../data'
 
 const BookingRequest = () => {
@@ -13,9 +14,7 @@ const BookingRequest = () => {
   return (
     <>
       <Section className='bg-light vehicle-add' align='center'>
-        <div className='top-row pb-20 d-flex'>
-          <h2>Booking Requests</h2>
-        </div>
+        <PageTitle title='Booking Requests' />
 
         <div className='table-responsive'>
           <table className='table'>
