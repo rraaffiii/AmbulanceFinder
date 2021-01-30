@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Section from '../components/Section'
 import FormSmall from '../components/FormSmall'
+import PageTitle from '../components/PageTitle'
 import StaticImg from '../assets/map_placeholder.jpg'
 
 const Search = () => {
@@ -18,11 +19,8 @@ const Search = () => {
   return (
     <>
       <Section className='bg-light' align='center'>
-        <div className='col-lg-4 bg-dark color-white px-5'>
-          <div className='top-row py-4'>
-            <h2>Routes</h2>
-          </div>
-
+        <div className='col-lg-4 bg-dark color-white px-5 pt-4'>
+          <PageTitle title='Routes' />
           <FormSmall
             btnText='Confirm'
             btnLink='/vehicles'

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Section from '../components/Section'
 import FormSmall from '../components/FormSmall'
-import StaticImg from '../assets/signup.jpg'
+import PageTitle from '../components/PageTitle'
 
 const Signin = () => {
   const [form, setForm] = useState({ username: '', password: '' })
@@ -21,7 +21,8 @@ const Signin = () => {
       <Section className='bg-light form_2' align='center'>
         <div className='col-lg-5 col-md-6 col-sm-10 d-flex align-items-center text-center'>
           <div className='d-block'>
-            <h2 className='mb-45 small'>Sign In to Book/Drive</h2>
+            <PageTitle title='Sign In' />
+
             <FormSmall
               btnText='Sign In'
               btnLink='# '
@@ -39,10 +40,6 @@ const Signin = () => {
               now!
             </p>
           </div>
-        </div>
-        <div className='col-sm-1'></div>
-        <div className='col-lg-6 col-md-5 d-none d-md-block overflow-hidden my-auto'>
-          <img src={StaticImg} alt='' className='img-fluid' />
         </div>
       </Section>
     </>

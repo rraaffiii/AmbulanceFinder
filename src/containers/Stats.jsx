@@ -1,6 +1,7 @@
 import React from 'react'
 import Section from '../components/Section'
 import BlockRow from '../components/BlockRow'
+import PageTitle from '../components/PageTitle'
 
 const Stats = () => {
   const stats = [
@@ -15,9 +16,7 @@ const Stats = () => {
   return (
     <>
       <Section className='bg-light d-flex align-items-center' align='center'>
-        <div className='top-row pb-20 d-flex'>
-          <h2 className='me-auto'>Stats</h2>
-        </div>
+        <PageTitle title='Stats' />
 
         <div className='col-lg-6'>
           <BlockRow heading='User Stats' rows={stats} />

@@ -15,20 +15,20 @@ const FormSmall = ({
       : 'border-transparent-white focus-white color-white placeholder-transparent-white'
   return (
     <>
-      <form className='row align-items-center no-gutters mt-50'>
+      <form className='row align-items-center no-gutters'>
         {inputs.map(({ label, type }, index) => (
           <input
             type={type}
             name={label}
-            placeholder={`Enter ${label}`}
+            placeholder={label}
             required='required'
             key={index}
-            className={`input mb-2 d-block text-center text-md-left ${className}`}
+            className={`input mb-15 d-block text-center text-md-left ${className}`}
             onChange={handleChange}
           />
         ))}
         <Button
-          className='action-2 mx-auto mw-320 text-center'
+          className='action-2 mx-auto w-250 text-center'
           link={btnLink || null}
           text={btnText}
           event={handleSubmit}

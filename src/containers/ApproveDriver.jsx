@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Section from '../components/Section'
 import RowApproveDriver from '../components/RowApproveDriver'
+import PageTitle from '../components/PageTitle'
 import { users as usersData } from '../data'
 
 const ApproveDriver = () => {
@@ -11,9 +12,7 @@ const ApproveDriver = () => {
   return (
     <>
       <Section className='bg-light vehicle-add' align='center'>
-        <div className='top-row pb-20 d-flex'>
-          <h2>Approve Driver</h2>
-        </div>
+        <PageTitle title='Approve Driver' />
 
         <div className='table-responsive'>
           <table className='table'>

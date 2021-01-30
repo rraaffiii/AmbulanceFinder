@@ -30,6 +30,9 @@ body.dev {
   background: #ccc;
   min-height: 10000px;
 }
+input::placeholder {
+  text-transform: capitalize;
+}
 
 nav,
 header,
@@ -47,10 +50,10 @@ section,
   background-size: cover;
 }
 
-header,
+/* header,
 section {
   overflow: hidden;
-}
+} */
 
 /* header nav {
   position: absolute;
@@ -971,6 +974,11 @@ select {
 }
 
 /* custom datepicker styling */
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  display: none;
+}
 .react-datepicker__day--selected:hover,
 .react-datepicker__day--in-selecting-range:hover,
 .react-datepicker__day--in-range:hover,

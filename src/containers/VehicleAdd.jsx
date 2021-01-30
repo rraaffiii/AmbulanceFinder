@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import Section from '../components/Section'
 import Button from '../components/Button'
+import PageTitle from '../components/PageTitle'
 
 const VehicleAdd = () => {
   const name = useRef(null)
@@ -43,16 +44,7 @@ const VehicleAdd = () => {
   return (
     <>
       <Section className='bg-light vehicle-add' align='center'>
-        <div className='top-row pb-20 d-flex'>
-          <h2>Add Vehicle</h2>
-
-          <a
-            href='#'
-            className='float-end ms-auto mr-15 btn border-gray action-1'
-          >
-            Modify
-          </a>
-        </div>
+        <PageTitle title='Add Vehicle' />
 
         <div className='col-lg-12'>
           <div className='row'>
