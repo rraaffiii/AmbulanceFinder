@@ -45,37 +45,50 @@ const Header = () => {
               </div>
               <div className='col-md-6 d-flex justify-content-end align-items-center'>
                 <NavLink
+                  exact
                   to='/booking-request'
                   className='link color-white f-18 mx-15'
-                  activeClassName='action-2'
+                  activeClassName='active'
                 >
                   Requests
                 </NavLink>
                 <NavLink
+                  exact
                   to='/vehicle-add'
                   className='link color-white f-18 mx-15'
-                  activeClassName='action-2'
+                  activeClassName='active'
                 >
                   Add
                 </NavLink>
                 <NavLink
+                  exact
                   to='/approve-driver'
                   className='link color-white f-18 mx-15'
-                  activeClassName='action-2'
+                  activeClassName='active'
                 >
                   Approve
                 </NavLink>
                 <NavLink
+                  exact
                   to='/stats'
                   className='link color-white f-18 mx-15'
-                  activeClassName='action-2'
+                  activeClassName='active'
                 >
                   Stats
                 </NavLink>
                 <NavLink
+                  exact
+                  to='/signin'
+                  className='link color-white f-18 mx-15'
+                  activeClassName='active'
+                >
+                  Signin
+                </NavLink>
+                <NavLink
+                  exact
                   to='/signup'
                   className='link color-white f-18 mx-15'
-                  activeClassName='action-2'
+                  activeClassName='active'
                 >
                   Signup
                 </NavLink>

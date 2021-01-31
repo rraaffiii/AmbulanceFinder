@@ -121,30 +121,15 @@ h6 {
   font-weight: 700;
   font-family: DM Sans, Helvetica, Arial, sans-serif;
 }
-
-h1 {
-  font-size: 58px;
-  line-height: 70px;
-}
 h1.big,
 .h1.big {
-  font-size: 72px;
-  line-height: 86px;
+  font-size: 3.5rem;
   font-weight: 900;
 }
 h2.big,
 .h2.big {
-  font-size: 52px;
-  line-height: 86px;
+  font-size: 2.5rem;
   font-weight: 900;
-}
-h1.small,
-.h1.small,
-h2.small,
-.h2.small {
-  font-size: 42px;
-  line-height: 52px;
-  font-weight: 700;
 }
 
 b,
@@ -936,6 +921,12 @@ body {
 }
 
 /* others */
+.active {
+  background-color: #f94144;
+  color: #ffffff;
+  border-radius: 50px;
+  padding: 5px 15px;
+}
 .input {
   border-radius: 30px !important;
 }

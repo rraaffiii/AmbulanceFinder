@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import SocialLink from '../components/SocialLink'
 
 const Footer = () => {
@@ -9,20 +9,27 @@ const Footer = () => {
         <div className='container px-xl-0'>
           <div className='row justify-content-between align-items-center lh-40 links'>
             <div className='col-lg-4 col-sm-6 text-sm-right text-lg-left order-1 order-lg-0'>
-              <NavLink
+              <Link
                 to='/'
                 className='link color-white f-18 mx-15'
                 activeClassName='action-2'
               >
                 Home
-              </NavLink>
-              <NavLink
+              </Link>
+              <Link
+                to='/signin'
+                className='link color-white f-18 mx-15'
+                activeClassName='action-2'
+              >
+                Signin
+              </Link>
+              <Link
                 to='/signup'
                 className='link color-white f-18 mx-15'
                 activeClassName='action-2'
               >
                 Signup
-              </NavLink>
+              </Link>
             </div>
             <div className='mb-10 mb-lg-0 col-lg-auto order-0'>
               <div className='color-heading text-adaptive'>

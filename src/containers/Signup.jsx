@@ -58,13 +58,13 @@ const Signup = () => {
           <SubHeadingTitle
             subheading='Find an Ambulance!'
             heading='Sign Up to Book'
-            size='h2 big'
+            size='h1 big'
             to='/signup?u=client'
           />
           <SubHeadingTitle
             subheading='Start Earning!'
             heading='Sign Up to Drive'
-            size='h2 big'
+            size='h1 big'
             to='/signup?u=driver'
           />
         </Section>
