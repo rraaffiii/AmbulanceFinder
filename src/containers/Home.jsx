@@ -23,7 +23,7 @@ const Home = () => {
     <>
       <Section className='bg-dark content_1' align='left'>
         <div className='col-lg-6'>
-          <h1 className='color-white text-center'>Request a ride now</h1>
+          <h1 className='color-white text-center big'>Request a ride now</h1>
           <div className='mw-620 mx-auto mt-10  mb-40 f-22 color-white op-7 text-center text-adaptive'>
             We help you rent ambulance everywhere!
           </div>
@@ -58,7 +58,7 @@ const Home = () => {
       {/* Feature */}
       <Section className='bg-dark feature_1' align='center'>
         <div className='col-xl-10 color-white text-center'>
-          <h2 className='mb-45 small'>How it works</h2>
+          <h2 className='mb-45'>How it works</h2>
           <div className='row justify-content-center'>
             <LogoParagraph
               logo='briefcase'
