@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Section from '../components/Section'
 import RowApproveDriver from '../components/RowApproveDriver'
 import PageTitle from '../components/PageTitle'
-import { users as usersData } from '../data'
+import { usersData } from '../data'
 
 const ApproveDriver = () => {
   const [users, setUsers] = useState(usersData)

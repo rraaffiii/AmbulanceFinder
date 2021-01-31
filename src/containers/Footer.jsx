@@ -37,9 +37,21 @@ const Footer = () => {
               </div>
             </div>
             <div className='col-lg-4 col-sm-6 text-sm-left text-lg-right order-2 order-lg-0'>
-              <SocialLink link='fb.com' color='white' icon='facebook' />
-              <SocialLink link='twitter.com' color='white' icon='twitter' />
-              <SocialLink link='instagram.com' color='white' icon='instagram' />
+              <SocialLink
+                link='https://facebook.com'
+                color='white'
+                icon='facebook'
+              />
+              <SocialLink
+                link='https://twitter.com'
+                color='white'
+                icon='twitter'
+              />
+              <SocialLink
+                link='https://instagram.com'
+                color='white'
+                icon='instagram'
+              />
             </div>
           </div>
         </div>

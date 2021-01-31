@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import Section from '../components/Section'
 import RowBookingRequest from '../components/RowBookingRequest'
 import PageTitle from '../components/PageTitle'
-import { bookingRequests as requestsData } from '../data'
+import { bookingsData } from '../data'
 
 const BookingRequest = () => {
-  const [bookingRequests, setBookingRequests] = useState(requestsData)
+  const [bookingRequests, setBookingRequests] = useState(bookingsData)
 
   const reject = (id) => {
     setBookingRequests(bookingRequests.filter((request) => request.id != id))

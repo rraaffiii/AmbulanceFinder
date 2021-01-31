@@ -46,11 +46,27 @@ const Header = () => {
               <div className='col-md-6 d-flex justify-content-end align-items-center'>
                 <NavLink
                   exact
+                  to='/profile/user3'
+                  className='link color-white f-18 mx-15'
+                  activeClassName='active'
+                >
+                  Profile
+                </NavLink>
+                <NavLink
+                  exact
                   to='/booking-request'
                   className='link color-white f-18 mx-15'
                   activeClassName='active'
                 >
                   Requests
+                </NavLink>
+                <NavLink
+                  exact
+                  to='/booking-recent'
+                  className='link color-white f-18 mx-15'
+                  activeClassName='active'
+                >
+                  Bookings
                 </NavLink>
                 <NavLink
                   exact

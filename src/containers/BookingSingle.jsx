@@ -6,7 +6,7 @@ import Switch from '../components/Switch'
 import BlockRow from '../components/BlockRow'
 import UserCard from '../components/UserCard'
 import Review from '../components/Review'
-import { users, reviewsData } from '../data'
+import { usersData, reviewsData } from '../data'
 
 const BookingSingle = () => {
   const { id } = useParams()
@@ -88,9 +88,13 @@ const BookingSingle = () => {
               </div>
             </div>
             <div className='col-lg-5'>
-              <UserCard {...users[0]} />
+              <UserCard {...usersData[0]} />
             </div>
           </div>
+        </div>
+      </Section>
+      <Section className='bg-offwhite' align='center'>
+        <div className='col-lg-12'>
           <div className='row justify-content-center'>
             <div className='col-lg-12'>
               <Switch
