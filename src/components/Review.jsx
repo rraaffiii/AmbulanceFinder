@@ -9,7 +9,7 @@ const Review = ({ id, username, rating, receiver, date, details }) => {
           <div className='col-md-2 col-sm-2 text-center'>
             <img
               className='col-md-6 rounded-circle'
-              src={require(`../assets/team_2_img_2.jpg`).default}
+              src={`/photos/profile/team_2_img_2.jpg`}
             />
             <span className='d-block pt-2'>
               {username}

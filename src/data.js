@@ -74,6 +74,8 @@ export const usersData = [
     email: 'mark@mail.com',
     date_of_birth: '15-01-1986',
     vehicle: 2,
+    available: true,
+    last_location: 'Dhaka',
     approved: true,
   },
 ]
