@@ -935,6 +935,9 @@ input[type='radio'] + label:before {
 .color-offwhite {
   color: #d3d3d3;
 }
+.table {
+  margin-bottom: 0;
+}
 .rating i {
   cursor: pointer;
   margin-left: 10px;

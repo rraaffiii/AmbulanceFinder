@@ -37,6 +37,7 @@ export const usersData = [
   {
     id: 1,
     username: 'user1',
+    password: 'aA11!',
     type: 0,
     name: 'Mark Otto',
     city: 'Dhaka',
@@ -50,6 +51,7 @@ export const usersData = [
   {
     id: 2,
     username: 'user2',
+    password: 'aA11!',
     type: 0,
     name: 'Chris Thornton',
     city: 'Chittagong',
@@ -63,6 +65,7 @@ export const usersData = [
   {
     id: 3,
     username: 'user3',
+    password: 'aA11!',
     type: 1,
     name: 'Larry Paige',
     city: 'Gazipur',
@@ -72,7 +75,7 @@ export const usersData = [
     rating_count: 25,
     phone: '+019989893935',
     email: 'mark@mail.com',
-    date_of_birth: '15-01-1986',
+    date_of_birth: '1986-01-15',
     vehicle: 2,
     available: true,
     last_location: 'Dhaka',
