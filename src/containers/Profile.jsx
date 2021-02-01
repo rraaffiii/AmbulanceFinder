@@ -6,13 +6,14 @@ import PageTitle from '../components/PageTitle'
 import Rating from '../components/Rating'
 import Switch from '../components/Switch'
 import Review from '../components/Review'
+import Button from '../components/Button'
 import { usersData, reviewsData } from '../data'
 
 const Profile = () => {
   const { id } = useParams()
   const [user, setUser] = useState({})
   const [reviews, setReviews] = useState([])
-  const [available, setAvailable] = useState(user.available)
+  const [available, setAvailable] = useState()
 
   const handleAvailability = () => {
     setAvailable(!available)
@@ -24,9 +25,6 @@ const Profile = () => {
     setAvailable(user.available)
   }, [user])
 
-  console.log(user)
-  console.log(reviews)
-  console.log(available)
   return (
     <>
       <Section className='bg-light d-flex align-items-center' align='center'>
@@ -35,15 +33,22 @@ const Profile = () => {
         <div className='col-lg-3'>
           <img
             src={`/photos/profile/${user.profile_photo}`}
-            className='img-fluid rounded pb-3'
+            className='img-fluid rounded pb-2'
           />
           <div className='pl-5'>
             <h3>{user.name}</h3>
             <Rating rating={user.rating} rating_count={user.rating_count} />
           </div>
+          {/* user can edit own profile if logged in*/}
+          <Button
+            className='btn mb-2 border-gray action-1'
+            link={`/profile/${id}/edit`}
+            text='Edit Profile'
+            type='submit'
+          />
           {user.type == 1 && (
             <Switch
-              label='Show Available Now'
+              label='Set Available'
               className='lg'
               isChecked={available}
               event={handleAvailability}

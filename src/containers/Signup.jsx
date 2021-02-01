@@ -159,7 +159,7 @@ const Signup = () => {
                         className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
                       />
                       <DatePicker
-                        className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left z-index-master'
+                        className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
                         selected={dob}
                         placeholderText='Date of Birth'
                         showMonthDropdown

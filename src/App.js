@@ -16,6 +16,7 @@ import VehicleAdd from './containers/VehicleAdd'
 import ApproveDriver from './containers/ApproveDriver'
 import Stats from './containers/Stats'
 import Profile from './containers/Profile'
+import ProfileEdit from './containers/ProfileEdit'
 
 const App = () => {
   return (
@@ -35,7 +36,8 @@ const App = () => {
           <Route path='/vehicle-add' component={VehicleAdd} />
           <Route path='/approve-driver' component={ApproveDriver} />
           <Route path='/stats' component={Stats} />
-          <Route path='/profile/:id' component={Profile} />
+          <Route exact path='/profile/:id' component={Profile} />
+          <Route exact path='/profile/:id/edit' component={ProfileEdit} />
         </Switch>
         <Footer />
       </Router>
