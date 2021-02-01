@@ -23,7 +23,7 @@ const UserCard = ({ id, name, profile_photo, rating, rating_count, phone }) => {
         </div>
         <div className='col-lg-4 justify-content-end'>
           <img
-            src={require(`../assets/${profile_photo}`).default}
+            src={`/photos/profile/${profile_photo}`}
             alt=''
             className='img-fluid rounded-circle'
           />

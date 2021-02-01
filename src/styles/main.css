@@ -932,6 +932,13 @@ input[type='radio'] + label:before {
 .bg-offwhite {
   background-color: #f3f3f3;
 }
+.color-offwhite {
+  color: #d3d3d3;
+}
+.rating i {
+  cursor: pointer;
+  margin-left: 10px;
+}
 .active {
   background-color: #f94144;
   color: #ffffff;
@@ -973,6 +980,15 @@ select {
 }
 .sign_up {
   height: calc(100vh - (var(--footerH) + var(--headerH)));
+}
+.modal {
+  display: initial;
+}
+.modal label {
+  padding-left: 5px;
+}
+textarea.input {
+  height: 100px;
 }
 
 /* custom datepicker styling */

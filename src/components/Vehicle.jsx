@@ -67,7 +67,7 @@ const Vehicle = ({
             </div>
             <div className='d-block'>
               <img
-                src={require(`../assets/${photo}`).default}
+                src={`/photos/profile/${photo}`}
                 alt=''
                 className='radius10 mt-25 w-full'
               />
