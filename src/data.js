@@ -1,10 +1,11 @@
-export const bookingRequests = [
+export const bookingsData = [
   {
     id: 1,
     username: 'user1',
     name: 'Mark Otto',
     date: 'January 15, 2021',
     time: '21:45',
+    status: 0,
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const bookingRequests = [
     name: 'Chris Thornton',
     date: 'January 11, 2021',
     time: '18:45',
+    status: 1,
   },
   {
     id: 3,
@@ -19,10 +21,19 @@ export const bookingRequests = [
     name: 'Larry Paige',
     date: 'January 02, 2021',
     time: '15:45',
+    status: 2,
+  },
+  {
+    id: 3,
+    username: 'user3',
+    name: 'Larry Paige',
+    date: 'January 08, 2021',
+    time: '12:45',
+    status: 3,
   },
 ]
 
-export const users = [
+export const usersData = [
   {
     id: 1,
     username: 'user1',
@@ -60,6 +71,8 @@ export const users = [
     rating: 4.9,
     rating_count: 25,
     phone: '+019989893935',
+    email: 'mark@mail.com',
+    date_of_birth: '15-01-1986',
     vehicle: 2,
     approved: true,
   },
@@ -70,7 +83,7 @@ export const reviewsData = [
     id: 1,
     username: 'user1',
     rating: 5,
-    receiver: 'user4',
+    receiver: 'user3',
     date: '2021-01-24',
     details:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et  olore magna aliqua adipiscing elit.',
@@ -79,16 +92,16 @@ export const reviewsData = [
     id: 2,
     username: 'user2',
     rating: 5,
-    receiver: 'user4',
+    receiver: 'user3',
     date: '2021-01-23',
     details:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et  olore magna aliqua adipiscing elit.',
   },
   {
     id: 3,
-    username: 'user3',
+    username: 'user1',
     rating: 4,
-    receiver: 'user4',
+    receiver: 'user3',
     date: '2021-01-23',
     details:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et  olore magna aliqua adipiscing elit.',

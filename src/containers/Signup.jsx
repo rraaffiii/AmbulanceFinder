@@ -16,7 +16,6 @@ const Signup = () => {
   const email = useRef(null)
   const phone = useRef(null)
   const password = useRef(null)
-  const address = useRef(null)
   const city = useRef(null)
   const country = useRef(null)
   const proPic = useRef(null)
@@ -169,14 +168,6 @@ const Signup = () => {
                         onChange={(date) => setDob(date)}
                       />
                     </div>
-                    <input
-                      ref={address}
-                      type='text'
-                      name='address'
-                      placeholder='Address'
-                      required='required'
-                      className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-                    />
                     <div className='input-group mb-15'>
                       <input
                         ref={city}

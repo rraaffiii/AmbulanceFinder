@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '../components/Button'
+import Rating from '../components/Rating'
 
 const UserCard = ({ id, name, profile_photo, rating, rating_count, phone }) => {
   return (
@@ -11,10 +12,7 @@ const UserCard = ({ id, name, profile_photo, rating, rating_count, phone }) => {
 
           <div>
             <div className='d-flex align-items-center'>
-              <i className='fas fa-star color-red'></i>
-              <span>
-                &nbsp;{rating} ({rating_count})
-              </span>
+              <Rating rating={rating} rating_count={rating_count} />
               <i className='fas fa-phone-square-alt f-18 pl-15'></i>
               <span>&nbsp;{phone}</span>
             </div>
