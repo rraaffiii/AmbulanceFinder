@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Logo = ({ name }) => {
+const Logo = ({ name, color = 'white' }) => {
   return (
     <>
-      <div className='logo color-white'>
+      <div className={`logo color-${color}`}>
         <Link to='/'>{name}</Link>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

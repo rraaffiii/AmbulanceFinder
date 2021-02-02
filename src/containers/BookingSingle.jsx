@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import Section from '../components/Section'
 import Button from '../components/Button'
 import Switch from '../components/Switch'
-import BlockRow from '../components/BlockRow'
+import Block from '../components/Block'
 import UserCard from '../components/UserCard'
 import Review from '../components/Review'
 import Modal from '../components/Modal'
@@ -200,10 +200,10 @@ const BookingSingle = () => {
                 <>
                   <div className='row'>
                     <div className='col-lg-6'>
-                      <BlockRow heading='Booking Details' rows={rowsBooking} />
+                      <Block heading='Booking Details' rows={rowsBooking} />
                     </div>
                     <div className='col-lg-6'>
-                      <BlockRow heading='Payment Details:' rows={rowsPayment} />
+                      <Block heading='Payment Details:' rows={rowsPayment} />
                     </div>
                   </div>
                 </>
