@@ -1,6 +1,6 @@
 import React from 'react'
 import Section from '../components/Section'
-import BlockRow from '../components/BlockRow'
+import Block from '../components/Block'
 import PageTitle from '../components/PageTitle'
 
 const Stats = () => {
@@ -19,10 +19,10 @@ const Stats = () => {
         <PageTitle title='Stats' />
 
         <div className='col-lg-6'>
-          <BlockRow heading='User Stats' rows={stats} />
+          <Block heading='User Stats' rows={stats} />
         </div>
         <div className='col-lg-6'>
-          <BlockRow heading='Booking Stats:' rows={stats} />
+          <Block heading='Booking Stats:' rows={stats} />
         </div>
       </Section>
     </>

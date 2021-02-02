@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Section from '../components/Section'
-import BlockObjectRow from '../components/BlockObjectRow'
+import BlockObject from '../components/BlockObject'
 import PageTitle from '../components/PageTitle'
 import Rating from '../components/Rating'
 import Switch from '../components/Switch'
@@ -56,7 +56,7 @@ const Profile = () => {
           )}
         </div>
         <div className='col-lg-9'>
-          <BlockObjectRow rows={user} />
+          <BlockObject rows={user} />
         </div>
       </Section>
 

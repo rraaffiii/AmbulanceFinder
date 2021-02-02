@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import FormSmall from '../components/FormSmall'
 import Section from '../components/Section'
 import SubHeadingTitle from '../components/SubHeadingTitle'
-import LogoParagraph from '../components/LogoParagraph'
+import IconParagraph from '../components/IconParagraph'
 import Testimonial from '../components/Testimonial'
 import staticImg from '../assets/testimonial_1_img.jpg'
 
@@ -60,21 +60,21 @@ const Home = () => {
         <div className='col-xl-10 color-white text-center'>
           <h2 className='mb-45'>How it works</h2>
           <div className='row justify-content-center'>
-            <LogoParagraph
+            <IconParagraph
               logo='briefcase'
               title='Find an ambulance'
               paragraph='Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industrys standard dummy text ever
           since the 1500s'
             />
-            <LogoParagraph
+            <IconParagraph
               logo='compress-arrows-alt'
               title='Book an ambulance'
               paragraph='Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industrys standard dummy text ever
           since the 1500s'
             />
-            <LogoParagraph
+            <IconParagraph
               logo='desktop'
               title='Easy payment'
               paragraph='Lorem Ipsum is simply dummy text of the printing and typesetting

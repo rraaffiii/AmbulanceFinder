@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-const LogoParagraph = ({ logo, title, paragraph }) => {
+const IconParagraph = ({ logo, title, paragraph }) => {
   return (
     <>
       <div className='col-md-4'>
@@ -9,7 +9,7 @@ const LogoParagraph = ({ logo, title, paragraph }) => {
         <div className='color-heading text-adaptive'>{paragraph}</div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default LogoParagraph;
+export default IconParagraph

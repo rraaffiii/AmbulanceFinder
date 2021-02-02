@@ -1,15 +1,15 @@
 import React from 'react'
 
-const BlockObjectRow = ({ heading, rows }) => {
+const Block = ({ heading, rows }) => {
   return (
     <>
       <div className='block radius10 p-3'>
-        {heading && <h5 className='pb-3'>{heading}</h5>}
-        {Object.keys(rows).map((key) => {
+        <h5 className='pb-3'>{heading}</h5>
+        {rows.map((row) => {
           return (
             <>
               <div className='item'>
-                {key}: <b>{rows[key]}</b>
+                {row.label}: <b>{row.value}</b>
               </div>
             </>
           )
@@ -19,4 +19,4 @@ const BlockObjectRow = ({ heading, rows }) => {
   )
 }
 
-export default BlockObjectRow
+export default Block
