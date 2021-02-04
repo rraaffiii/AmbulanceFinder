@@ -1,7 +1,7 @@
 import React from 'react'
-import Section from '../components/Section'
-import Block from '../components/Block'
-import PageTitle from '../components/PageTitle'
+import Section from '../../components/Section'
+import Block from '../../components/Block'
+import PageTitle from '../../components/PageTitle'
 
 const Stats = () => {
   const stats = [

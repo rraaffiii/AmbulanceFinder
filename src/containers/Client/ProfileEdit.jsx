@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import Section from '../components/Section'
-import PageTitle from '../components/PageTitle'
-import RowProfileEdit from '../components/RowProfileEdit'
-import Button from '../components/Button'
+import Section from '../../components/Section'
+import PageTitle from '../../components/PageTitle'
+import RowProfileEdit from '../../components/RowProfileEdit'
+import Button from '../../components/Button'
 import DatePicker from 'react-datepicker'
-import { usersData } from '../data'
+import { usersData } from '../../data'
 
 const ProfileEdit = () => {
   const { id } = useParams()

@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
-import Section from '../components/Section'
-import Button from '../components/Button'
-import Select from '../components/Select'
-import PageTitle from '../components/PageTitle'
+import Section from '../../components/Section'
+import Button from '../../components/Button'
+import Select from '../../components/Select'
+import PageTitle from '../../components/PageTitle'
 
 const Checkout = () => {
   const [type, setType] = useState(0)

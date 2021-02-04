@@ -44,7 +44,7 @@ const RowApproveDriver = ({ id, username, name, statusData, docs }) => {
       {doc && (
         <tr>
           <td colSpan={4} className='text-center'>
-            Photo Photo Photo
+            Driving License
           </td>
         </tr>
       )}

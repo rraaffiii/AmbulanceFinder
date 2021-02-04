@@ -18,11 +18,11 @@ const RowBookingRecent = ({ id, username, name, date, time, status }) => {
           : 'Completed'}
       </td>
       <td>
-        <Button className='sm' link={`/booking/${id}`} text='Details' />
+        <Button className='sm' link={`/client/booking/${id}`} text='Details' />
         {status == 3 && (
           <Button
             className='sm action-2'
-            link={`/invoice/${id}`}
+            link={`/client/invoice/${id}`}
             text='Invoice'
           />
         )}

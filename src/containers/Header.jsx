@@ -46,7 +46,7 @@ const Header = () => {
               <div className='col-md-6 d-flex justify-content-end align-items-center'>
                 <NavLink
                   exact
-                  to='/profile/user3'
+                  to='/driver/profile/user3'
                   className='link color-white f-18 mx-15'
                   activeClassName='active'
                 >
@@ -54,7 +54,7 @@ const Header = () => {
                 </NavLink>
                 <NavLink
                   exact
-                  to='/booking-request'
+                  to='/driver/booking-request'
                   className='link color-white f-18 mx-15'
                   activeClassName='active'
                 >
@@ -62,7 +62,7 @@ const Header = () => {
                 </NavLink>
                 <NavLink
                   exact
-                  to='/booking-recent'
+                  to='/client/booking-recent'
                   className='link color-white f-18 mx-15'
                   activeClassName='active'
                 >
@@ -70,7 +70,7 @@ const Header = () => {
                 </NavLink>
                 <NavLink
                   exact
-                  to='/vehicle-add'
+                  to='/driver/vehicle-add'
                   className='link color-white f-18 mx-15'
                   activeClassName='active'
                 >
@@ -78,7 +78,7 @@ const Header = () => {
                 </NavLink>
                 <NavLink
                   exact
-                  to='/approve-driver'
+                  to='/admin/approve-driver'
                   className='link color-white f-18 mx-15'
                   activeClassName='active'
                 >
@@ -86,7 +86,7 @@ const Header = () => {
                 </NavLink>
                 <NavLink
                   exact
-                  to='/stats'
+                  to='/admin/stats'
                   className='link color-white f-18 mx-15'
                   activeClassName='active'
                 >

@@ -18,9 +18,6 @@ const Signup = () => {
   const password = useRef(null)
   const city = useRef(null)
   const country = useRef(null)
-  const proPic = useRef(null)
-  const license = useRef(null)
-  const nid = useRef(null)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -34,7 +31,6 @@ const Signup = () => {
       dob: dob,
       city: city.current.value,
       country: country.current.value,
-      proPic: proPic.current.files[0],
     }
     if (userData.gender == 'Gender') {
       return console.log('Gender value required')
@@ -220,12 +216,6 @@ const Signup = () => {
                       <span className='badge bg-danger rounded-circle'>2</span>
                       <b className='align-middle pl-5'>
                         Must have driving license
-                      </b>
-                    </span>
-                    <span className='item d-block'>
-                      <span className='badge bg-danger rounded-circle'>3</span>
-                      <b className='align-middle pl-5'>
-                        Must have National ID/Passport
                       </b>
                     </span>
                   </div>

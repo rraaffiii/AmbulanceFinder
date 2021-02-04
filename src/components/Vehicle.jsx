@@ -63,11 +63,15 @@ const Vehicle = ({
                 <span>4</span> (<span>4</span>)
               </div>
 
-              <Button link='/checkout' className='action-2' text='Book' />
+              <Button
+                link='/client/checkout'
+                className='action-2'
+                text='Book'
+              />
             </div>
             <div className='d-block'>
               <img
-                src={`/photos/profile/${photo}`}
+                src={`/photos/vehicle/${photo}`}
                 alt=''
                 className='radius10 mt-25 w-full'
               />
