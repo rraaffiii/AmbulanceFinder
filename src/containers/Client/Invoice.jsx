@@ -1,9 +1,9 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import Section from '../components/Section'
-import Block from '../components/Block'
-import Logo from '../components/Logo'
-import Button from '../components/Button'
+import Section from '../../components/Section'
+import Block from '../../components/Block'
+import Logo from '../../components/Logo'
+import Button from '../../components/Button'
 
 const Invoice = () => {
   const { bookId } = useParams()

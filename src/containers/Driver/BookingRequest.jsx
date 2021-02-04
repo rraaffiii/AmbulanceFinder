@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Section from '../components/Section'
-import RowBookingRequest from '../components/RowBookingRequest'
-import PageTitle from '../components/PageTitle'
-import { bookingsData } from '../data'
+import Section from '../../components/Section'
+import RowBookingRequest from '../../components/RowBookingRequest'
+import PageTitle from '../../components/PageTitle'
+import { bookingsData } from '../../data'
 
 const BookingRequest = () => {
   const [bookingRequests, setBookingRequests] = useState(bookingsData)

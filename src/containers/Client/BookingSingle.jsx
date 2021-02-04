@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import Section from '../components/Section'
-import Button from '../components/Button'
-import Switch from '../components/Switch'
-import Block from '../components/Block'
-import UserCard from '../components/UserCard'
-import Review from '../components/Review'
-import Modal from '../components/Modal'
-import RatingStar from '../components/RatingStar'
-import { usersData, reviewsData } from '../data'
+import Section from '../../components/Section'
+import Button from '../../components/Button'
+import Switch from '../../components/Switch'
+import Block from '../../components/Block'
+import UserCard from '../../components/UserCard'
+import Review from '../../components/Review'
+import Modal from '../../components/Modal'
+import RatingStar from '../../components/RatingStar'
+import { usersData, reviewsData } from '../../data'
 
 const BookingSingle = () => {
   const { id } = useParams()
@@ -16,9 +16,7 @@ const BookingSingle = () => {
   const [user, setUser] = useState([])
   // status section
   const [status, setStatus] = useState(0)
-  const handleStatus = (id) => {
-    setStatus(id)
-  }
+
   // show reviews section
   const [showReviews, setShowReviews] = useState(false)
   const handleShowReviews = () => {
@@ -119,43 +117,6 @@ const BookingSingle = () => {
                   ? 'Completed'
                   : 'Feedback Submitted'}
               </h5>
-
-              <div className='row pb-2'>
-                <div className='col-lg-12 d-flex pt-15'>
-                  {/* if user == driver */}
-                  {user.type == 1 && (
-                    <>
-                      <Button
-                        className={`sm mr-5 primary ${
-                          status >= 1 && 'disabled'
-                        }`}
-                        link='# '
-                        text='Mark as Arrived'
-                        event={handleStatus}
-                        id='1'
-                      />
-                      <Button
-                        className={`sm mr-5 action-1 ${
-                          status >= 2 && 'disabled'
-                        }`}
-                        link='# '
-                        text='Mark as Started'
-                        event={handleStatus}
-                        id='2'
-                      />
-                      <Button
-                        className={`sm mr-5 action-2 ${
-                          status >= 3 && 'disabled'
-                        }`}
-                        link='# '
-                        text='Mark as Completed'
-                        event={handleStatus}
-                        id='3'
-                      />
-                    </>
-                  )}
-                </div>
-              </div>
 
               {/* review modal */}
               <div className='row pb-2'>

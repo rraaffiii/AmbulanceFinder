@@ -23,7 +23,7 @@ const Search = () => {
           <PageTitle title='Routes' />
           <FormSmall
             btnText='Confirm'
-            btnLink='/vehicles'
+            btnLink='/search-result'
             inputs={inputs}
             setForm={setForm}
             handleChange={handleChange}

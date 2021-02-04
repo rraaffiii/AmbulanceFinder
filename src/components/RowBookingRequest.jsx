@@ -31,7 +31,13 @@ const RowBookingRequest = ({ id, username, name, date, time, reject }) => {
               id={id}
             />
           </>
-        )) || <Button className='sm' link={`/booking/${id}`} text='Details' />}
+        )) || (
+          <Button
+            className='sm'
+            link={`/driver/booking/${id}`}
+            text='Details'
+          />
+        )}
       </td>
     </tr>
   )

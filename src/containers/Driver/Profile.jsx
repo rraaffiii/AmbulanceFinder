@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import Section from '../components/Section'
-import BlockObject from '../components/BlockObject'
-import PageTitle from '../components/PageTitle'
-import Rating from '../components/Rating'
-import Switch from '../components/Switch'
-import Review from '../components/Review'
-import Button from '../components/Button'
-import { usersData, reviewsData } from '../data'
+import Section from '../../components/Section'
+import BlockObject from '../../components/BlockObject'
+import PageTitle from '../../components/PageTitle'
+import Rating from '../../components/Rating'
+import Switch from '../../components/Switch'
+import Review from '../../components/Review'
+import Button from '../../components/Button'
+import { usersData, reviewsData } from '../../data'
 
 const Profile = () => {
   const { id } = useParams()
@@ -42,7 +42,7 @@ const Profile = () => {
           {/* user can edit own profile if logged in*/}
           <Button
             className='btn mb-2 border-gray action-1'
-            link={`/profile/${id}/edit`}
+            link={`/driver/profile/${id}/edit`}
             text='Edit Profile'
             type='submit'
           />

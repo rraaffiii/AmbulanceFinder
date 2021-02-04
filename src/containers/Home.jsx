@@ -11,9 +11,12 @@ const Home = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     console.log({ ...form })
-    // e.preventDefault()
+    fetch('http://localhost:3000/')
+      .then((response) => response.json())
+      .then((data) => console.log(data))
   }
   const inputs = [
     { label: 'pickup', type: 'text' },
