@@ -5,6 +5,7 @@ import SubHeadingTitle from '../components/SubHeadingTitle'
 import IconParagraph from '../components/IconParagraph'
 import Testimonial from '../components/Testimonial'
 import staticImg from '../assets/testimonial_1_img.jpg'
+import HomeApi from '../api/home-api'
 
 const Home = () => {
   const [form, setForm] = useState({ pickup: '', destination: '' })
@@ -12,11 +13,11 @@ const Home = () => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
   const handleSubmit = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     console.log({ ...form })
-    fetch('http://localhost:3000/')
-      .then((response) => response.json())
-      .then((data) => console.log(data))
+    HomeApi.submitLocationsQuery(form)
+      .then((res) => console.log('recieved data ' + JSON.stringify(res.data)))
+      .catch((err) => console.log(err))
   }
   const inputs = [
     { label: 'pickup', type: 'text' },

@@ -22,7 +22,7 @@ const RowBookingRecent = ({ id, username, name, date, time, status }) => {
         {status == 3 && (
           <Button
             className='sm action-2'
-            link={`/client/invoice/${id}`}
+            link={`/invoice/${id}`}
             text='Invoice'
           />
         )}
