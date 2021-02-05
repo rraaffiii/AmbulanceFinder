@@ -1,12 +1,12 @@
 const express = require('express')
+const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
-const app = express()
 require('dotenv').config()
 
 // middlewares
-app.use(express.json())
 app.use(cors())
+app.use(express.json())
 
 const port = process.env.PORT || 5000
 const uri = process.env.DB_URI
@@ -25,11 +25,17 @@ mongoose
   .catch((err) => console.log(err))
 
 //Routes
-const routes = require('./routes')
-const routes_clients = require('./routes/clients')
-const routes_drivers = require('./routes/drivers')
-const routes_admins = require('./routes/admins')
-app.use('/clients', routes_clients)
-app.use('/drivers', routes_drivers)
-app.use('/admins', routes_admins)
-app.use('/', routes)
+const homeRoutes = require('./routes/home-routes')
+const registerRoutes = require('./routes/register-routes')
+const authRoutes = require('./routes/auth-routes')
+const searchRoutes = require('./routes/search-routes')
+const clientRoutes = require('./routes/client-routes')
+const driverRoutes = require('./routes/driver-routes')
+const adminRoutes = require('./routes/admin-routes')
+app.use('/api/', homeRoutes)
+app.use('/api/signup', registerRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/search', searchRoutes)
+app.use('/api/client', clientRoutes)
+app.use('/api/driver', driverRoutes)
+app.use('/api/admin', adminRoutes)

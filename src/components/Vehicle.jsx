@@ -63,11 +63,7 @@ const Vehicle = ({
                 <span>4</span> (<span>4</span>)
               </div>
 
-              <Button
-                link='/client/checkout'
-                className='action-2'
-                text='Book'
-              />
+              <Button link='/checkout' className='action-2' text='Book' />
             </div>
             <div className='d-block'>
               <img

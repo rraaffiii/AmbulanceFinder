@@ -35,20 +35,16 @@ const App = () => {
           <Route exact path='/signin' component={Signin} />
           <Route exact path='/signup' component={Signup} />
           <Route exact path='/search' component={Search} />
-          <Route exact path='/search-result' component={SearchResult} />
+          <Route exact path='/search/result' component={SearchResult} />
           {/* client */}
-          <Route
-            exact
-            path='/client/booking-recent'
-            component={BookingRecent}
-          />
+          <Route exact path='/client/booking' component={BookingRecent} />
           <Route
             exact
             path='/client/booking/:id'
             children={<BookingSingleClient />}
           />
-          <Route exact path='/client/checkout' component={Checkout} />
-          <Route exact path='/client/invoice/:bookId' component={Invoice} />
+          <Route exact path='/checkout' component={Checkout} />
+          <Route exact path='/invoice/:bookId' component={Invoice} />
           <Route exact path='/client/profile/:id' component={ProfileClient} />
           <Route
             exact
@@ -56,17 +52,13 @@ const App = () => {
             component={ProfileEditClient}
           />
           {/* driver */}
-          <Route
-            exact
-            path='/driver/booking-request'
-            component={BookingRequest}
-          />
+          <Route exact path='/driver/booking' component={BookingRequest} />
           <Route
             exact
             path='/driver/booking/:id'
             children={<BookingSingleDriver />}
           />
-          <Route exact path='/driver/vehicle-add' component={VehicleAdd} />
+          <Route exact path='/vehicle-add' component={VehicleAdd} />
           <Route exact path='/driver/profile/:id' component={ProfileDriver} />
           <Route
             exact
@@ -74,8 +66,8 @@ const App = () => {
             component={ProfileEditDriver}
           />
           {/* admin */}
-          <Route exact path='/admin/approve-driver' component={ApproveDriver} />
-          <Route exact path='/admin/stats' component={Stats} />
+          <Route exact path='/approve-driver' component={ApproveDriver} />
+          <Route exact path='/stats' component={Stats} />
         </Switch>
         <Footer />
       </Router>
