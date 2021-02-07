@@ -2,11 +2,13 @@ import React, { useState, useRef } from 'react'
 import Section from '../../components/Section'
 import Button from '../../components/Button'
 import PageTitle from '../../components/PageTitle'
+import VehicleApi from '../../api/vehicle'
 
 const VehicleAdd = () => {
   const name = useRef(null)
   const cost = useRef(0)
   const seat = useRef(0)
+  const numberPlate = useRef(null)
   const type = useRef(null)
   const vehiclePhoto = useRef(null)
   const registrationPhoto = useRef(null)
@@ -30,15 +32,23 @@ const VehicleAdd = () => {
       name: name.current.value,
       type: type.current.value,
       cost: cost.current.value,
+      seat: seat.current.value,
+      number_plate: numberPlate.current.value,
       features: {
         wheelChair: wheelchair,
         oxygen: oxygen,
         stretcher: stretcher,
-        seat: seat.current.value,
       },
       vehiclePhoto: vehiclePhoto.current.files[0],
       registrationPhoto: registrationPhoto.current.files[0],
     }
+    VehicleApi.createVehicle(vehicleData)
+      .then((res) => {
+        console.log(`recieved data ` + JSON.stringify(res.data))
+      })
+      .catch((err) => {
+        console.log(console.log(err))
+      })
     console.log(vehicleData)
   }
   return (
@@ -65,11 +75,20 @@ const VehicleAdd = () => {
                 required='required'
                 className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
+
               <input
                 ref={seat}
                 type='text'
                 name='seat'
                 placeholder='Seat'
+                required='required'
+                className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+              />
+              <input
+                ref={numberPlate}
+                type='text'
+                name='numberPlate'
+                placeholder='Number Plate'
                 required='required'
                 className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />

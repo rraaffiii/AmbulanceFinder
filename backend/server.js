@@ -18,24 +18,21 @@ mongoose
     useCreateIndex: true,
     useUnifiedTopology: true,
   })
+  .then(console.log('DB connencted!'))
   .then(() => {
     app.listen(port)
-    console.log('DB connencted and app started!')
+    console.log('App started!')
   })
   .catch((err) => console.log(err))
 
-//Routes
-const homeRoutes = require('./routes/home-routes')
-const registerRoutes = require('./routes/register-routes')
-const authRoutes = require('./routes/auth-routes')
-const searchRoutes = require('./routes/search-routes')
-const clientRoutes = require('./routes/client-routes')
-const driverRoutes = require('./routes/driver-routes')
-const adminRoutes = require('./routes/admin-routes')
-app.use('/api/', homeRoutes)
-app.use('/api/signup', registerRoutes)
-app.use('/api/auth', authRoutes)
-app.use('/api/search', searchRoutes)
-app.use('/api/client', clientRoutes)
-app.use('/api/driver', driverRoutes)
-app.use('/api/admin', adminRoutes)
+//API Routes
+const bookingRoutes = require('./api/routes/booking')
+const reviewRoutes = require('./api/routes/review')
+const routeRoutes = require('./api/routes/route')
+const userRoutes = require('./api/routes/user')
+const vehicleRoutes = require('./api/routes/vehicle')
+app.use('/api/booking', bookingRoutes)
+app.use('/api/review', reviewRoutes)
+app.use('/api/route', routeRoutes)
+app.use('/api/user', userRoutes)
+app.use('/api/vehicle', vehicleRoutes)

@@ -1,10 +1,10 @@
 import axios from 'axios'
 // require('dotenv')
-const api_url = `http://localhost:3001/api/search/`
+const api_url = `http://localhost:3001/api/route`
 
-const SearchApi = {
+const RouteApi = {
   submitLocationsQuery(locations) {
     return axios.post(api_url, locations)
   },
 }
-export default SearchApi
+export default RouteApi
