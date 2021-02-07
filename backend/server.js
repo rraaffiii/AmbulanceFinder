@@ -25,7 +25,7 @@ mongoose
   })
   .catch((err) => console.log(err))
 
-//API Routes
+// API routes
 const bookingRoutes = require('./api/routes/booking')
 const reviewRoutes = require('./api/routes/review')
 const routeRoutes = require('./api/routes/route')
