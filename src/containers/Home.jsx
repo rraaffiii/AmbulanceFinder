@@ -5,7 +5,7 @@ import SubHeadingTitle from '../components/SubHeadingTitle'
 import IconParagraph from '../components/IconParagraph'
 import Testimonial from '../components/Testimonial'
 import staticImg from '../assets/testimonial_1_img.jpg'
-import HomeApi from '../api/home-api'
+import RouteApi from '../api/route'
 
 const Home = () => {
   const [form, setForm] = useState({ pickup: '', destination: '' })
@@ -13,9 +13,9 @@ const Home = () => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
   const handleSubmit = (e) => {
-    // e.preventDefault()
+    e.preventDefault()
     console.log({ ...form })
-    HomeApi.submitLocationsQuery(form)
+    RouteApi.submitLocationsQuery(form)
       .then((res) => console.log('recieved data ' + JSON.stringify(res.data)))
       .catch((err) => console.log(err))
   }

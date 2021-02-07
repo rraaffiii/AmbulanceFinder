@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const routesController = require('../controllers/routes-controller')
+const routesController = require('../controllers/route')
 
 router.post('/', routesController.submit_route_query)
 
