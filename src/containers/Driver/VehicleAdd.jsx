@@ -33,7 +33,7 @@ const VehicleAdd = () => {
       type: type.current.value,
       cost: cost.current.value,
       seat: seat.current.value,
-      number_plate: numberPlate.current.value,
+      numberplate: numberPlate.current.value,
       features: {
         wheelChair: wheelchair,
         oxygen: oxygen,
@@ -47,7 +47,9 @@ const VehicleAdd = () => {
         console.log(`recieved data ` + JSON.stringify(res.data))
       })
       .catch((err) => {
-        console.log(console.log(err))
+        console.log(
+          `recieved data ` + JSON.stringify(err.response.data.message)
+        )
       })
     console.log(vehicleData)
   }

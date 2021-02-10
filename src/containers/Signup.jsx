@@ -2,10 +2,8 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 import Section from '../components/Section'
 import SubHeadingTitle from '../components/SubHeadingTitle'
-import SignupDriver from '../components/SignupDriver'
-import SignupClient from '../components/SignupClient'
-import 'react-datepicker/dist/react-datepicker.css'
-import 'react-phone-input-2/lib/style.css'
+import SignupDriver from './Driver/Signup'
+import SignupClient from './Client/Signup'
 
 const Signup = () => {
   const user = new URLSearchParams(useLocation().search).get('u')

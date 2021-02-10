@@ -13,7 +13,7 @@ const Home = () => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
   const handleSubmit = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     console.log({ ...form })
     RouteApi.submitLocationsQuery(form)
       .then((res) => console.log('recieved data ' + JSON.stringify(res.data)))
