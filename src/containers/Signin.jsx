@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Section from '../components/Section'
+import Alert from '../components/Alert'
 import PageTitle from '../components/PageTitle'
 import firebase from '../firebase'
 import UserApi from '../api/user'
 
 const Signin = () => {
+  const [alert, setAlert] = useState({ type: null, message: null })
   const phone = useRef(null)
   const pass = useRef(null)
 
@@ -32,6 +34,7 @@ const Signin = () => {
                 .confirm(code)
                 .then(() => {
                   // client login action
+                  setAlert({ type: 'success', message: 'Login successful' })
                   console.log('Logged in')
                 })
                 .catch((err) => {
@@ -48,11 +51,13 @@ const Signin = () => {
         }
         //user not found, show error
         else {
+          setAlert({ type: 'danger', message: res.data.message })
           console.log(JSON.stringify(res.data.message))
         }
       })
       //server error
       .catch((err) => {
+        setAlert({ type: 'danger', message: err.response.data.message })
         console.log(JSON.stringify(err.response.data.message))
       })
   }
@@ -60,21 +65,30 @@ const Signin = () => {
     e.preventDefault()
     const number = phone.current.value
     const password = pass.current.value
-    UserApi.checkCredentials({ phone: number, password }).then((res) => {
-      //driver login
-      if (res.data.valid) {
-        console.log(JSON.stringify(res.data.message))
-      } else {
-        console.log(JSON.stringify(res.data.message))
-      }
-    })
+    UserApi.checkCredentials({ phone: number, password })
+      .then((res) => {
+        //driver login
+        if (res.data.valid) {
+          setAlert({ type: 'success', message: res.data.message })
+          console.log(JSON.stringify(res.data.message))
+        } else {
+          setAlert({ type: 'danger', message: res.data.message })
+          console.log(JSON.stringify(res.data.message))
+        }
+      })
+      .catch((err) => {
+        setAlert({ type: 'danger', message: err.response.data.message })
+        console.log(JSON.stringify(err.response.data.message))
+      })
   }
   return (
     <>
       <Section className='bg-light form_2' align='center'>
         <div className='col-lg-5 col-md-6 col-sm-10 text-center'>
-          <PageTitle title='Sign In' />
+          {/* show alert */}
+          {alert.message && <Alert alert={alert} event={setAlert} />}
 
+          <PageTitle title='Sign In' />
           <div className='input-group mb-15'>
             <input
               ref={phone}
