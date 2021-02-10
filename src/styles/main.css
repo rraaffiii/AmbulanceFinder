@@ -863,6 +863,9 @@ input[type='radio'] + label:before {
 .logo {
   font-size: 2rem;
 }
+.logo a {
+  vertical-align: middle;
+}
 .bg-offwhite {
   background-color: #f3f3f3;
 }

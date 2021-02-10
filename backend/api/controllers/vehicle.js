@@ -5,9 +5,9 @@ exports.create_vehicle = (req, res) => {
   vehicle
     .save()
     .then(() => {
-      res.json({ message: 'Added succesfully' })
+      res.status(201).json({ message: 'Registered successfully' })
     })
     .catch((err) => {
-      console.log(err)
+      res.status(500).json({ message: 'Registration failed' })
     })
 }

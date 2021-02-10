@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
-import Section from '../components/Section'
-import PageTitle from '../components/PageTitle'
+import Section from '../../components/Section'
+import PageTitle from '../../components/PageTitle'
+import UserApi from '../../api/user'
 import 'react-datepicker/dist/react-datepicker.css'
 
 const SignupDriver = () => {
@@ -11,6 +12,8 @@ const SignupDriver = () => {
   const fname = useRef(null)
   const lname = useRef(null)
   const phone = useRef(null)
+  const password = useRef(null)
+  const drivingLicense = useRef(null)
   const city = useRef(null)
   const country = useRef(null)
 
@@ -18,16 +21,23 @@ const SignupDriver = () => {
     e.preventDefault()
 
     const userData = {
-      fname: fname.current.value,
-      lname: lname.current.value,
       type: 1,
-      dob: dob,
+      first_name: fname.current.value,
+      last_name: lname.current.value,
+      phone: phone.current.value,
+      password: password.current.value,
+      driving_license: drivingLicense.current.value,
+      date_of_birth: dob,
       city: city.current.value,
       country: country.current.value,
     }
-    if (userData.gender == 'Gender') {
-      return console.log('Gender value required')
-    }
+    UserApi.createDriver(userData)
+      .then((res) => {
+        console.log(JSON.stringify(res.data))
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     console.log(userData)
   }
 
@@ -62,6 +72,24 @@ const SignupDriver = () => {
                 type='text'
                 name='phone'
                 placeholder='Phone'
+                required='required'
+                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+              />
+              <input
+                ref={password}
+                type='password'
+                name='password'
+                placeholder='Password'
+                required='required'
+                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+              />
+            </div>
+            <div className='input-group mb-15'>
+              <input
+                ref={drivingLicense}
+                type='text'
+                name='drivingLicense'
+                placeholder='Driving License'
                 required='required'
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
