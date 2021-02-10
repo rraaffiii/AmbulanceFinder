@@ -114,21 +114,6 @@ strong {
   font-weight: 700;
 }
 
-.alert {
-  display: none;
-  position: fixed;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 970px;
-  z-index: 2000;
-}
-.alert-dismissable .close,
-.alert-dismissible .close {
-  top: 0;
-}
-
 /* Slick slider */
 /* .slick-loading .slick-list {
   background: #fff url("../i/ajax-loader.gif") center center no-repeat;
