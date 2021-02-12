@@ -45,18 +45,6 @@ const ProfileEdit = () => {
       <Section className='bg-light d-flex align-items-center' align='center'>
         <PageTitle title='Edit Profile' />
 
-        <div className='col-lg-3'>
-          <img
-            src={`/photos/profile/${user.profile_photo}`}
-            className='img-fluid rounded'
-          />
-          <Button
-            className='btn mt-15 border-gray action-1'
-            link='# '
-            text='Change Photo'
-            type='submit'
-          />
-        </div>
         <div className='col-lg-9'>
           <div className='block radius10 p-3'>
             <table className='table table-borderless'>
@@ -65,38 +53,15 @@ const ProfileEdit = () => {
                   label='username'
                   value={user.username}
                   ref={username}
+                  disabled={true}
                 />
                 <RowProfileEdit
-                  label='password'
-                  value={user.password}
-                  ref={password}
+                  label='phone'
+                  value={user.phone}
+                  ref={phone}
+                  disabled={true}
                 />
                 <RowProfileEdit label='name' value={user.name} ref={fullname} />
-                <RowProfileEdit label='phone' value={user.phone} ref={phone} />
-                <RowProfileEdit label='email' value={user.email} ref={email} />
-                <tr className='item'>
-                  <td>
-                    <b>Date of Birth: </b>
-                  </td>
-                  <td>
-                    <DatePicker
-                      className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left sm'
-                      selected={dob}
-                      placeholderText='Date of Birth'
-                      showMonthDropdown
-                      showYearDropdown
-                      dropdownMode='select'
-                      onChange={(date) => setDob(date)}
-                    />
-                  </td>
-                </tr>
-
-                <RowProfileEdit label='city' value={user.city} ref={city} />
-                <RowProfileEdit
-                  label='country'
-                  value={user.country}
-                  ref={country}
-                />
               </tbody>
             </table>
             <Button

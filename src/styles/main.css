@@ -843,6 +843,9 @@ input[type='radio'] + label:before {
   background-color: #f94144;
   border-color: #bd4042;
 }
+.form-switch .form-check-input {
+  float: none;
+}
 
 /* others */
 .logo {

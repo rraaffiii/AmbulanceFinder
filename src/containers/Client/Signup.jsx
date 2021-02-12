@@ -1,4 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
+import Cookies from 'js-cookie'
+import { GlobalContext } from '../../context/GlobalContext'
 import { Link } from 'react-router-dom'
 import Section from '../../components/Section'
 import PageTitle from '../../components/PageTitle'
@@ -6,6 +8,7 @@ import firebase from '../../firebase'
 import UserApi from '../../api/user'
 
 const Signup = () => {
+  const global = useContext(GlobalContext)
   const phone = useRef(null)
 
   const handleClick = (e) => {
@@ -30,28 +33,50 @@ const Signup = () => {
                 .then(() => {
                   UserApi.createClient({ phone: number })
                     .then((res) => {
-                      console.log(JSON.stringify(res.data))
+                      Cookies.set('userId', res.data.user._id)
+                      Cookies.set('type', res.data.user.type)
+                      Cookies.set('token', res.headers.authorization)
+                      global.setAlert({
+                        type: 'success',
+                        message: res.data.message,
+                      })
+                      window.location.href = `/`
                     })
                     .catch((err) => {
-                      console.log(JSON.stringify(err.response.data.message))
+                      global.setAlert({
+                        type: 'danger',
+                        message: err.response.data.message,
+                      })
                     })
                 })
                 .catch((err) => {
-                  console.log(err)
+                  global.setAlert({
+                    type: 'danger',
+                    message: 'Error sending verification code',
+                  })
                 })
             })
             .catch((err) => {
-              console.log(err)
+              global.setAlert({
+                type: 'danger',
+                message: err.response.data.message,
+              })
             })
         }
         //user found, show error
         else {
-          console.log(JSON.stringify(res.data.message))
+          global.setAlert({
+            type: 'danger',
+            message: res.data.message,
+          })
         }
       })
       //server error
       .catch((err) => {
-        console.log(JSON.stringify(err.response.data.message))
+        global.setAlert({
+          type: 'danger',
+          message: err.response.data.message,
+        })
       })
   }
   return (

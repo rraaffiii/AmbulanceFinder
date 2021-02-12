@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 
 // middlewares
-app.use(cors())
+app.use(cors({ exposedHeaders: 'authorization' }))
 app.use(express.json())
 
 const port = process.env.PORT || 5000

@@ -1,17 +1,17 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
+import Cookies from 'js-cookie'
+import { GlobalContext } from '../context/GlobalContext'
 import { Link } from 'react-router-dom'
 import Section from '../components/Section'
-import Alert from '../components/Alert'
 import PageTitle from '../components/PageTitle'
 import firebase from '../firebase'
 import UserApi from '../api/user'
 
 const Signin = () => {
-  const [alert, setAlert] = useState({ type: null, message: null })
+  const global = useContext(GlobalContext)
+  const [showPass, setShowPass] = useState(false)
   const phone = useRef(null)
   const pass = useRef(null)
-
-  const [showPass, setShowPass] = useState(false)
 
   const handlePhoneSubmit = (e) => {
     e.preventDefault()
@@ -33,16 +33,37 @@ const Signin = () => {
               response
                 .confirm(code)
                 .then(() => {
-                  // client login action
-                  setAlert({ type: 'success', message: 'Login successful' })
-                  console.log('Logged in')
+                  UserApi.findUserByPhone(number)
+                    // client login
+                    .then((res) => {
+                      Cookies.set('userId', res.data.user._id)
+                      Cookies.set('type', res.data.user.type)
+                      Cookies.set('token', res.headers.authorization)
+                      global.setAlert({
+                        type: 'success',
+                        message: res.data.message,
+                      })
+                      window.location.href = `/`
+                    })
+                    .catch((err) => {
+                      global.setAlert({
+                        type: 'danger',
+                        message: err.response.data.message,
+                      })
+                    })
                 })
                 .catch((err) => {
-                  console.log(err)
+                  global.setAlert({
+                    type: 'danger',
+                    message: 'Error sending verification code',
+                  })
                 })
             })
             .catch((err) => {
-              console.log(err)
+              global.setAlert({
+                type: 'danger',
+                message: err.response.data.message,
+              })
             })
         }
         //driver found, show password
@@ -51,13 +72,13 @@ const Signin = () => {
         }
         //user not found, show error
         else {
-          setAlert({ type: 'danger', message: res.data.message })
+          global.setAlert({ type: 'danger', message: res.data.message })
           console.log(JSON.stringify(res.data.message))
         }
       })
       //server error
       .catch((err) => {
-        setAlert({ type: 'danger', message: err.response.data.message })
+        global.setAlert({ type: 'danger', message: err.response.data.message })
         console.log(JSON.stringify(err.response.data.message))
       })
   }
@@ -69,15 +90,22 @@ const Signin = () => {
       .then((res) => {
         //driver login
         if (res.data.valid) {
-          setAlert({ type: 'success', message: res.data.message })
-          console.log(JSON.stringify(res.data.message))
+          Cookies.set('userId', res.data.user._id)
+          Cookies.set('type', res.data.user.type)
+          Cookies.set('token', res.headers.authorization)
+          global.setAlert({ type: 'success', message: res.data.message })
+
+          window.location.href = `/`
         } else {
-          setAlert({ type: 'danger', message: res.data.message })
+          global.setAlert({ type: 'danger', message: res.data.message })
           console.log(JSON.stringify(res.data.message))
         }
       })
       .catch((err) => {
-        setAlert({ type: 'danger', message: err.response.data.message })
+        global.setAlert({
+          type: 'danger',
+          message: err.response.data.message,
+        })
         console.log(JSON.stringify(err.response.data.message))
       })
   }
@@ -85,10 +113,8 @@ const Signin = () => {
     <>
       <Section className='bg-light form_2' align='center'>
         <div className='col-lg-5 col-md-6 col-sm-10 text-center'>
-          {/* show alert */}
-          {alert.message && <Alert alert={alert} event={setAlert} />}
-
           <PageTitle title='Sign In' />
+
           <div className='input-group mb-15'>
             <input
               ref={phone}

@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef, useState, useContext } from 'react'
+import Cookies from 'js-cookie'
+import { GlobalContext } from '../../context/GlobalContext'
 import { Link } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import Section from '../../components/Section'
@@ -7,6 +9,7 @@ import UserApi from '../../api/user'
 import 'react-datepicker/dist/react-datepicker.css'
 
 const SignupDriver = () => {
+  const global = useContext(GlobalContext)
   const [dob, setDob] = useState()
 
   const fname = useRef(null)
@@ -33,12 +36,16 @@ const SignupDriver = () => {
     }
     UserApi.createDriver(userData)
       .then((res) => {
-        console.log(JSON.stringify(res.data))
+        Cookies.set('userId', res.data.user._id)
+        Cookies.set('type', res.data.user.type)
+        Cookies.set('token', res.headers.authorization)
+        global.setAlert({ type: 'success', message: res.data.message })
+        window.location.href = `/`
       })
       .catch((err) => {
+        global.setAlert({ type: 'danger', message: err.response.data.message })
         console.log(err)
       })
-    console.log(userData)
   }
 
   return (

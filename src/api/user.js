@@ -1,5 +1,8 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 // require('dotenv')
+
+const token = Cookies.get('token')
 const api_url = `http://localhost:3001/api/user`
 
 const UserApi = {
@@ -18,13 +21,16 @@ const UserApi = {
     })
   },
   checkCredentials({ phone, password }) {
-    return axios.get(`${api_url}/checkCredentials`, {
-      params: { phone, password },
-    })
+    return axios.post(`${api_url}/checkCredentials`, { phone, password })
   },
   findUserByPhone(phone) {
     return axios.get(`${api_url}/findUserByPhone`, {
       params: { phone },
+    })
+  },
+  findUserById(id) {
+    return axios.post(`${api_url}/findUserById`, id, {
+      headers: { authorization: token },
     })
   },
 }

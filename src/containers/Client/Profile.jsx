@@ -24,12 +24,8 @@ const Profile = () => {
         <PageTitle title='Profile' />
 
         <div className='col-lg-3'>
-          <img
-            src={`/photos/profile/${user.profile_photo}`}
-            className='img-fluid rounded pb-2'
-          />
           <div className='pl-5'>
-            <h3>{user.name}</h3>
+            <h3>{user.phone || user.name}</h3>
             <Rating rating={user.rating} rating_count={user.rating_count} />
           </div>
           {/* user can edit own profile if logged in*/}

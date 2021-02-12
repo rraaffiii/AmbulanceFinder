@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "firebase": "^8.2.6",
+    "js-cookie": "^2.2.1",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-datepicker": "^3.4.1",

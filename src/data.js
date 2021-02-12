@@ -35,17 +35,12 @@ export const bookingsData = [
 
 export const usersData = [
   {
-    id: 1,
     username: 'user1',
-    password: 'aA11!',
     type: 0,
     name: 'Mark Otto',
-    city: 'Dhaka',
-    country: 'Bangladesh',
-    profile_photo: 'team_2_img_3.jpg',
+    phone: '+019989893598',
     rating: 4.5,
     rating_count: 12,
-    phone: '+019989893598',
     approved: true,
   },
   {

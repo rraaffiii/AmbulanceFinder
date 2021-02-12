@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import Section from '../../components/Section'
 import BlockObject from '../../components/BlockObject'
 import PageTitle from '../../components/PageTitle'
@@ -7,10 +7,11 @@ import Rating from '../../components/Rating'
 import Switch from '../../components/Switch'
 import Review from '../../components/Review'
 import Button from '../../components/Button'
-import { usersData, reviewsData } from '../../data'
+import UserApi from '../../api/user'
+import { reviewsData } from '../../data'
 
 const Profile = () => {
-  const { id } = useParams()
+  const id = Cookies.get('userId')
   const [user, setUser] = useState({})
   const [reviews, setReviews] = useState([])
   const [available, setAvailable] = useState()
@@ -18,26 +19,32 @@ const Profile = () => {
   const handleAvailability = () => {
     setAvailable(!available)
   }
-
+  const getProfileData = () => {
+    UserApi.findUserById(id).then((res) => {
+      setUser(res.data)
+    })
+  }
   useEffect(() => {
-    setUser(usersData.find((user) => user.username == id))
+    getProfileData()
     setReviews(reviewsData.filter((review) => review.receiver == id))
     setAvailable(user.available)
-  }, [user])
+  }, [])
 
   return (
     <>
       <Section className='bg-light d-flex align-items-center' align='center'>
         <PageTitle title='Profile' />
 
-        <div className='col-lg-3'>
+        <div className='col-lg-3 text-center'>
           <img
             src={`/photos/profile/${user.profile_photo}`}
-            className='img-fluid rounded pb-2'
+            className='img-fluid border rounded pb-2'
           />
           <div className='pl-5'>
             <h3>{user.name}</h3>
-            <Rating rating={user.rating} rating_count={user.rating_count} />
+            {(user.ratin && (
+              <Rating rating={user.rating} rating_count={user.rating_count} />
+            )) || <Rating rating='No reviews' />}
           </div>
           {/* user can edit own profile if logged in*/}
           <Button
@@ -46,17 +53,37 @@ const Profile = () => {
             text='Edit Profile'
             type='submit'
           />
-          {user.type == 1 && (
-            <Switch
-              label='Set Available'
-              className='lg'
-              isChecked={available}
-              event={handleAvailability}
-            />
-          )}
+          <Switch
+            label='Set Available'
+            className='lg'
+            isChecked={available}
+            event={handleAvailability}
+          />
         </div>
         <div className='col-lg-9'>
-          <BlockObject rows={user} />
+          <div className='block radius10 p-3'>
+            <div className='item'>
+              ID: <b>{user._id}</b>
+            </div>
+            <div className='item'>
+              Name: <b>{user.first_name + ' ' + user.last_name}</b>
+            </div>
+            <div className='item'>
+              Phone: <b>{user.phone}</b>
+            </div>
+            <div className='item'>
+              Date of Birth: <b>{user.date_of_birth.toString().slice(0, 10)}</b>
+            </div>
+            <div className='item'>
+              City: <b>{user.city}</b>
+            </div>
+            <div className='item'>
+              Country: <b>{user.country}</b>
+            </div>
+            <div className='item'>
+              Driving License: <b>{user.driving_license}</b>
+            </div>
+          </div>
         </div>
       </Section>
 
