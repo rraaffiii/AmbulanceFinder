@@ -1,8 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import Logo from '../components/Logo'
 
 const Header = () => {
+  const type = Cookies.get('type')
+
+  const handleSignout = () => {
+    Cookies.remove('userId')
+    Cookies.remove('type')
+    Cookies.remove('token')
+    window.location.replace('/')
+  }
   return (
     <>
       {/* Navigation Mobile type */}
@@ -44,70 +53,120 @@ const Header = () => {
                 <Logo name='Ambulance Finder' />
               </div>
               <div className='col-md-6 d-flex justify-content-end align-items-center'>
-                <NavLink
-                  exact
-                  to='/driver/profile/user3'
-                  className='link color-white f-18 mx-15'
-                  activeClassName='active'
-                >
-                  Profile
-                </NavLink>
-                <NavLink
-                  exact
-                  to='/driver/booking'
-                  className='link color-white f-18 mx-15'
-                  activeClassName='active'
-                >
-                  Requests
-                </NavLink>
-                <NavLink
-                  exact
-                  to='/client/booking'
-                  className='link color-white f-18 mx-15'
-                  activeClassName='active'
-                >
-                  Bookings
-                </NavLink>
-                <NavLink
-                  exact
-                  to='/vehicle-add'
-                  className='link color-white f-18 mx-15'
-                  activeClassName='active'
-                >
-                  Add
-                </NavLink>
-                <NavLink
-                  exact
-                  to='/approve-driver'
-                  className='link color-white f-18 mx-15'
-                  activeClassName='active'
-                >
-                  Approve
-                </NavLink>
-                <NavLink
-                  exact
-                  to='/stats'
-                  className='link color-white f-18 mx-15'
-                  activeClassName='active'
-                >
-                  Stats
-                </NavLink>
-                <NavLink
-                  exact
-                  to='/signin'
-                  className='link color-white f-18 mx-15'
-                  activeClassName='active'
-                >
-                  Signin
-                </NavLink>
-                <NavLink
-                  exact
-                  to='/signup'
-                  className='link color-white f-18 mx-15'
-                  activeClassName='active'
-                >
-                  Signup
-                </NavLink>
+                {/* client nav */}
+                {type && type == 0 && (
+                  <>
+                    <NavLink
+                      exact
+                      to='/profile'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Profile
+                    </NavLink>
+                    <NavLink
+                      exact
+                      to='/booking'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Bookings
+                    </NavLink>
+                    <Link
+                      className='link color-white f-18 mx-15'
+                      onClick={handleSignout}
+                    >
+                      Signout
+                    </Link>
+                  </>
+                )}
+                {/* driver nav */}
+                {type && type == 1 && (
+                  <>
+                    <NavLink
+                      exact
+                      to='/profile'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Profile
+                    </NavLink>
+                    <NavLink
+                      exact
+                      to='/booking'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Requests
+                    </NavLink>
+
+                    <NavLink
+                      exact
+                      to='/vehicle-add'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Add
+                    </NavLink>
+                    <Link
+                      to='/signout'
+                      className='link color-white f-18 mx-15'
+                      onClick={handleSignout}
+                    >
+                      Signout
+                    </Link>
+                  </>
+                )}
+                {/* admin nav */}
+                {type && type == 2 && (
+                  <>
+                    <NavLink
+                      exact
+                      to='/approve/driver'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Approve
+                    </NavLink>
+                    <NavLink
+                      exact
+                      to='/stats'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Stats
+                    </NavLink>
+                    <Link
+                      exact
+                      to='/signout'
+                      className='link color-white f-18 mx-15'
+                      onClick={handleSignout}
+                    >
+                      Signout
+                    </Link>
+                  </>
+                )}
+                {/* general nav */}
+                {!type && (
+                  <>
+                    <NavLink
+                      exact
+                      to='/signin'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Signin
+                    </NavLink>
+                    <NavLink
+                      exact
+                      to='/signup'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Signup
+                    </NavLink>
+                  </>
+                )}
               </div>
             </div>
           </div>

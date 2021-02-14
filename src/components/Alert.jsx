@@ -4,7 +4,7 @@ const Alert = ({ alert, event }) => {
   return (
     <>
       <div
-        className={`alert alert-${alert.type} alert-dismissible fade show`}
+        className={`alert alert-${alert.type} alert-dismissible fade show text-center mx-15 mt-15`}
         role='alert'
       >
         {alert.message}

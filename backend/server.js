@@ -2,12 +2,12 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
+const path = require('path')
 require('dotenv').config()
 
 // middlewares
-app.use(cors())
+app.use(cors({ exposedHeaders: 'authorization' }))
 app.use(express.json())
-
 const port = process.env.PORT || 5000
 const uri = process.env.DB_URI
 
@@ -24,6 +24,7 @@ mongoose
     console.log('App started!')
   })
   .catch((err) => console.log(err))
+mongoose.set('useFindAndModify', false)
 
 // API routes
 const bookingRoutes = require('./api/routes/booking')

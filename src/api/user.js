@@ -1,6 +1,12 @@
 import axios from 'axios'
-// require('dotenv')
+import Cookies from 'js-cookie'
+
 const api_url = `http://localhost:3001/api/user`
+const getToken = () => {
+  const token = Cookies.get('token')
+  if (token === null) return ''
+  return token
+}
 
 const UserApi = {
   createClient(clientData) {
@@ -18,13 +24,41 @@ const UserApi = {
     })
   },
   checkCredentials({ phone, password }) {
-    return axios.get(`${api_url}/checkCredentials`, {
-      params: { phone, password },
-    })
+    return axios.post(`${api_url}/checkCredentials`, { phone, password })
+  },
+  loginWithPhone(phone) {
+    return axios.post(`${api_url}/loginWithPhone`, { phone })
   },
   findUserByPhone(phone) {
     return axios.get(`${api_url}/findUserByPhone`, {
       params: { phone },
+    })
+  },
+  findUserById(id) {
+    return axios.post(`${api_url}/findUserById`, id, {
+      headers: { authorization: getToken() },
+    })
+  },
+  setAvailability({ id, available }) {
+    return axios.post(
+      `${api_url}/setAvailability`,
+      { id, available },
+      { headers: { authorization: getToken() } }
+    )
+  },
+  updateProfile(formData) {
+    return axios.post(`${api_url}/updateProfile`, formData, {
+      headers: {
+        authorization: getToken(),
+      },
+    })
+  },
+  updateProfileWithImg(formData) {
+    return axios.post(`${api_url}/updateProfileWithImg`, formData, {
+      headers: {
+        authorization: getToken(),
+        'content-type': 'multipart/form-data',
+      },
     })
   },
 }

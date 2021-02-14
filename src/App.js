@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { GlobalContext } from './context/GlobalContext'
+import Cookies from 'js-cookie'
 
+import Alert from './components/Alert'
 import Header from './containers/Header'
 import Footer from './containers/Footer'
 import Home from './containers/Home'
@@ -26,10 +29,17 @@ import ApproveDriver from './containers/Admin/ApproveDriver'
 import Stats from './containers/Admin/Stats'
 
 const App = () => {
+  const global = useContext(GlobalContext)
+  const type = Cookies.get('type')
   return (
     <>
       <Router>
         <Header />
+        {/* show alert */}
+        {global.alert.message && (
+          <Alert alert={global.alert} event={global.setAlert} />
+        )}
+
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/signin' component={Signin} />
@@ -37,37 +47,41 @@ const App = () => {
           <Route exact path='/search' component={Search} />
           <Route exact path='/search/result' component={SearchResult} />
           {/* client */}
-          <Route exact path='/client/booking' component={BookingRecent} />
-          <Route
-            exact
-            path='/client/booking/:id'
-            children={<BookingSingleClient />}
-          />
-          <Route exact path='/checkout' component={Checkout} />
-          <Route exact path='/invoice/:bookId' component={Invoice} />
-          <Route exact path='/client/profile/:id' component={ProfileClient} />
-          <Route
-            exact
-            path='/client/profile/:id/edit'
-            component={ProfileEditClient}
-          />
+          {type && type == 0 && (
+            <>
+              <Route exact path='/booking' component={BookingRecent} />
+              <Route
+                exact
+                path='/booking/:id'
+                children={<BookingSingleClient />}
+              />
+              <Route exact path='/checkout' component={Checkout} />
+              <Route exact path='/invoice/:bookId' component={Invoice} />
+              <Route exact path='/profile' component={ProfileClient} />
+              <Route exact path='/profile/edit' component={ProfileEditClient} />
+            </>
+          )}
           {/* driver */}
-          <Route exact path='/driver/booking' component={BookingRequest} />
-          <Route
-            exact
-            path='/driver/booking/:id'
-            children={<BookingSingleDriver />}
-          />
-          <Route exact path='/vehicle-add' component={VehicleAdd} />
-          <Route exact path='/driver/profile/:id' component={ProfileDriver} />
-          <Route
-            exact
-            path='/driver/profile/:id/edit'
-            component={ProfileEditDriver}
-          />
+          {type && type == 1 && (
+            <>
+              <Route exact path='/booking' component={BookingRequest} />
+              <Route
+                exact
+                path='/booking/:id'
+                children={<BookingSingleDriver />}
+              />
+              <Route exact path='/vehicle-add' component={VehicleAdd} />
+              <Route exact path='/profile' component={ProfileDriver} />
+              <Route exact path='/profile/edit' component={ProfileEditDriver} />
+            </>
+          )}
           {/* admin */}
-          <Route exact path='/approve-driver' component={ApproveDriver} />
-          <Route exact path='/stats' component={Stats} />
+          {type && type == 2 && (
+            <>
+              <Route exact path='/approve/driver' component={ApproveDriver} />
+              <Route exact path='/stats' component={Stats} />
+            </>
+          )}
         </Switch>
         <Footer />
       </Router>
