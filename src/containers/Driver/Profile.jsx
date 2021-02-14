@@ -133,7 +133,7 @@ const Profile = () => {
       <Section className='bg-offwhite d-flex align-items-center' align='center'>
         <PageTitle title='Reviews' />
         <div className='col-lg-12'>
-          {(reviews.length !== 0 &&
+          {(reviews.length > 0 &&
             reviews.map((review) => {
               return <Review key={review._id} {...review} />
             })) || <div className='h5 text-center'>No reviews yet</div>}

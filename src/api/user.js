@@ -2,6 +2,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 const api_url = `http://localhost:3001/api/user`
+
 const getToken = () => {
   const token = Cookies.get('token')
   if (token === null) return ''

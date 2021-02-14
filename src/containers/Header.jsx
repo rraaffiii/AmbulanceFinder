@@ -58,19 +58,19 @@ const Header = () => {
                   <>
                     <NavLink
                       exact
-                      to='/profile'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Profile
-                    </NavLink>
-                    <NavLink
-                      exact
                       to='/booking'
                       className='link color-white f-18 mx-15'
                       activeClassName='active'
                     >
                       Bookings
+                    </NavLink>
+                    <NavLink
+                      exact
+                      to='/profile'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Profile
                     </NavLink>
                     <Link
                       className='link color-white f-18 mx-15'
@@ -85,11 +85,11 @@ const Header = () => {
                   <>
                     <NavLink
                       exact
-                      to='/profile'
+                      to='/booking/request'
                       className='link color-white f-18 mx-15'
                       activeClassName='active'
                     >
-                      Profile
+                      Requests
                     </NavLink>
                     <NavLink
                       exact
@@ -97,16 +97,23 @@ const Header = () => {
                       className='link color-white f-18 mx-15'
                       activeClassName='active'
                     >
-                      Requests
+                      Bookings
                     </NavLink>
-
                     <NavLink
                       exact
-                      to='/vehicle-add'
+                      to='/vehicle'
                       className='link color-white f-18 mx-15'
                       activeClassName='active'
                     >
-                      Add
+                      Vehicle
+                    </NavLink>
+                    <NavLink
+                      exact
+                      to='/profile'
+                      className='link color-white f-18 mx-15'
+                      activeClassName='active'
+                    >
+                      Profile
                     </NavLink>
                     <Link
                       to='/signout'

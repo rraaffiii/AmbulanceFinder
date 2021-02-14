@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useParams } from 'react-router-dom'
 import { GlobalContext } from '../../context/GlobalContext'
 import Cookies from 'js-cookie'
 import Section from '../../components/Section'
@@ -7,19 +7,21 @@ import Button from '../../components/Button'
 import PageTitle from '../../components/PageTitle'
 import VehicleApi from '../../api/vehicle'
 
-const VehicleAdd = () => {
+const VehicleModify = () => {
   const id = Cookies.get('userId')
   const global = useContext(GlobalContext)
+  const vehicleId = useParams()
 
+  const [vehicle, setVehicle] = useState({})
   const name = useRef(null)
   const cost = useRef(0)
   const seat = useRef(0)
   const numberPlate = useRef(null)
   const type = useRef(null)
   const vehiclePhoto = useRef(null)
-  const [wheelchair, setWheelchair] = useState(false)
-  const [oxygen, setOxygen] = useState(false)
-  const [stretcher, setStretcher] = useState(false)
+  const [wheelchair, setWheelchair] = useState(null)
+  const [oxygen, setOxygen] = useState(null)
+  const [stretcher, setStretcher] = useState(null)
 
   const handleSelectedChange = (e) => {
     if (e.target.name == 'wheelchair') {
@@ -32,34 +34,68 @@ const VehicleAdd = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-
+    console.log(vehicle.type)
     const features = {
       wheelchair,
       oxygen,
       stretcher,
     }
     const formData = new FormData()
-    formData.append('user_id', id)
+    formData.append('vehicleId', vehicleId.vehicleId)
     formData.append('name', name.current.value)
-    formData.append('type', type.current.value)
+    formData.append('type', parseInt(type.current.value) + 1)
     formData.append('cost', cost.current.value)
     formData.append('seat', seat.current.value)
     formData.append('number_plate', numberPlate.current.value)
     formData.append('features', JSON.stringify(features))
-    formData.append('vehicle_photo', vehiclePhoto.current.files[0])
 
-    VehicleApi.createVehicle(formData)
+    if (typeof vehiclePhoto.current.files[0] !== 'undefined') {
+      formData.append('vehicle_photo', vehiclePhoto.current.files[0])
+
+      VehicleApi.updateVehicleWithImg(formData)
+        .then((res) => {
+          global.setAlert({ type: 'success', message: res.data.message })
+          global.setRedirect('/vehicle')
+        })
+        .catch((err) =>
+          global.setAlert({
+            type: 'danger',
+            message: err.response.data.message,
+          })
+        )
+    } else {
+      formData.append('vehicle_photo', vehicle.vehicle_photo)
+      VehicleApi.updateVehicle(formData)
+        .then((res) => {
+          global.setAlert({ type: 'success', message: res.data.message })
+          global.setRedirect('/vehicle')
+        })
+        .catch((err) =>
+          global.setAlert({
+            type: 'danger',
+            message: err.response.data.message,
+          })
+        )
+    }
+  }
+  const getVehicle = (vehicleId) => {
+    VehicleApi.getVehicleById(vehicleId)
       .then((res) => {
-        global.setAlert({ type: 'success', message: res.data.message })
-        global.setRedirect('/vehicle')
+        setVehicle(res.data)
+        setWheelchair(res.data.features.wheelchair)
+        setOxygen(res.data.features.oxygen)
+        setStretcher(res.data.features.stretcher)
       })
-      .catch((err) =>
+      .catch((err) => {
         global.setAlert({
           type: 'danger',
           message: err.response.data.message,
         })
-      )
+      })
   }
+  useEffect(() => {
+    getVehicle(vehicleId)
+  }, [])
   useEffect(() => {
     return global.setRedirect(null)
   }, [global.redirect])
@@ -70,13 +106,14 @@ const VehicleAdd = () => {
       {global.redirect && <Redirect to={global.redirect} />}
 
       <Section className='bg-light vehicle-add' align='center'>
-        <PageTitle title='Add Vehicle' />
+        <PageTitle title='Modify Vehicle' />
 
         <div className='col-lg-12'>
           <div className='row'>
             <div className='col-lg-6'>
               <input
                 ref={name}
+                defaultValue={vehicle && vehicle.name}
                 type='text'
                 name='name'
                 placeholder='Name'
@@ -85,6 +122,7 @@ const VehicleAdd = () => {
               />
               <input
                 ref={cost}
+                defaultValue={vehicle && vehicle.cost}
                 type='text'
                 name='cost'
                 placeholder='Fare/KM'
@@ -94,6 +132,7 @@ const VehicleAdd = () => {
 
               <input
                 ref={seat}
+                defaultValue={vehicle && vehicle.seat}
                 type='text'
                 name='seat'
                 placeholder='Seat'
@@ -102,6 +141,7 @@ const VehicleAdd = () => {
               />
               <input
                 ref={numberPlate}
+                defaultValue={vehicle && vehicle.number_plate}
                 type='text'
                 name='numberPlate'
                 placeholder='Number Plate'
@@ -113,12 +153,12 @@ const VehicleAdd = () => {
             <div className='col-lg-6'>
               <select
                 ref={type}
+                defaultValue={vehicle && vehicle.type}
                 className='input w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
                 aria-label='Default select example'
                 id='type'
-                defaultValue='default'
               >
-                <option value='default' disabled>
+                <option value='DEFAULT' disabled>
                   Type
                 </option>
                 <option value='0'>Non AC</option>
@@ -131,6 +171,7 @@ const VehicleAdd = () => {
                 <span className='f-18 bold'>Vehicle Photo:</span>
                 <input
                   ref={vehiclePhoto}
+                  defaultValue={vehicle && vehicle.vehiclePhoto}
                   type='file'
                   className='input form-control'
                   id='inputGroupFile02'
@@ -143,6 +184,7 @@ const VehicleAdd = () => {
                   <div className='form-check'>
                     <input
                       onClick={(e) => handleSelectedChange(e)}
+                      defaultChecked={wheelchair}
                       type='checkbox'
                       name='wheelchair'
                       id='wheelchair'
@@ -154,6 +196,7 @@ const VehicleAdd = () => {
                   <div className='form-check'>
                     <input
                       onClick={(e) => handleSelectedChange(e)}
+                      defaultChecked={oxygen}
                       type='checkbox'
                       name='oxygen'
                       id='oxygen'
@@ -165,6 +208,7 @@ const VehicleAdd = () => {
                   <div className='form-check'>
                     <input
                       onClick={(e) => handleSelectedChange(e)}
+                      defaultChecked={stretcher}
                       type='checkbox'
                       name='stretcher'
                       id='stretcher'
@@ -190,4 +234,4 @@ const VehicleAdd = () => {
   )
 }
 
-export default VehicleAdd
+export default VehicleModify

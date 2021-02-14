@@ -12,7 +12,7 @@ import Signup from './containers/Signup'
 import Search from './containers/Search'
 import SearchResult from './containers/SearchResult'
 // client
-import BookingRecent from './containers/Client/BookingRecent'
+import BookingRecent from './containers/BookingRecent'
 import BookingSingleClient from './containers/Client/BookingSingle'
 import ProfileClient from './containers/Client/Profile'
 import ProfileEditClient from './containers/Client/ProfileEdit'
@@ -21,7 +21,9 @@ import Invoice from './containers/Client/Invoice'
 // driver
 import BookingRequest from './containers/Driver/BookingRequest'
 import BookingSingleDriver from './containers/Driver/BookingSingle'
+import VehicleMy from './containers/Driver/VehicleMy'
 import VehicleAdd from './containers/Driver/VehicleAdd'
+import VehicleModify from './containers/Driver/VehicleModify'
 import ProfileDriver from './containers/Driver/Profile'
 import ProfileEditDriver from './containers/Driver/ProfileEdit'
 // admin
@@ -48,7 +50,7 @@ const App = () => {
           <Route exact path='/search/result' component={SearchResult} />
           {/* client */}
           {type && type == 0 && (
-            <>
+            <Switch>
               <Route exact path='/booking' component={BookingRecent} />
               <Route
                 exact
@@ -59,28 +61,35 @@ const App = () => {
               <Route exact path='/invoice/:bookId' component={Invoice} />
               <Route exact path='/profile' component={ProfileClient} />
               <Route exact path='/profile/edit' component={ProfileEditClient} />
-            </>
+            </Switch>
           )}
           {/* driver */}
           {type && type == 1 && (
-            <>
-              <Route exact path='/booking' component={BookingRequest} />
+            <Switch>
+              <Route exact path='/booking/request' component={BookingRequest} />
+              <Route exact path='/booking' component={BookingRecent} />
               <Route
                 exact
                 path='/booking/:id'
                 children={<BookingSingleDriver />}
               />
-              <Route exact path='/vehicle-add' component={VehicleAdd} />
+              <Route exact path='/vehicle' component={VehicleMy} />
+              <Route exact path='/vehicle/add' component={VehicleAdd} />
+              <Route
+                exact
+                path='/vehicle/modify/:vehicleId'
+                component={VehicleModify}
+              />
               <Route exact path='/profile' component={ProfileDriver} />
               <Route exact path='/profile/edit' component={ProfileEditDriver} />
-            </>
+            </Switch>
           )}
           {/* admin */}
           {type && type == 2 && (
-            <>
+            <Switch>
               <Route exact path='/approve/driver' component={ApproveDriver} />
               <Route exact path='/stats' component={Stats} />
-            </>
+            </Switch>
           )}
         </Switch>
         <Footer />
