@@ -20,7 +20,7 @@ const RowProfileEdit = React.forwardRef(
               name={label}
               placeholder={label}
               required='required'
-              className={`input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left sm`}
+              className={`input w-full flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left sm`}
             />
           </td>
         </tr>

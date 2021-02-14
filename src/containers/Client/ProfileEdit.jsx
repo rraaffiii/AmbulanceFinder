@@ -1,47 +1,67 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import { Redirect } from 'react-router-dom'
+import { GlobalContext } from '../../context/GlobalContext'
+import Cookies from 'js-cookie'
 import Section from '../../components/Section'
 import PageTitle from '../../components/PageTitle'
 import RowProfileEdit from '../../components/RowProfileEdit'
 import Button from '../../components/Button'
-import DatePicker from 'react-datepicker'
-import { usersData } from '../../data'
+import UserApi from '../../api/user'
 
 const ProfileEdit = () => {
-  const { id } = useParams()
+  const id = Cookies.get('userId')
+  const global = useContext(GlobalContext)
   const [user, setUser] = useState({})
-  const [dob, setDob] = useState()
 
-  const username = useRef(null)
-  const password = useRef(null)
-  const fullname = useRef(null)
+  const fname = useRef(null)
+  const lname = useRef(null)
   const phone = useRef(null)
-  const email = useRef(null)
   const city = useRef(null)
   const country = useRef(null)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const updatedUser = {
-      username: username.current.value,
-      password: password.current.value,
-      fullname: fullname.current.value,
-      phone: phone.current.value,
-      email: email.current.value,
-      city: city.current.value,
-      country: country.current.value,
-    }
-    const updatedData = { dob, ...updatedUser }
-    console.log(updatedData)
-  }
 
+    const formData = new FormData()
+    formData.append('first_name', fname.current.value)
+    formData.append('last_name', lname.current.value)
+    formData.append('phone', phone.current.value)
+    formData.append('city', city.current.value)
+    formData.append('country', country.current.value)
+
+    UserApi.updateProfile(formData)
+      .then((res) => {
+        global.setAlert({ type: 'success', message: res.data.message })
+        global.setRedirect('/profile')
+      })
+      .catch((err) =>
+        global.setAlert({
+          type: 'success',
+          message: err.response.data.message,
+        })
+      )
+  }
+  const getProfileData = () => {
+    UserApi.findUserById(id)
+      .then((res) => {
+        setUser(res.data)
+      })
+      .catch((err) => {
+        global.setAlert(err.response.data.message)
+      })
+  }
   useEffect(() => {
-    setUser(usersData.find((user) => user.username == id))
-    user.date_of_birth && setDob(new Date(user.date_of_birth))
-  }, [user])
+    getProfileData()
+  }, [])
+  useEffect(() => {
+    return global.setRedirect(null)
+  }, [global.redirect])
 
   return (
     <>
+      {/* redirect */}
+      {global.redirect && <Redirect to={global.redirect} />}
+
       <Section className='bg-light d-flex align-items-center' align='center'>
         <PageTitle title='Edit Profile' />
 
@@ -49,19 +69,29 @@ const ProfileEdit = () => {
           <div className='block radius10 p-3'>
             <table className='table table-borderless'>
               <tbody>
-                <RowProfileEdit
-                  label='username'
-                  value={user.username}
-                  ref={username}
-                  disabled={true}
-                />
+                <RowProfileEdit label='ID' value={user._id} disabled={true} />
                 <RowProfileEdit
                   label='phone'
                   value={user.phone}
                   ref={phone}
                   disabled={true}
                 />
-                <RowProfileEdit label='name' value={user.name} ref={fullname} />
+                <RowProfileEdit
+                  label='first name'
+                  value={user.first_name}
+                  ref={fname}
+                />
+                <RowProfileEdit
+                  label='last name'
+                  value={user.last_name}
+                  ref={lname}
+                />
+                <RowProfileEdit label='city' value={user.city} ref={city} />
+                <RowProfileEdit
+                  label='country'
+                  value={user.country}
+                  ref={country}
+                />
               </tbody>
             </table>
             <Button

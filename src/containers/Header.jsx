@@ -66,15 +66,13 @@ const Header = () => {
                     </NavLink>
                     <NavLink
                       exact
-                      to='/client/booking'
+                      to='/booking'
                       className='link color-white f-18 mx-15'
                       activeClassName='active'
                     >
                       Bookings
                     </NavLink>
                     <Link
-                      exact
-                      to='/signout'
                       className='link color-white f-18 mx-15'
                       onClick={handleSignout}
                     >
@@ -95,7 +93,7 @@ const Header = () => {
                     </NavLink>
                     <NavLink
                       exact
-                      to='/driver/booking'
+                      to='/booking'
                       className='link color-white f-18 mx-15'
                       activeClassName='active'
                     >
@@ -111,7 +109,6 @@ const Header = () => {
                       Add
                     </NavLink>
                     <Link
-                      exact
                       to='/signout'
                       className='link color-white f-18 mx-15'
                       onClick={handleSignout}
@@ -125,7 +122,7 @@ const Header = () => {
                   <>
                     <NavLink
                       exact
-                      to='/approve-driver'
+                      to='/approve/driver'
                       className='link color-white f-18 mx-15'
                       activeClassName='active'
                     >

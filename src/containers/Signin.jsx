@@ -1,4 +1,5 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import { GlobalContext } from '../context/GlobalContext'
 import { Link } from 'react-router-dom'
@@ -33,17 +34,18 @@ const Signin = () => {
               response
                 .confirm(code)
                 .then(() => {
-                  UserApi.findUserByPhone(number)
+                  UserApi.loginWithPhone(number)
                     // client login
                     .then((res) => {
+                      console.log(res.data.user)
                       Cookies.set('userId', res.data.user._id)
                       Cookies.set('type', res.data.user.type)
                       Cookies.set('token', res.headers.authorization)
                       global.setAlert({
                         type: 'success',
-                        message: res.data.message,
+                        message: 'Login successful',
                       })
-                      window.location.href = `/`
+                      global.setRedirect('/')
                     })
                     .catch((err) => {
                       global.setAlert({
@@ -94,8 +96,7 @@ const Signin = () => {
           Cookies.set('type', res.data.user.type)
           Cookies.set('token', res.headers.authorization)
           global.setAlert({ type: 'success', message: res.data.message })
-
-          window.location.href = `/`
+          global.setRedirect('/')
         } else {
           global.setAlert({ type: 'danger', message: res.data.message })
           console.log(JSON.stringify(res.data.message))
@@ -109,8 +110,15 @@ const Signin = () => {
         console.log(JSON.stringify(err.response.data.message))
       })
   }
+  useEffect(() => {
+    return global.setRedirect(null)
+  }, [global.redirect])
+
   return (
     <>
+      {/* redirect */}
+      {global.redirect && <Redirect to={global.redirect} />}
+
       <Section className='bg-light form_2' align='center'>
         <div className='col-lg-5 col-md-6 col-sm-10 text-center'>
           <PageTitle title='Sign In' />

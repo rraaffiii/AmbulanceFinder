@@ -1,4 +1,5 @@
-import React, { useRef, useContext } from 'react'
+import React, { useRef, useContext, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import { GlobalContext } from '../../context/GlobalContext'
 import { Link } from 'react-router-dom'
@@ -40,7 +41,7 @@ const Signup = () => {
                         type: 'success',
                         message: res.data.message,
                       })
-                      window.location.href = `/`
+                      global.setRedirect('/')
                     })
                     .catch((err) => {
                       global.setAlert({
@@ -79,8 +80,15 @@ const Signup = () => {
         })
       })
   }
+  useEffect(() => {
+    return global.setRedirect(null)
+  }, [global.redirect])
+
   return (
     <>
+      {/* redirect */}
+      {global.redirect && <Redirect to={global.redirect} />}
+
       <Section className='bg-light form_2' align='center'>
         <div className='col-lg-5 col-md-6 col-sm-10 text-center'>
           <PageTitle title='Sign Up to Book' />

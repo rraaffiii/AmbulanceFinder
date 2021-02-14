@@ -867,6 +867,9 @@ input[type='radio'] + label:before {
   cursor: pointer;
   margin-left: 10px;
 }
+.profile img {
+  width: 80%;
+}
 .active {
   background-color: #f94144;
   color: #ffffff;
@@ -875,6 +878,10 @@ input[type='radio'] + label:before {
 }
 .input {
   border-radius: 30px !important;
+}
+input:disabled {
+  background-color: #e9ecef;
+  opacity: 1;
 }
 input[type='file'].input {
   height: auto;

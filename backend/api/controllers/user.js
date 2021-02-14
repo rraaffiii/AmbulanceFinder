@@ -85,6 +85,29 @@ exports.check_credentials = (req, res) => {
     })
 }
 
+exports.login_with_phone = (req, res) => {
+  User.findOne({ phone: req.body.phone })
+    .then((user) => {
+      if (user) {
+        const token = jwt.sign(
+          {
+            id: user._id,
+          },
+          process.env.TOKEN_SECRET
+        )
+        res
+          .header('authorization', token)
+          .status(200)
+          .json({ message: 'Log in successful', valid: true, user })
+      } else {
+        res.status(400).json({ message: 'User does not exist' })
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Server error' })
+    })
+}
+
 exports.find_user_by_id = (req, res) => {
   User.findOne({ _id: req.userId })
     .then((user) => {
@@ -95,6 +118,28 @@ exports.find_user_by_id = (req, res) => {
       }
     })
     .catch((err) => {
+      res.status(500).json({ message: 'Server error' })
+    })
+}
+
+exports.set_availability = (req, res) => {
+  User.updateOne({ _id: req.userId }, { available: req.body.available })
+    .then((available) => {
+      res.status(200).json({ message: 'Updated successfully', available })
+    })
+    .catch(() => {
+      res.status(500).json({ message: 'Server error' })
+    })
+}
+
+exports.update_profile = (req, res) => {
+  req.file ? (req.body.profile_photo = req.file.filename) : null
+
+  User.updateOne({ _id: req.userId }, { $set: req.body })
+    .then((user) => {
+      res.status(200).json({ message: 'Updated successfully', user })
+    })
+    .catch(() => {
       res.status(500).json({ message: 'Server error' })
     })
 }
