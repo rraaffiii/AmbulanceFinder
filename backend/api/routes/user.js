@@ -1,10 +1,7 @@
 const router = require('express').Router()
 const userController = require('../controllers/user')
 const authToken = require('../middlewares/auth-token')
-const multer = require('multer')
-const upProfiePic = multer({ dest: '../public/photos/profile' })
-const upLicensePic = multer({ dest: '../public/photos/license' })
-const upVehiclePic = multer({ dest: '../public/photos/vehicle' })
+const upload = require('../middlewares/upload')
 
 router.get('/isUserExist', userController.is_user_exist)
 router.get('/findUserByPhone', userController.find_user_by_phone)
@@ -17,13 +14,13 @@ router.post('/setAvailability', authToken, userController.set_availability)
 router.post(
   '/updateProfile',
   authToken,
-  upProfiePic.none(),
+  upload.profile.none(),
   userController.update_profile
 )
 router.post(
   '/updateProfileWithImg',
   authToken,
-  upProfiePic.single('profile_photo'),
+  upload.profile.single('profile_photo'),
   userController.update_profile
 )
 

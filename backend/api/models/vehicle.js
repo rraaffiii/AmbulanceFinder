@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const vehicleSchema = mongoose.Schema(
   {
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     name: {
       type: String,
       required: true,
@@ -20,11 +21,11 @@ const vehicleSchema = mongoose.Schema(
     },
     seat: { type: Number, required: true },
     features: {
-      wheelChair: { type: Boolean, required: true },
+      wheelchair: { type: Boolean, required: true },
       oxygen: { type: Boolean, required: true },
       stretcher: { type: Boolean, required: true },
     },
-    photo: String,
+    vehicle_photo: { type: String, required: true },
   },
   { timestamps: true }
 )

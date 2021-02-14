@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import Section from '../components/Section'
 import Vehicle from '../components/Vehicle'
 import Select from '../components/Select'
 import PageTitle from '../components/PageTitle'
+import Button from '../components/Button'
 import { vehiclesData } from '../data'
 
 const Vehicles = () => {
@@ -43,7 +45,21 @@ const Vehicles = () => {
           />
         </div>
         {vehicles.map((vehicle) => {
-          return <Vehicle key={vehicle.id} {...vehicle} />
+          return (
+            <Vehicle key={vehicle.id} {...vehicle}>
+              <div className='d-flex align-items-center'>
+                <Link to={`/profile/${vehicle.userId}`}>
+                  Driver: <span className='underline'>{vehicle.userId}</span>
+                </Link>
+                <div className='ml-15 me-auto'>
+                  <i className='fas fa-star color-red'></i>&nbsp;
+                  <span>4</span> (<span>4</span>)
+                </div>
+
+                <Button link='/checkout' className='action-2' text='Book' />
+              </div>
+            </Vehicle>
+          )
         })}
       </Section>
     </>

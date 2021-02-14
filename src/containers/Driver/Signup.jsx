@@ -159,14 +159,10 @@ const SignupDriver = () => {
             <h3 className='text-center'>Are You Eligible to Join Us?</h3>
             <div className='details mt-30'>
               <span className='item d-block'>
-                <span className='badge bg-danger rounded-circle'>1</span>
+                <span className='badge bg-danger rounded-circle'></span>
                 <b className='align-middle pl-5'>
-                  Must have vehicle’s registration paper
+                  You Must have driving license
                 </b>
-              </span>
-              <span className='item d-block'>
-                <span className='badge bg-danger rounded-circle'>2</span>
-                <b className='align-middle pl-5'>Must have driving license</b>
               </span>
             </div>
           </div>

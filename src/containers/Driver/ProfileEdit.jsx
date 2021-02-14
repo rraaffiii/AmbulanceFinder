@@ -41,13 +41,12 @@ const ProfileEdit = () => {
         })
         .catch((err) =>
           global.setAlert({
-            type: 'success',
+            type: 'danger',
             message: err.response.data.message,
           })
         )
     } else {
       formData.append('profile_photo', user.profile_photo)
-      console.log(user.profile_photo)
       UserApi.updateProfile(formData)
         .then((res) => {
           global.setAlert({ type: 'success', message: res.data.message })
@@ -55,7 +54,7 @@ const ProfileEdit = () => {
         })
         .catch((err) =>
           global.setAlert({
-            type: 'success',
+            type: 'danger',
             message: err.response.data.message,
           })
         )

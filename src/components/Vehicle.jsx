@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 
 const Vehicle = ({
-  id,
-  driver,
+  _id,
+  user_id,
   name,
   type,
   cost,
-  features: { wheelChair, oxygen, stretcher, seat },
-  photo,
+  seat,
+  features: { wheelchair, oxygen, stretcher },
+  vehicle_photo,
+  children,
 }) => {
   return (
     <>
@@ -31,7 +33,7 @@ const Vehicle = ({
             <ul className='m-0 pl-10'>
               <li
                 className={`float-left mr-25 ${
-                  !wheelChair && 'text-decoration-line-through'
+                  !wheelchair && 'text-decoration-line-through'
                 }`}
               >
                 Wheel Chair
@@ -54,20 +56,10 @@ const Vehicle = ({
                 Seat: <span>{seat}</span>
               </li>
             </ul>
-            <div className='d-flex align-items-center'>
-              <Link to={`/user/${driver}`}>
-                Driver: <span className='underline'>{driver}</span>
-              </Link>
-              <div className='ml-15 me-auto'>
-                <i className='fas fa-star color-red'></i>&nbsp;
-                <span>4</span> (<span>4</span>)
-              </div>
-
-              <Button link='/checkout' className='action-2' text='Book' />
-            </div>
+            {children}
             <div className='d-block'>
               <img
-                src={`/photos/vehicle/${photo}`}
+                src={`/photos/vehicle/${vehicle_photo}`}
                 alt=''
                 className='radius10 mt-25 w-full'
               />
