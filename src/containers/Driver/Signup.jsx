@@ -36,31 +36,26 @@ const SignupDriver = () => {
       date_of_birth: dob,
       city: city.current.value,
       country: country.current.value,
+      vehicles: [],
     }
     UserApi.createDriver(userData)
       .then((res) => {
-        Cookies.set('userId', res.data.user._id)
-        Cookies.set('type', res.data.user.type)
-        Cookies.set('token', res.headers.authorization)
-        global.setAlert({ type: 'success', message: res.data.message })
-        global.setRedirect('/')
+        Cookies.set('userId', res.data.user._id, { expires: 1 })
+        Cookies.set('type', res.data.user.type, { expires: 1 })
+        Cookies.set('token', res.headers.authorization, { expires: 1 })
+        window.location.replace('/')
       })
       .catch((err) => {
+        console.log(err)
         global.setAlert({ type: 'danger', message: err.response.data.message })
         console.log(err)
       })
   }
-  useEffect(() => {
-    return global.setRedirect(null)
-  }, [global.redirect])
 
   return (
     <>
-      {/* redirect */}
-      {global.redirect && <Redirect to={global.redirect} />}
-
       <Section className='bg-light form_2' align='center'>
-        <div className='col-lg-7 col-md-7 col-sm-10 text-center'>
+        <div className='col-lg-8 col-md-9 col-sm-12 text-center'>
           <form onSubmit={handleSubmit}>
             <PageTitle title='Sign Up to Drive' />
 
@@ -138,6 +133,10 @@ const SignupDriver = () => {
               />
             </div>
 
+            <b className='text-center align-middle'>
+              * You Must have driving license
+            </b>
+
             <div className='d-flex flex-wrap justify-content-center align-items-center buttons mt-25'>
               <button className='btn mr-20 mb-20 mb-xl-0 w-210 action-2'>
                 Sign Up
@@ -153,19 +152,6 @@ const SignupDriver = () => {
               </p>
             </span>
           </form>
-        </div>
-        <div className='col-lg-5 col-md-5 d-none d-md-block overflow-hidden my-auto f-20 text-start '>
-          <div className='p-4 rounded-3 border '>
-            <h3 className='text-center'>Are You Eligible to Join Us?</h3>
-            <div className='details mt-30'>
-              <span className='item d-block'>
-                <span className='badge bg-danger rounded-circle'></span>
-                <b className='align-middle pl-5'>
-                  You Must have driving license
-                </b>
-              </span>
-            </div>
-          </div>
         </div>
       </Section>
     </>

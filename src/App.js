@@ -10,7 +10,6 @@ import Home from './containers/Home'
 import Signin from './containers/Signin'
 import Signup from './containers/Signup'
 import Search from './containers/Search'
-import SearchResult from './containers/SearchResult'
 // client
 import BookingRecent from './containers/BookingRecent'
 import BookingSingleClient from './containers/Client/BookingSingle'
@@ -44,10 +43,8 @@ const App = () => {
 
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/signin' component={Signin} />
-          <Route exact path='/signup' component={Signup} />
           <Route exact path='/search' component={Search} />
-          <Route exact path='/search/result' component={SearchResult} />
+          <Route exact path='/checkout' component={Checkout} />
           {/* client */}
           {type && type == 0 && (
             <Switch>
@@ -57,7 +54,6 @@ const App = () => {
                 path='/booking/:id'
                 children={<BookingSingleClient />}
               />
-              <Route exact path='/checkout' component={Checkout} />
               <Route exact path='/invoice/:bookId' component={Invoice} />
               <Route exact path='/profile' component={ProfileClient} />
               <Route exact path='/profile/edit' component={ProfileEditClient} />
@@ -89,6 +85,12 @@ const App = () => {
             <Switch>
               <Route exact path='/approve/driver' component={ApproveDriver} />
               <Route exact path='/stats' component={Stats} />
+            </Switch>
+          )}
+          {!type && (
+            <Switch>
+              <Route exact path='/signin' component={Signin} />
+              <Route exact path='/signup' component={Signup} />
             </Switch>
           )}
         </Switch>

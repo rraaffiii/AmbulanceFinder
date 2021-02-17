@@ -1,7 +1,7 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Logo from '../components/Logo'
+import NavBar from '../components/NavBar'
 
 const Header = () => {
   const type = Cookies.get('type')
@@ -12,6 +12,29 @@ const Header = () => {
     Cookies.remove('token')
     window.location.replace('/')
   }
+
+  const generalNavs = [
+    { link: '/signin', btnText: 'Signin' },
+    { link: '/signup', btnText: 'Signup' },
+  ]
+  const clientNavs = [
+    { link: '/booking', btnText: 'Bookings' },
+    { link: '/profile', btnText: 'Profile' },
+    { link: '/#', btnText: 'Signout', event: handleSignout },
+  ]
+  const driverNavs = [
+    { link: '/booking/request', btnText: 'Requests' },
+    { link: '/booking', btnText: 'Bookings' },
+    { link: '/vehicle', btnText: 'Vehicles' },
+    { link: '/profile', btnText: 'Profile' },
+    { link: '/#', btnText: 'Signout', event: handleSignout },
+  ]
+  const adminNavs = [
+    { link: '/approve/driver', btnText: 'Approve' },
+    { link: '/stats', btnText: 'Stats' },
+    { link: '/#', btnText: 'Signout', event: handleSignout },
+  ]
+
   return (
     <>
       {/* Navigation Mobile type */}
@@ -52,128 +75,18 @@ const Header = () => {
               <div className='col-md-4'>
                 <Logo name='Ambulance Finder' />
               </div>
-              <div className='col-md-6 d-flex justify-content-end align-items-center'>
-                {/* client nav */}
-                {type && type == 0 && (
-                  <>
-                    <NavLink
-                      exact
-                      to='/booking'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Bookings
-                    </NavLink>
-                    <NavLink
-                      exact
-                      to='/profile'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Profile
-                    </NavLink>
-                    <Link
-                      className='link color-white f-18 mx-15'
-                      onClick={handleSignout}
-                    >
-                      Signout
-                    </Link>
-                  </>
-                )}
-                {/* driver nav */}
-                {type && type == 1 && (
-                  <>
-                    <NavLink
-                      exact
-                      to='/booking/request'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Requests
-                    </NavLink>
-                    <NavLink
-                      exact
-                      to='/booking'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Bookings
-                    </NavLink>
-                    <NavLink
-                      exact
-                      to='/vehicle'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Vehicle
-                    </NavLink>
-                    <NavLink
-                      exact
-                      to='/profile'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Profile
-                    </NavLink>
-                    <Link
-                      to='/signout'
-                      className='link color-white f-18 mx-15'
-                      onClick={handleSignout}
-                    >
-                      Signout
-                    </Link>
-                  </>
-                )}
-                {/* admin nav */}
-                {type && type == 2 && (
-                  <>
-                    <NavLink
-                      exact
-                      to='/approve/driver'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Approve
-                    </NavLink>
-                    <NavLink
-                      exact
-                      to='/stats'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Stats
-                    </NavLink>
-                    <Link
-                      exact
-                      to='/signout'
-                      className='link color-white f-18 mx-15'
-                      onClick={handleSignout}
-                    >
-                      Signout
-                    </Link>
-                  </>
-                )}
+              <div className='col-md-6 nav-inner d-flex justify-content-end align-items-center'>
                 {/* general nav */}
-                {!type && (
-                  <>
-                    <NavLink
-                      exact
-                      to='/signin'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Signin
-                    </NavLink>
-                    <NavLink
-                      exact
-                      to='/signup'
-                      className='link color-white f-18 mx-15'
-                      activeClassName='active'
-                    >
-                      Signup
-                    </NavLink>
-                  </>
-                )}
+                {!type && <NavBar navs={generalNavs} />}
+
+                {/* client nav */}
+                {type && type == 0 && <NavBar navs={clientNavs} />}
+
+                {/* driver nav */}
+                {type && type == 1 && <NavBar navs={driverNavs} />}
+
+                {/* admin nav */}
+                {type && type == 2 && <NavBar navs={adminNavs} />}
               </div>
             </div>
           </div>

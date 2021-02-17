@@ -1,5 +1,4 @@
-import React, { useRef, useContext, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { useRef, useContext } from 'react'
 import Cookies from 'js-cookie'
 import { GlobalContext } from '../../context/GlobalContext'
 import { Link } from 'react-router-dom'
@@ -7,6 +6,7 @@ import Section from '../../components/Section'
 import PageTitle from '../../components/PageTitle'
 import firebase from '../../firebase'
 import UserApi from '../../api/user'
+import BookingApi from '../../api/booking'
 
 const Signup = () => {
   const global = useContext(GlobalContext)
@@ -34,14 +34,35 @@ const Signup = () => {
                 .then(() => {
                   UserApi.createClient({ phone: number })
                     .then((res) => {
-                      Cookies.set('userId', res.data.user._id)
-                      Cookies.set('type', res.data.user.type)
-                      Cookies.set('token', res.headers.authorization)
+                      Cookies.set('userId', res.data.user._id, { expires: 1 })
+                      Cookies.set('type', res.data.user.type, { expires: 1 })
+                      Cookies.set('token', res.headers.authorization, {
+                        expires: 1,
+                      })
                       global.setAlert({
                         type: 'success',
                         message: res.data.message,
                       })
-                      global.setRedirect('/')
+
+                      // check if redirected from booking page
+                      if (!Cookies.get('redirectUrl')) {
+                        window.location.replace('/')
+                      } else {
+                        BookingApi.bookDriverFromRedirect(
+                          Cookies.get('redirectUrl')
+                        )
+                          // if booking successful
+                          .then((res) => {
+                            global.setAlert({
+                              type: 'success',
+                              message: res.data.message,
+                            })
+                            window.location.replace('/booking')
+                          })
+                          .catch((err) => {
+                            global.setAlert(err.response.data.message)
+                          })
+                      }
                     })
                     .catch((err) => {
                       global.setAlert({
@@ -80,15 +101,9 @@ const Signup = () => {
         })
       })
   }
-  useEffect(() => {
-    return global.setRedirect(null)
-  }, [global.redirect])
 
   return (
     <>
-      {/* redirect */}
-      {global.redirect && <Redirect to={global.redirect} />}
-
       <Section className='bg-light form_2' align='center'>
         <div className='col-lg-5 col-md-6 col-sm-10 text-center'>
           <PageTitle title='Sign Up to Book' />

@@ -44,7 +44,12 @@ const VehicleMy = () => {
         {(vehicles.length > 0 &&
           vehicles.map((vehicle) => {
             return (
-              <Vehicle key={vehicle._id} {...vehicle}>
+              <Vehicle
+                btnText='Modify'
+                btnLink={`/vehicle/modify/${vehicle._id}`}
+                key={vehicle._id}
+                {...vehicle}
+              >
                 <div className='d-flex justify-content-end'>
                   <Button
                     link={`/vehicle/modify/${vehicle._id}`}

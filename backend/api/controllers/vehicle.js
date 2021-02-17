@@ -1,4 +1,5 @@
 const Vehicle = require('../models/vehicle')
+const User = require('../models/user')
 
 exports.create_vehicle = (req, res) => {
   req.body.vehicle_photo = req.file.filename
@@ -7,11 +8,16 @@ exports.create_vehicle = (req, res) => {
   const vehicle = new Vehicle({ ...req.body })
   vehicle
     .save()
-    .then(() => {
+    .then((vehicle) => {
+      // save vehicle data to user collection
+      User.updateOne(
+        { _id: vehicle.user_id },
+        { $push: { vehicles: vehicle._id } }
+      )
       res.status(201).json({ message: 'Registered successfully' })
     })
     .catch(() => {
-      res.status(500).json({ message: 'Registration failed' })
+      res.status(500).json({ message: 'Server error' })
     })
 }
 exports.update_vehicle = (req, res) => {

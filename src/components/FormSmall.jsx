@@ -6,8 +6,8 @@ const FormSmall = ({
   btnLink,
   style,
   inputs,
-  handleChange,
-  handleSubmit,
+  handleChange = null,
+  handleSubmit = null,
 }) => {
   const className =
     style == 'dark'

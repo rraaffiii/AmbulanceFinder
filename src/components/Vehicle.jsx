@@ -1,22 +1,31 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import Button from '../components/Button'
 
 const Vehicle = ({
-  _id,
-  user_id,
   name,
   type,
   cost,
   seat,
-  features: { wheelchair, oxygen, stretcher },
   vehicle_photo,
+  features: { wheelchair, oxygen, stretcher },
+  style = null,
   children,
 }) => {
+  let parentDiv = null
+  let spacing = null
+
+  if (style == 'compact') {
+    parentDiv = 'col-xl-4 col-lg-4 col-md-6 col-sm-12'
+    spacing = 'mb-15 px-15'
+  } else {
+    parentDiv = 'col-xl-6 col-lg-6 col-md-6 col-sm-12'
+    spacing = 'mb-30 px-30'
+  }
   return (
     <>
-      <div className='col-md-10 col-lg-7 col-xl-6'>
-        <div className='mx-auto mb-30 px-30 pt-15 pb-15 radius20 color-heading product big'>
+      <div className={parentDiv}>
+        <div
+          className={`mx-auto ${spacing} pt-15 pb-15 radius20 color-heading product big`}
+        >
           <div className='d-flex flex-column justify-content-between'>
             <div className='d-flex'>
               <div className='f-14 semibold text-uppercase sp-20 brand me-auto'>
@@ -32,31 +41,32 @@ const Vehicle = ({
             <div className='f-22 semibold color-main title'>{name}</div>
             <ul className='m-0 pl-10'>
               <li
-                className={`float-left mr-25 ${
+                className={`float-left mr-15 ${
                   !wheelchair && 'text-decoration-line-through'
                 }`}
               >
                 Wheel Chair
               </li>
               <li
-                className={`float-left mr-25 ${
+                className={`float-left mr-15 ${
                   !oxygen && 'text-decoration-line-through'
                 }`}
               >
                 Oxygen
               </li>
               <li
-                className={`float-left mr-25 ${
+                className={`float-left mr-15 ${
                   !stretcher && 'text-decoration-line-through'
                 }`}
               >
                 Stretcher
               </li>
-              <li className='float-left mr-25'>
+              <li className='float-left mr-15'>
                 Seat: <span>{seat}</span>
               </li>
             </ul>
             {children}
+
             <div className='d-block'>
               <img
                 src={`/photos/vehicle/${vehicle_photo}`}
