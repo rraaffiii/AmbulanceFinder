@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ButtonSm = ({ className, link, text, event, id }) => {
+const ButtonSm = ({ className, link, text, event, btnParams }) => {
+  // console.log(btnParams)
   return (
     <>
       {(!link && (
@@ -12,11 +13,11 @@ const ButtonSm = ({ className, link, text, event, id }) => {
           {text}
         </button>
       )) ||
-        (id && (
+        (btnParams && (
           <Link
             to={link}
             className={`btn ${className} border-gray color-main medium f-16`}
-            onClick={() => event(id) || null}
+            onClick={(e) => event(btnParams, e) || null}
           >
             {text}
           </Link>

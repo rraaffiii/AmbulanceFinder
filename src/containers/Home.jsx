@@ -5,20 +5,14 @@ import SubHeadingTitle from '../components/SubHeadingTitle'
 import IconParagraph from '../components/IconParagraph'
 import Testimonial from '../components/Testimonial'
 import staticImg from '../assets/testimonial_1_img.jpg'
-import RouteApi from '../api/route'
 
 const Home = () => {
   const [form, setForm] = useState({ pickup: '', destination: '' })
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
-  const handleSubmit = (e) => {
-    // e.preventDefault()
-    console.log({ ...form })
-    RouteApi.submitLocationsQuery(form)
-      .then((res) => console.log('recieved data ' + JSON.stringify(res.data)))
-      .catch((err) => console.log(err))
-  }
+
   const inputs = [
     { label: 'pickup', type: 'text' },
     { label: 'destination', type: 'text' },
@@ -34,11 +28,10 @@ const Home = () => {
 
           <FormSmall
             btnText='Search'
-            btnLink='/search'
+            btnLink={`/search?p=${form.pickup}&d=${form.destination}`}
             inputs={inputs}
             setForm={setForm}
             handleChange={handleChange}
-            handleSubmit={handleSubmit}
           />
         </div>
       </Section>

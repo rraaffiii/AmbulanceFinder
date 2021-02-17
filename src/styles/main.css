@@ -283,6 +283,13 @@ strong {
   color: #313131;
 }
 
+.alert {
+  position: absolute;
+  z-index: 9;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
 /* 2. Common responsive styles */
 /* Smaller than 1200px */
 @media (max-width: 1199.98px) {
@@ -365,15 +372,6 @@ strong {
   .text-adaptive.f-20 {
     font-size: 18px;
     line-height: 28px;
-  }
-
-  .alert {
-    top: 10px;
-    left: 20px;
-    right: 20px;
-    transform: none;
-    width: auto;
-    padding-left: 40px;
   }
 }
 /* Smaller than 768px */
@@ -853,6 +851,9 @@ input[type='radio'] + label:before {
 }
 .logo a {
   vertical-align: middle;
+}
+.nav-inner {
+  min-height: 2.5em;
 }
 .bg-offwhite {
   background-color: #f3f3f3;

@@ -1,12 +1,13 @@
-import React, { useState, useRef, useContext, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import { Redirect } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import { GlobalContext } from '../context/GlobalContext'
+import Cookies from 'js-cookie'
 import { Link } from 'react-router-dom'
 import Section from '../components/Section'
 import PageTitle from '../components/PageTitle'
 import firebase from '../firebase'
 import UserApi from '../api/user'
+import BookingApi from '../api/booking'
 
 const Signin = () => {
   const global = useContext(GlobalContext)
@@ -37,15 +38,31 @@ const Signin = () => {
                   UserApi.loginWithPhone(number)
                     // client login
                     .then((res) => {
-                      console.log(res.data.user)
-                      Cookies.set('userId', res.data.user._id)
-                      Cookies.set('type', res.data.user.type)
-                      Cookies.set('token', res.headers.authorization)
-                      global.setAlert({
-                        type: 'success',
-                        message: 'Login successful',
+                      Cookies.set('userId', res.data.user._id, { expires: 1 })
+                      Cookies.set('type', res.data.user.type, { expires: 1 })
+                      Cookies.set('token', res.headers.authorization, {
+                        expires: 1,
                       })
-                      global.setRedirect('/')
+
+                      // check if redirected from booking page
+                      if (!Cookies.get('redirectUrl')) {
+                        window.location.replace('/')
+                      } else {
+                        BookingApi.bookDriverFromRedirect(
+                          Cookies.get('redirectUrl')
+                        )
+                          // if booking successful
+                          .then((res) => {
+                            global.setAlert({
+                              type: 'success',
+                              message: res.data.message,
+                            })
+                            window.location.replace('/booking')
+                          })
+                          .catch((err) => {
+                            global.setAlert(err.response.data.message)
+                          })
+                      }
                     })
                     .catch((err) => {
                       global.setAlert({
@@ -92,14 +109,12 @@ const Signin = () => {
       .then((res) => {
         //driver login
         if (res.data.valid) {
-          Cookies.set('userId', res.data.user._id)
-          Cookies.set('type', res.data.user.type)
-          Cookies.set('token', res.headers.authorization)
-          global.setAlert({ type: 'success', message: res.data.message })
-          global.setRedirect('/')
+          Cookies.set('userId', res.data.user._id, { expires: 1 })
+          Cookies.set('type', res.data.user.type, { expires: 1 })
+          Cookies.set('token', res.headers.authorization, { expires: 1 })
+          window.location.replace('/')
         } else {
           global.setAlert({ type: 'danger', message: res.data.message })
-          console.log(JSON.stringify(res.data.message))
         }
       })
       .catch((err) => {
@@ -110,15 +125,9 @@ const Signin = () => {
         console.log(JSON.stringify(err.response.data.message))
       })
   }
-  useEffect(() => {
-    return global.setRedirect(null)
-  }, [global.redirect])
 
   return (
     <>
-      {/* redirect */}
-      {global.redirect && <Redirect to={global.redirect} />}
-
       <Section className='bg-light form_2' align='center'>
         <div className='col-lg-5 col-md-6 col-sm-10 text-center'>
           <PageTitle title='Sign In' />
@@ -126,6 +135,7 @@ const Signin = () => {
           <div className='input-group mb-15'>
             <input
               ref={phone}
+              defaultValue='+8801748410491'
               type='text'
               name='phone'
               placeholder='Phone'
@@ -154,6 +164,7 @@ const Signin = () => {
               <div className='input-group mb-15'>
                 <input
                   ref={pass}
+                  defaultValue='1234'
                   type='password'
                   name='password'
                   placeholder='Password'

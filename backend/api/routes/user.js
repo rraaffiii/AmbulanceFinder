@@ -9,6 +9,7 @@ router.post('/createClient', userController.create_user)
 router.post('/createDriver', userController.create_user)
 router.post('/checkCredentials', userController.check_credentials)
 router.post('/loginWithPhone', userController.login_with_phone)
+router.post('/findVehiclesByDriver', userController.find_vehicles_by_driver)
 router.post('/findUserById', authToken, userController.find_user_by_id)
 router.post('/setAvailability', authToken, userController.set_availability)
 router.post(

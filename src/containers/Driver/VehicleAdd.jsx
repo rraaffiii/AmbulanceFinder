@@ -41,7 +41,7 @@ const VehicleAdd = () => {
     const formData = new FormData()
     formData.append('user_id', id)
     formData.append('name', name.current.value)
-    formData.append('type', type.current.value)
+    formData.append('type', parseInt(type.current.value) + 1)
     formData.append('cost', cost.current.value)
     formData.append('seat', seat.current.value)
     formData.append('number_plate', numberPlate.current.value)
@@ -51,24 +51,18 @@ const VehicleAdd = () => {
     VehicleApi.createVehicle(formData)
       .then((res) => {
         global.setAlert({ type: 'success', message: res.data.message })
-        global.setRedirect('/vehicle')
+        window.location.replace('/vehicle')
       })
-      .catch((err) =>
+      .catch((err) => {
         global.setAlert({
           type: 'danger',
           message: err.response.data.message,
         })
-      )
+      })
   }
-  useEffect(() => {
-    return global.setRedirect(null)
-  }, [global.redirect])
 
   return (
     <>
-      {/* redirect */}
-      {global.redirect && <Redirect to={global.redirect} />}
-
       <Section className='bg-light vehicle-add' align='center'>
         <PageTitle title='Add Vehicle' />
 

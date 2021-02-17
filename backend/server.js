@@ -1,15 +1,14 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
-const path = require('path')
-require('dotenv').config()
+const port = process.env.PORT || 5000
+const uri = process.env.DB_URI
 
 // middlewares
 app.use(cors({ exposedHeaders: 'authorization' }))
 app.use(express.json())
-const port = process.env.PORT || 5000
-const uri = process.env.DB_URI
 
 // DB connection
 mongoose
@@ -27,13 +26,7 @@ mongoose
 mongoose.set('useFindAndModify', false)
 
 // API routes
-const bookingRoutes = require('./api/routes/booking')
-const reviewRoutes = require('./api/routes/review')
-const routeRoutes = require('./api/routes/route')
-const userRoutes = require('./api/routes/user')
-const vehicleRoutes = require('./api/routes/vehicle')
-app.use('/api/booking', bookingRoutes)
-app.use('/api/review', reviewRoutes)
-app.use('/api/route', routeRoutes)
-app.use('/api/user', userRoutes)
-app.use('/api/vehicle', vehicleRoutes)
+app.use('/api/user', require('./api/routes/user'))
+app.use('/api/booking', require('./api/routes/booking'))
+app.use('/api/vehicle', require('./api/routes/vehicle'))
+app.use('/api/review', require('./api/routes/review'))

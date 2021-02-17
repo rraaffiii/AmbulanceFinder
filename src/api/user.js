@@ -62,5 +62,11 @@ const UserApi = {
       },
     })
   },
+  findVehiclesByDriver({ pickup, destination }) {
+    return axios.post(`${api_url}/findVehiclesByDriver`, {
+      pickup,
+      destination,
+    })
+  },
 }
 export default UserApi

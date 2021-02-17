@@ -9,6 +9,7 @@ const userSchema = mongoose.Schema(
     phone: {
       type: String,
       required: true,
+      unique: true,
     },
     password: String,
     first_name: String,
@@ -18,10 +19,12 @@ const userSchema = mongoose.Schema(
     city: String,
     country: String,
     profile_photo: String,
-    vehicle: Number,
+    vehicles: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle' }],
+      default: undefined,
+    },
     rating: Number,
     rating_count: Number,
-    last_location: String,
     available: Boolean,
     approved: Boolean,
   },
