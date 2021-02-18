@@ -1,14 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { GlobalContext } from '../context/GlobalContext'
+import Cookies from 'js-cookie'
 import Section from '../components/Section'
 import RowBookingRecent from '../components/RowBookingRecent'
 import PageTitle from '../components/PageTitle'
-import { bookingsData } from '../data'
+import BookingApi from '../api/booking'
 
 const BookingRecent = () => {
+  const global = useContext(GlobalContext)
   const [bookingRecents, setBookingRecents] = useState([])
+  const userType = Cookies.get('type')
 
   useEffect(() => {
-    setBookingRecents(bookingsData)
+    BookingApi.findBookingsByUserId(userType)
+      .then((res) => {
+        setBookingRecents(res.data)
+      })
+      .catch((err) =>
+        global.setAlert({
+          type: 'danger',
+          message: err.response.data.message,
+        })
+      )
   }, [])
 
   return (
@@ -16,27 +29,30 @@ const BookingRecent = () => {
       <Section className='bg-light' align='center'>
         <PageTitle title='Recent Bookings' />
 
-        <div className='table-responsive'>
-          <table className='table'>
-            <thead>
-              <tr className='text-center'>
-                <th>Username</th>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookingRecents.map((bookingRecent) => {
-                return (
-                  <RowBookingRecent key={bookingRecent.id} {...bookingRecent} />
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
+        {(bookingRecents.length > 0 && (
+          <div className='table-responsive'>
+            <table className='table table-hover'>
+              <thead>
+                <tr className='text-center'>
+                  {(userType == 0 && <th>Driver</th>) || <th>Client</th>}
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {bookingRecents.map((bookingRecent) => {
+                  return (
+                    <RowBookingRecent
+                      key={bookingRecent._id}
+                      {...bookingRecent}
+                    />
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        )) || <h5 className='text-center'> No bookings found</h5>}
       </Section>
     </>
   )

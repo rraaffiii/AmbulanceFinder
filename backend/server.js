@@ -25,6 +25,17 @@ mongoose
   .catch((err) => console.log(err))
 mongoose.set('useFindAndModify', false)
 
+// CORS handling
+// app.use(function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*')
+//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept, authorization, access-control-allow-origin'
+//   )
+//   next()
+// })
+
 // API routes
 app.use('/api/user', require('./api/routes/user'))
 app.use('/api/booking', require('./api/routes/booking'))

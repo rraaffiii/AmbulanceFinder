@@ -7,5 +7,11 @@ router.post(
   authToken,
   reviewController.get_review_by_user_id
 )
+router.post('/createReview', authToken, reviewController.create_review)
+router.get(
+  '/getReviewsByReceiver',
+  authToken,
+  reviewController.get_reviews_by_receiver
+)
 
 module.exports = router

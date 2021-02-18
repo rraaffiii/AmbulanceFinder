@@ -2,17 +2,32 @@ import React from 'react'
 import Button from '../components/Button'
 import Rating from '../components/Rating'
 
-const UserCard = ({ id, name, profile_photo, rating, rating_count, phone }) => {
+const UserCard = ({
+  title,
+  _id,
+  first_name,
+  last_name,
+  profile_photo,
+  rating,
+  rating_count,
+  phone,
+}) => {
   return (
     <>
-      <div className='row p-3 border border-1 rounded'>
-        <div className='col-lg-8 justify-content-start'>
-          <h5 className='pb-1'>Booked User:</h5>
-          <div className='mt-10 mb-1 f-20 title'>{name}</div>
+      <div className='row border border-1 rounded p-3'>
+        <div className='col-lg-9 justify-content-start '>
+          <h5 className='pb-1'>{title}</h5>
+          <div className='mt-10 mb-1 f-20 title'>
+            {first_name + ' ' + last_name || phone}
+          </div>
 
           <div>
             <div className='d-flex align-items-center'>
-              <Rating rating={rating} rating_count={rating_count} />
+              {(rating && (
+                <Rating rating={rating} rating_count={rating_count} />
+              )) ||
+                'No reviews'}
+
               <i className='fas fa-phone-square-alt f-18 pl-15'></i>
               <span>&nbsp;{phone}</span>
             </div>
@@ -21,7 +36,7 @@ const UserCard = ({ id, name, profile_photo, rating, rating_count, phone }) => {
             </a>
           </div>
         </div>
-        <div className='col-lg-4 justify-content-end'>
+        <div className='col-lg-3 justify-content-end'>
           <img
             src={`/photos/profile/${profile_photo}`}
             alt=''

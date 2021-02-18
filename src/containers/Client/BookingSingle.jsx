@@ -1,27 +1,36 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import { GlobalContext } from '../../context/GlobalContext'
 import { useParams } from 'react-router-dom'
 import Section from '../../components/Section'
 import Button from '../../components/Button'
-import Switch from '../../components/Switch'
 import Block from '../../components/Block'
 import UserCard from '../../components/UserCard'
+import BookingStatus from '../../components/BookingStatus'
 import Review from '../../components/Review'
 import Modal from '../../components/Modal'
 import RatingStar from '../../components/RatingStar'
-import { usersData, reviewsData } from '../../data'
+import BookingApi from '../../api/booking'
+import ReviewgApi from '../../api/review'
 
 const BookingSingle = () => {
   const { id } = useParams()
+  const global = useContext(GlobalContext)
 
-  const [user, setUser] = useState([])
+  const [booking, setBooking] = useState()
+  const [reviews, setReviews] = useState([])
+
   // status section
-  const [status, setStatus] = useState(0)
-
-  // show reviews section
-  const [showReviews, setShowReviews] = useState(false)
-  const handleShowReviews = () => {
-    setShowReviews(!showReviews)
+  const [status, setStatus] = useState()
+  const handleStatus = (newStatus) => {
+    BookingApi.updateStatus(id, newStatus)
+      .then((res) => {
+        setStatus(newStatus)
+      })
+      .catch((err) => {
+        global.setAlert(err.response.data.message)
+      })
   }
+
   // modal section
   const [showModal, setShowModal] = useState(false)
   const openModal = () => {
@@ -33,36 +42,65 @@ const BookingSingle = () => {
   // modal body data
   const [rating, setRating] = useState(4)
   const review_details = useRef(null)
+
   const submitModal = () => {
     const reviewData = {
+      receiver: booking.driver._id,
       rating: rating + 1,
-      review_details: review_details.current.value,
+      details: review_details.current.value,
     }
-    console.log(reviewData)
-    setStatus(4)
+    // sumbit review
+    ReviewgApi.createReview(reviewData)
+      .then((res) => {
+        global.setAlert(res.data.message)
+        // set status
+        const newStatus = 7
+        BookingApi.updateStatus(id, newStatus)
+          .then(() => {
+            setStatus(newStatus)
+          })
+          .catch((err) => {
+            global.setAlert(err.response.data.message)
+          })
+      })
+      .catch((err) => {
+        global.setAlert(err.response.data.message)
+      })
     closeModal()
   }
 
-  const rowsBooking = [
-    { label: 'Vehicle Name', value: 'Rocket Ambulance' },
-    { label: 'Booking Date', value: '12-01-2021' },
-    { label: 'Booking Time', value: '5:30 PM' },
-    { label: 'Pickup', value: 'Uttara' },
-    { label: 'Destination', value: 'Kuril' },
-    { label: 'Fare/KM', value: '$8' },
-    { label: 'Distance', value: '9.9KM' },
-  ]
-  const rowsPayment = [
-    { label: 'Payment ID', value: '1324654' },
-    { label: 'Payment Status', value: 'Paid' },
-    { label: 'Payment Date', value: '12-01-2021' },
-    { label: 'Payment Time', value: '5:30 PM' },
-    { label: 'Payment Method', value: 'Cash' },
-  ]
-
   useEffect(() => {
-    setUser(usersData[2])
+    BookingApi.findBookingVehicleByBookingId(id)
+      .then((res) => {
+        setBooking(res.data)
+        setStatus(res.data.status)
+
+        ReviewgApi.getReviewsByReceiver(res.data.driver._id)
+          .then((res) => {
+            setReviews(res.data)
+          })
+          .catch((err) => {
+            global.setAlert(err.response.data.message)
+          })
+      })
+      .catch((err) => {
+        global.setAlert({ type: 'danger', message: err.response.data.message })
+      })
   }, [])
+
+  let rowsBooking
+  if (booking) {
+    rowsBooking = [
+      { label: 'Vehicle Name', value: booking.driver.vehicles[0].name },
+      {
+        label: 'Booking Time',
+        value: booking.createdAt.slice(0, 19).replace('T', ' | '),
+      },
+      { label: 'Pickup', value: booking.pickup },
+      { label: 'Destination', value: booking.destination },
+      { label: 'Fare/KM', value: `$ ${booking.driver.vehicles[0].cost}` },
+    ]
+  }
 
   return (
     <>
@@ -106,37 +144,31 @@ const BookingSingle = () => {
             <div className='col-lg-7'>
               <h2>Booking #{id}</h2>
               <h5 className='pt-2'>
-                Status:{' '}
-                {status == 0
-                  ? 'Accepted'
-                  : status == 1
-                  ? 'Arrived'
-                  : status == 2
-                  ? 'Started'
-                  : status == 3
-                  ? 'Completed'
-                  : 'Feedback Submitted'}
+                Status: <BookingStatus status={status} />
               </h5>
 
-              {/* review modal */}
-              <div className='row pb-2'>
-                <div className='col-lg-12 d-flex'>
-                  {/* if status complete */}
-                  {status >= 3 && (
-                    <>
+              {/* if status complete */}
+              {status >= 5 && (
+                <>
+                  <div className='row py-4'>
+                    <div className='col-lg-12 d-flex'>
                       <Button
-                        className={`sm action-2 ${status >= 4 && 'disabled'}`}
+                        className={`sm action-2 ${status >= 7 && 'disabled'}`}
                         link='# '
                         text='Submit Review'
                         event={openModal}
                       />
-                    </>
-                  )}
-                </div>
-              </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {booking && <UserCard title='Driver' {...booking.driver} />}
             </div>
             <div className='col-lg-5'>
-              <UserCard {...user} />
+              {rowsBooking && (
+                <Block heading='Booking Details' rows={rowsBooking} />
+              )}
             </div>
           </div>
         </div>
@@ -145,30 +177,11 @@ const BookingSingle = () => {
         <div className='col-lg-12'>
           <div className='row justify-content-center'>
             <div className='col-lg-12'>
-              <Switch
-                label='Show User Reviews'
-                className='lg mb-4'
-                event={handleShowReviews}
-              />
-              {showReviews && (
-                <>
-                  {reviewsData.map((review) => {
-                    return <Review key={review.id} {...review} />
-                  })}
-                </>
-              )}
-              {!showReviews && (
-                <>
-                  <div className='row'>
-                    <div className='col-lg-6'>
-                      <Block heading='Booking Details' rows={rowsBooking} />
-                    </div>
-                    <div className='col-lg-6'>
-                      <Block heading='Payment Details:' rows={rowsPayment} />
-                    </div>
-                  </div>
-                </>
-              )}
+              <h4 className='pb-3'>Driver Reviews:</h4>
+              {(reviews.length > 0 &&
+                reviews.map((review) => {
+                  return <Review key={review.id} {...review} />
+                })) || <h5 className='pt-2 text-center'>No Reviews Found</h5>}
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ const Header = () => {
     Cookies.remove('userId')
     Cookies.remove('type')
     Cookies.remove('token')
+    Cookies.remove('redirectUrl')
     window.location.replace('/')
   }
 
@@ -23,7 +24,6 @@ const Header = () => {
     { link: '/#', btnText: 'Signout', event: handleSignout },
   ]
   const driverNavs = [
-    { link: '/booking/request', btnText: 'Requests' },
     { link: '/booking', btnText: 'Bookings' },
     { link: '/vehicle', btnText: 'Vehicles' },
     { link: '/profile', btnText: 'Profile' },

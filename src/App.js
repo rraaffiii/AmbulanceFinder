@@ -10,15 +10,14 @@ import Home from './containers/Home'
 import Signin from './containers/Signin'
 import Signup from './containers/Signup'
 import Search from './containers/Search'
-// client
 import BookingRecent from './containers/BookingRecent'
+// client
 import BookingSingleClient from './containers/Client/BookingSingle'
 import ProfileClient from './containers/Client/Profile'
 import ProfileEditClient from './containers/Client/ProfileEdit'
 import Checkout from './containers/Client/Checkout'
 import Invoice from './containers/Client/Invoice'
 // driver
-import BookingRequest from './containers/Driver/BookingRequest'
 import BookingSingleDriver from './containers/Driver/BookingSingle'
 import VehicleMy from './containers/Driver/VehicleMy'
 import VehicleAdd from './containers/Driver/VehicleAdd'
@@ -62,7 +61,6 @@ const App = () => {
           {/* driver */}
           {type && type == 1 && (
             <Switch>
-              <Route exact path='/booking/request' component={BookingRequest} />
               <Route exact path='/booking' component={BookingRecent} />
               <Route
                 exact
