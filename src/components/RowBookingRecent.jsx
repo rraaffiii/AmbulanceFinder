@@ -1,31 +1,27 @@
-import React, { useState } from 'react'
-import Button from './Button'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+import BookingStatus from './BookingStatus'
 
-const RowBookingRecent = ({ id, username, name, date, time, status }) => {
+const RowBookingRecent = ({
+  _id,
+  driver: { first_name } = null,
+  client: { phone } = null,
+  createdAt,
+  status,
+}) => {
+  const history = useHistory()
+
+  const handleClick = (bookingId) => {
+    history.push(`/booking/${bookingId}`)
+  }
   return (
-    <tr className='text-center'>
-      <td>{username}</td>
-      <td>{name}</td>
-      <td>{date}</td>
-      <td>{time}</td>
+    <tr className='text-center clickable' onClick={() => handleClick(_id)}>
+      {first_name && <td>{first_name}</td>}
+      {phone && <td>{phone}</td>}
+      <td>{createdAt && createdAt.slice(0, 19).split('T')[0]}</td>
+      <td>{createdAt && createdAt.slice(0, 19).split('T')[1]}</td>
       <td>
-        {status == 0
-          ? 'Accepted'
-          : status == 1
-          ? 'Arrived'
-          : status == 2
-          ? 'Started'
-          : 'Completed'}
-      </td>
-      <td>
-        <Button className='sm' link={`/booking/${id}`} text='Details' />
-        {status == 3 && (
-          <Button
-            className='sm action-2'
-            link={`/invoice/${id}`}
-            text='Invoice'
-          />
-        )}
+        <BookingStatus status={status} />
       </td>
     </tr>
   )

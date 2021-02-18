@@ -846,6 +846,9 @@ input[type='radio'] + label:before {
 }
 
 /* others */
+.clickable {
+  cursor: pointer;
+}
 .logo {
   font-size: 2rem;
 }
