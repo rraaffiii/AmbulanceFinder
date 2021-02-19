@@ -68,5 +68,12 @@ const UserApi = {
       destination,
     })
   },
+  updateProfileRating(profileRating) {
+    console.log(JSON.stringify(profileRating))
+    return axios.get(`${api_url}/updateProfileRating`, {
+      headers: { authorization: getToken() },
+      params: { profileRating },
+    })
+  },
 }
 export default UserApi

@@ -24,5 +24,10 @@ router.post(
   upload.profile.single('profile_photo'),
   userController.update_profile
 )
+router.get(
+  '/updateProfileRating',
+  authToken,
+  userController.update_profile_rating
+)
 
 module.exports = router
