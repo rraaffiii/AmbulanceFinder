@@ -6,30 +6,20 @@ import Button from '../../components/Button'
 import Block from '../../components/Block'
 import UserCard from '../../components/UserCard'
 import BookingStatus from '../../components/BookingStatus'
-import Review from '../../components/Review'
 import Modal from '../../components/Modal'
 import RatingStar from '../../components/RatingStar'
 import BookingApi from '../../api/booking'
-import ReviewgApi from '../../api/review'
+import ReviewApi from '../../api/review'
+import UserApi from '../../api/user'
 
 const BookingSingle = () => {
   const { id } = useParams()
   const global = useContext(GlobalContext)
 
   const [booking, setBooking] = useState()
-  const [reviews, setReviews] = useState([])
 
   // status section
   const [status, setStatus] = useState()
-  const handleStatus = (newStatus) => {
-    BookingApi.updateStatus(id, newStatus)
-      .then((res) => {
-        setStatus(newStatus)
-      })
-      .catch((err) => {
-        global.setAlert(err.response.data.message)
-      })
-  }
 
   // modal section
   const [showModal, setShowModal] = useState(false)
@@ -50,9 +40,8 @@ const BookingSingle = () => {
       details: review_details.current.value,
     }
     // sumbit review
-    ReviewgApi.createReview(reviewData)
+    ReviewApi.createReview(reviewData)
       .then((res) => {
-        global.setAlert(res.data.message)
         // set status
         const newStatus = 7
         BookingApi.updateStatus(id, newStatus)
@@ -60,7 +49,27 @@ const BookingSingle = () => {
             setStatus(newStatus)
           })
           .catch((err) => {
-            global.setAlert(err.response.data.message)
+            global.setAlert({
+              type: 'danger',
+              message: err.response.data.message,
+            })
+          })
+        //update reciever profile rating and rating_count
+        const profileRating = {
+          receiver: booking.driver._id,
+          oldRating: booking.driver.rating,
+          oldRatingCount: booking.driver.rating_count,
+          newRating: rating + 1,
+        }
+        UserApi.updateProfileRating(profileRating)
+          .then(() => {
+            global.setAlert({ type: 'success', message: res.data.message })
+          })
+          .catch((err) => {
+            global.setAlert({
+              type: 'danger',
+              message: err.response.data.message,
+            })
           })
       })
       .catch((err) => {
@@ -74,14 +83,6 @@ const BookingSingle = () => {
       .then((res) => {
         setBooking(res.data)
         setStatus(res.data.status)
-
-        ReviewgApi.getReviewsByReceiver(res.data.driver._id)
-          .then((res) => {
-            setReviews(res.data)
-          })
-          .catch((err) => {
-            global.setAlert(err.response.data.message)
-          })
       })
       .catch((err) => {
         global.setAlert({ type: 'danger', message: err.response.data.message })
@@ -141,19 +142,22 @@ const BookingSingle = () => {
             </>
           )}
           <div className='row justify-content-center'>
-            <div className='col-lg-7'>
+            <div className='col-lg-12'>
               <h2>Booking #{id}</h2>
               <h5 className='pt-2'>
                 Status: <BookingStatus status={status} />
               </h5>
-
-              {/* if status complete */}
-              {status >= 5 && (
+            </div>
+          </div>
+          <div className='row justify-content-center pt-4'>
+            <div className='col-lg-6'>
+              {/* review modal */}
+              {status == 5 && (
                 <>
-                  <div className='row py-4'>
+                  <div className='row pb-4'>
                     <div className='col-lg-12 d-flex'>
                       <Button
-                        className={`sm action-2 ${status >= 7 && 'disabled'}`}
+                        className={`sm action-2 ${status >= 6 && 'disabled'}`}
                         link='# '
                         text='Submit Review'
                         event={openModal}
@@ -165,23 +169,10 @@ const BookingSingle = () => {
 
               {booking && <UserCard title='Driver' {...booking.driver} />}
             </div>
-            <div className='col-lg-5'>
+            <div className='col-lg-6'>
               {rowsBooking && (
                 <Block heading='Booking Details' rows={rowsBooking} />
               )}
-            </div>
-          </div>
-        </div>
-      </Section>
-      <Section className='bg-offwhite' align='center'>
-        <div className='col-lg-12'>
-          <div className='row justify-content-center'>
-            <div className='col-lg-12'>
-              <h4 className='pb-3'>Driver Reviews:</h4>
-              {(reviews.length > 0 &&
-                reviews.map((review) => {
-                  return <Review key={review.id} {...review} />
-                })) || <h5 className='pt-2 text-center'>No Reviews Found</h5>}
             </div>
           </div>
         </div>

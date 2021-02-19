@@ -41,8 +41,6 @@ const BookingApi = {
     })
   },
   updateStatus(bookingId, newStatus) {
-    console.log(bookingId)
-    console.log(newStatus)
     return axios.get(`${api_url}/updateStatus`, {
       headers: { authorization: getToken() },
       params: { bookingId, newStatus },

@@ -27,7 +27,7 @@ const Profile = () => {
       })
   }
   const getReviews = () => {
-    ReviewApi.getReviewsByUserId(id)
+    ReviewApi.getReviewsByReceiver(id)
       .then((res) => {
         setReviews(res.data)
       })

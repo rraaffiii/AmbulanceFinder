@@ -20,12 +20,16 @@ const Profile = () => {
         setUser(res.data)
       })
       .catch((err) => {
-        global.setAlert(err.response.data.message)
+        global.setAlert({
+          type: 'danger',
+          message: err.response.data.message,
+        })
       })
   }
   const getReviews = () => {
-    ReviewApi.getReviewsByUserId(id)
+    ReviewApi.getReviewsByReceiver(id)
       .then((res) => {
+        console.log(res.data)
         setReviews(res.data)
       })
       .catch((err) => {

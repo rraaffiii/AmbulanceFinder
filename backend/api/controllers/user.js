@@ -137,3 +137,20 @@ exports.find_vehicles_by_driver = (req, res) => {
       res.status(500).json({ message: 'Server error' })
     })
 }
+exports.update_profile_rating = (req, res) => {
+  let { receiver, oldRating, oldRatingCount, newRating } = JSON.parse(
+    req.query.profileRating
+  )
+  oldRating = oldRating === null ? 0 : parseFloat(oldRating)
+  oldRatingCount = oldRatingCount === null ? 0 : parseFloat(oldRatingCount)
+  const finalRating =
+    (oldRating * oldRatingCount + newRating) / (oldRatingCount + 1)
+  const roundedRating = Math.round(finalRating * 10) / 10
+
+  User.updateOne(
+    { _id: receiver },
+    { rating: roundedRating, rating_count: oldRatingCount + 1 }
+  )
+    .then(() => res.status(200).json({ message: 'Updated successfully' }))
+    .catch(() => res.status(500).json({ message: 'Server error' }))
+}
