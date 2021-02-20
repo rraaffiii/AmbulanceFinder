@@ -8,8 +8,8 @@ exports.book_driver = (req, res) => {
   })
   booking
     .save()
-    .then(() => {
-      res.status(201).json({ message: 'Booking successful' })
+    .then((booking) => {
+      res.status(201).json({ message: 'Booking successful', booking })
     })
     .catch(() => {
       res.status(500).json({ message: 'Booking failed' })

@@ -34,6 +34,7 @@ exports.update_vehicle = (req, res) => {
 }
 exports.get_vehicles_by_user_id = (req, res) => {
   Vehicle.find({ user_id: req.userId })
+    .populate('user_id', 'approved vehicles')
     .then((vehicles) => {
       if (vehicles) {
         res.status(200).send(vehicles)

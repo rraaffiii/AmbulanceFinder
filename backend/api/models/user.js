@@ -19,16 +19,22 @@ const userSchema = mongoose.Schema(
     city: String,
     country: String,
     profile_photo: String,
-    vehicles: {
-      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle' }],
-      default: undefined,
-    },
+    license_photo: String,
     rating: { type: Number, default: null },
     rating_count: { type: Number, default: null },
     available: Boolean,
     approved: Boolean,
+    vehicles: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Vehicle' }],
+      default: undefined,
+    },
+    last_booking: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Booking',
+      default: null,
+    },
   },
-  { timestamps: true }
+  { collation: { locale: 'en', strength: 2 }, timestamps: true }
 )
 
 module.exports = mongoose.model('User', userSchema)

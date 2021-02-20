@@ -89,6 +89,21 @@ exports.login_with_phone = (req, res) => {
     })
 }
 exports.find_user_by_id = (req, res) => {
+  const userId = req.query.id
+  User.findOne({ _id: userId })
+    .select('-password')
+    .then((user) => {
+      if (user) {
+        res.status(200).send(user)
+      } else {
+        res.status(400).json({ message: 'Invalid request' })
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Server error' })
+    })
+}
+exports.find_user_by_token = (req, res) => {
   User.findOne({ _id: req.userId })
     .then((user) => {
       if (user) {
@@ -101,8 +116,38 @@ exports.find_user_by_id = (req, res) => {
       res.status(500).json({ message: 'Server error' })
     })
 }
+exports.get_user_last_location = (req, res) => {
+  User.findOne({ _id: req.userId })
+    .select('-password')
+    .populate('last_booking')
+    .then((user) => {
+      if (user) {
+        res.status(200).send(user)
+      } else {
+        res.status(400).json({ message: 'Invalid request' })
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Server error' })
+    })
+}
 exports.set_availability = (req, res) => {
-  User.updateOne({ _id: req.userId }, { available: req.body.available })
+  const id = req.query.id
+  const available = req.query.available
+
+  User.updateOne({ _id: id }, { available: available })
+    .then((available) => {
+      res.status(200).json({ message: 'Updated successfully', available })
+    })
+    .catch(() => {
+      res.status(500).json({ message: 'Server error' })
+    })
+}
+exports.update_location = (req, res) => {
+  User.updateOne(
+    { _id: req.userId },
+    { city: req.body.city, country: req.body.country }
+  )
     .then((available) => {
       res.status(200).json({ message: 'Updated successfully', available })
     })
@@ -114,6 +159,25 @@ exports.update_profile = (req, res) => {
   req.file ? (req.body.profile_photo = req.file.filename) : null
 
   User.updateOne({ _id: req.userId }, { $set: req.body })
+    .then((user) => {
+      res.status(200).json({ message: 'Updated successfully', user })
+    })
+    .catch(() => {
+      res.status(500).json({ message: 'Server error' })
+    })
+}
+exports.update_fields = (req, res) => {
+  const data = JSON.parse(req.query.data)
+  User.updateOne({ _id: req.userId }, { $set: data })
+    .then(() => {
+      res.status(200).json({ message: 'Updated successfully' })
+    })
+    .catch(() => {
+      res.status(500).json({ message: 'Server error' })
+    })
+}
+exports.upload_license = (req, res) => {
+  User.updateOne({ _id: req.userId }, { license_photo: req.file.filename })
     .then((user) => {
       res.status(200).json({ message: 'Updated successfully', user })
     })

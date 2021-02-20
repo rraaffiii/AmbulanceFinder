@@ -37,10 +37,21 @@ const Search = () => {
             type: 'success',
             message: res.data.message,
           })
+          console.log(res.data)
+          const data = { last_booking: res.data.booking._id }
+          UserApi.updateFields(data).catch((err) => {
+            global.setAlert({
+              type: 'danger',
+              message: err.response.data.message,
+            })
+          })
           global.setRedirect('/booking')
         })
         .catch((err) => {
-          global.setAlert(err.response.data.message)
+          global.setAlert({
+            type: 'danger',
+            message: err.response.data.message,
+          })
         })
     } else {
       const redirectUrl = `/signup?p=${pickup}&d=${destination}&driver=${driverId}`
@@ -111,7 +122,7 @@ const Search = () => {
                 <div className='ml-15 me-auto'>
                   <i className='fas fa-star color-red'></i>&nbsp;
                   <span>{driver.rating || 'No reviews'}</span>{' '}
-                  {driver.rating_count && <span>{driver.rating_count}</span>}
+                  {driver.rating_count && <span>({driver.rating_count})</span>}
                 </div>
 
                 <Button

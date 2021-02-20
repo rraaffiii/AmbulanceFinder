@@ -24,6 +24,24 @@ const BookingSingle = () => {
     BookingApi.updateStatus(id, newStatus)
       .then(() => {
         setStatus(newStatus)
+        // set driver availability
+        if (newStatus == 1) {
+          const data = { last_booking: booking._id, available: false }
+          UserApi.updateFields(data).catch((err) => {
+            global.setAlert({
+              type: 'danger',
+              message: err.response.data.message,
+            })
+          })
+        } else if (newStatus == 5) {
+          const data = { available: true }
+          UserApi.updateFields(data).catch((err) => {
+            global.setAlert({
+              type: 'danger',
+              message: err.response.data.message,
+            })
+          })
+        }
       })
       .catch((err) => {
         global.setAlert({
@@ -67,7 +85,6 @@ const BookingSingle = () => {
             })
           })
         //update receiver profile rating and rating_count
-        console.log(JSON.stringify(booking.client))
         const profileRating = {
           receiver: booking.client._id,
           oldRating: booking.client.rating,

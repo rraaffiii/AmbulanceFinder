@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import { GlobalContext } from '../../context/GlobalContext'
 import Section from '../../components/Section'
 import PageTitle from '../../components/PageTitle'
-import Rating from '../../components/Rating'
+import ProfileDriver from '../../components/ProfileDriver'
 import Switch from '../../components/Switch'
 import Review from '../../components/Review'
 import Button from '../../components/Button'
@@ -18,12 +18,15 @@ const Profile = () => {
   const [available, setAvailable] = useState(user.available)
 
   const getProfileData = () => {
-    UserApi.findUserById(id)
+    UserApi.findUserByToken()
       .then((res) => {
         setUser(res.data)
       })
       .catch((err) => {
-        global.setAlert(err.response.data.message)
+        global.setAlert({
+          type: 'danger',
+          message: err.response.data.message,
+        })
       })
   }
   const getReviews = () => {
@@ -71,17 +74,7 @@ const Profile = () => {
       <Section className='bg-light d-flex align-items-center' align='center'>
         <PageTitle title='Profile' />
 
-        <div className='col-lg-3 profile text-center'>
-          <img
-            src={`/photos/profile/${user.profile_photo}`}
-            className='img-fluid border rounded pb-2'
-          />
-          <div className='pl-5'>
-            <h3>{user.first_name}</h3>
-            {(user.rating && (
-              <Rating rating={user.rating} rating_count={user.rating_count} />
-            )) || <Rating rating='No reviews' />}
-          </div>
+        <ProfileDriver user={user}>
           {/* user can edit own profile if logged in*/}
           <Button
             className='btn mb-2 border-gray action-1'
@@ -95,39 +88,7 @@ const Profile = () => {
             isChecked={user.available}
             event={handleAvailability}
           />
-        </div>
-        <div className='col-lg-9'>
-          <div className='block radius10 p-3'>
-            <div className='item'>
-              ID: <b>{user._id}</b>
-            </div>
-            <div className='item'>
-              Name: <b>{user.first_name + ' ' + user.last_name}</b>
-            </div>
-            <div className='item'>
-              Phone: <b>{user.phone}</b>
-            </div>
-            <div className='item'>
-              Date of Birth:{' '}
-              <b>
-                {user.date_of_birth &&
-                  user.date_of_birth.toString().slice(0, 10)}
-              </b>
-            </div>
-            <div className='item'>
-              City: <b>{user.city}</b>
-            </div>
-            <div className='item'>
-              Country: <b>{user.country}</b>
-            </div>
-            <div className='item'>
-              Driving License: <b>{user.driving_license}</b>
-            </div>
-            <div className='item'>
-              Status: <b>{(user.approved && 'Approved') || 'Not approved'}</b>
-            </div>
-          </div>
-        </div>
+        </ProfileDriver>
       </Section>
 
       <Section className='bg-offwhite d-flex align-items-center' align='center'>

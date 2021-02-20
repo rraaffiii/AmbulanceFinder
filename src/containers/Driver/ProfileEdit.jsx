@@ -61,7 +61,7 @@ const ProfileEdit = () => {
     }
   }
   const getProfileData = () => {
-    UserApi.findUserById(id)
+    UserApi.findUserByToken(id)
       .then((res) => {
         setUser(res.data)
       })

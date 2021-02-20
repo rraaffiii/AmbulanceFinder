@@ -28,6 +28,7 @@ const SignupDriver = () => {
       available: true,
       approved: false,
       profile_photo: 'default.jpg',
+      license_photo: null,
       first_name: fname.current.value,
       last_name: lname.current.value,
       phone: phone.current.value,
@@ -138,7 +139,10 @@ const SignupDriver = () => {
             </b>
 
             <div className='d-flex flex-wrap justify-content-center align-items-center buttons mt-25'>
-              <button className='btn mr-20 mb-20 mb-xl-0 w-210 action-2'>
+              <button
+                className='btn mr-20 mb-20 mb-xl-0 w-210 action-2'
+                type='submit'
+              >
                 Sign Up
               </button>
             </div>
