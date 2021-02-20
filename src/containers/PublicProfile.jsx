@@ -1,21 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react'
-import Cookies from 'js-cookie'
-import { GlobalContext } from '../../context/GlobalContext'
-import Section from '../../components/Section'
-import PageTitle from '../../components/PageTitle'
-import ProfileClient from '../../components/ProfileClient'
-import Review from '../../components/Review'
-import Button from '../../components/Button'
-import UserApi from '../../api/user'
-import ReviewApi from '../../api/review'
+import { useParams } from 'react-router-dom'
+import { GlobalContext } from '../context/GlobalContext'
+import Section from '../components/Section'
+import PageTitle from '../components/PageTitle'
+import ProfileDriver from '../components/ProfileDriver'
+import ProfileClient from '../components/ProfileClient'
+import Review from '../components/Review'
+import UserApi from '../api/user'
+import ReviewApi from '../api/review'
 
-const Profile = () => {
-  const id = Cookies.get('userId')
+const PublicProfile = () => {
+  const { id } = useParams()
   const global = useContext(GlobalContext)
   const [user, setUser] = useState({})
   const [reviews, setReviews] = useState([])
+
   const getProfileData = () => {
-    UserApi.findUserByToken()
+    UserApi.findUserById(id)
       .then((res) => {
         setUser(res.data)
       })
@@ -29,7 +30,6 @@ const Profile = () => {
   const getReviews = () => {
     ReviewApi.getReviewsByReceiver(id)
       .then((res) => {
-        console.log(res.data)
         setReviews(res.data)
       })
       .catch((err) => {
@@ -39,6 +39,7 @@ const Profile = () => {
         })
       })
   }
+
   useEffect(() => {
     getProfileData()
     getReviews()
@@ -49,15 +50,8 @@ const Profile = () => {
       <Section className='bg-light d-flex align-items-center' align='center'>
         <PageTitle title='Profile' />
 
-        <ProfileClient user={user}>
-          {/* user can edit own profile if logged in*/}
-          <Button
-            className='btn mb-2 border-gray action-1'
-            link={`/profile/edit`}
-            text='Edit Profile'
-            type='submit'
-          />
-        </ProfileClient>
+        {user.type == 0 && <ProfileClient user={user} />}
+        {user.type == 1 && <ProfileDriver user={user} />}
       </Section>
 
       <Section className='bg-offwhite d-flex align-items-center' align='center'>
@@ -73,4 +67,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default PublicProfile

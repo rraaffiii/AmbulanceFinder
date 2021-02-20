@@ -19,11 +19,13 @@ const Header = () => {
     { link: '/signup', btnText: 'Signup' },
   ]
   const clientNavs = [
+    { link: '/dashboard', btnText: 'Dashboard' },
     { link: '/booking', btnText: 'Bookings' },
     { link: '/profile', btnText: 'Profile' },
     { link: '/#', btnText: 'Signout', event: handleSignout },
   ]
   const driverNavs = [
+    { link: '/dashboard', btnText: 'Dashboard' },
     { link: '/booking', btnText: 'Bookings' },
     { link: '/vehicle', btnText: 'Vehicles' },
     { link: '/profile', btnText: 'Profile' },

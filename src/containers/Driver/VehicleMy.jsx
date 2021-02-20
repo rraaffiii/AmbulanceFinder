@@ -25,6 +25,7 @@ const VehicleMy = () => {
         })
       })
   }
+
   useEffect(() => {
     getVehicles(id)
   }, [])
@@ -34,11 +35,21 @@ const VehicleMy = () => {
       <Section className='bg-light vehicle-add ecommerce_2' align='center'>
         <div className='d-flex'>
           <PageTitle title='My Vehicle' />
-          <Button
-            link={`/vehicle/add`}
-            className='action-1 ms-auto'
-            text='Add Vehicle'
-          />
+          {(vehicles.length > 0 &&
+            vehicles[0].user_id.approved === true &&
+            vehicles[0].user_id.vehicles.length == 0 && (
+              <Button
+                link={`/vehicle/add`}
+                className='action-1 ms-auto'
+                text='Add Vehicle'
+              />
+            )) || (
+            <Button
+              link={`#`}
+              className='action-1 ms-auto disabled'
+              text='Add Vehicle'
+            />
+          )}
         </div>
 
         {(vehicles.length > 0 &&

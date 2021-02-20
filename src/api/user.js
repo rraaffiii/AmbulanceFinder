@@ -35,20 +35,32 @@ const UserApi = {
       params: { phone },
     })
   },
-  findUserById(id) {
-    return axios.post(`${api_url}/findUserById`, id, {
+  findUserByToken() {
+    return axios.get(`${api_url}/findUserByToken`, {
       headers: { authorization: getToken() },
     })
   },
+  findUserById(id) {
+    return axios.get(`${api_url}/findUserById`, {
+      headers: { authorization: getToken() },
+      params: { id },
+    })
+  },
   setAvailability({ id, available }) {
-    return axios.post(
-      `${api_url}/setAvailability`,
-      { id, available },
-      { headers: { authorization: getToken() } }
-    )
+    return axios.get(`${api_url}/setAvailability`, {
+      headers: { authorization: getToken() },
+      params: { id, available },
+    })
   },
   updateProfile(formData) {
     return axios.post(`${api_url}/updateProfile`, formData, {
+      headers: {
+        authorization: getToken(),
+      },
+    })
+  },
+  uploadLicense(formData) {
+    return axios.post(`${api_url}/uploadLicense`, formData, {
       headers: {
         authorization: getToken(),
       },
@@ -69,10 +81,28 @@ const UserApi = {
     })
   },
   updateProfileRating(profileRating) {
-    console.log(JSON.stringify(profileRating))
     return axios.get(`${api_url}/updateProfileRating`, {
       headers: { authorization: getToken() },
       params: { profileRating },
+    })
+  },
+  updateLocation(locationData) {
+    return axios.post(`${api_url}/updateLocation`, locationData, {
+      headers: {
+        authorization: getToken(),
+      },
+    })
+  },
+  getUserLastLocation() {
+    return axios.get(`${api_url}/getUserLastLocation`, {
+      headers: { authorization: getToken() },
+    })
+  },
+  updateFields(data) {
+    console.log(data)
+    return axios.get(`${api_url}/updateFields`, {
+      headers: { authorization: getToken() },
+      params: { data },
     })
   },
 }

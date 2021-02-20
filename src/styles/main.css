@@ -872,7 +872,7 @@ input[type='radio'] + label:before {
   margin-left: 10px;
 }
 .profile img {
-  width: 80%;
+  width: 65%;
 }
 .active {
   background-color: #f94144;
