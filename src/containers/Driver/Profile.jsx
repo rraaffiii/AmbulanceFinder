@@ -15,12 +15,13 @@ const Profile = () => {
   const global = useContext(GlobalContext)
   const [user, setUser] = useState({})
   const [reviews, setReviews] = useState([])
-  const [available, setAvailable] = useState(user.available)
+  const [available, setAvailable] = useState()
 
   const getProfileData = () => {
     UserApi.findUserByToken()
       .then((res) => {
         setUser(res.data)
+        setAvailable(res.data.available)
       })
       .catch((err) => {
         global.setAlert({
@@ -41,10 +42,10 @@ const Profile = () => {
         })
       })
   }
-
-  const updateAvailable = (available) => {
-    UserApi.setAvailability({ id, available })
+  const handleAvailability = (e) => {
+    UserApi.setAvailability({ id, available: e.target.checked })
       .then((res) => {
+        setAvailable(!available)
         global.setAlert({
           type: 'success',
           message: res.data.message,
@@ -57,18 +58,11 @@ const Profile = () => {
         })
       })
   }
-  const handleAvailability = () => {
-    setAvailable(!available)
-  }
   useEffect(() => {
     getProfileData()
     getReviews()
   }, [])
-  useEffect(() => {
-    if (available !== null && typeof available !== 'undefined') {
-      updateAvailable(available)
-    }
-  }, [available])
+
   return (
     <>
       <Section className='bg-light d-flex align-items-center' align='center'>
@@ -85,7 +79,7 @@ const Profile = () => {
           <Switch
             label='Set Available'
             className='lg'
-            isChecked={user.available}
+            isChecked={available}
             event={handleAvailability}
           />
         </ProfileDriver>

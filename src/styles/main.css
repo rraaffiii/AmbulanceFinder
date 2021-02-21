@@ -283,7 +283,7 @@ strong {
   color: #313131;
 }
 
-.alert {
+.custom-alert {
   position: absolute;
   z-index: 9;
   left: 50%;
@@ -660,7 +660,6 @@ strong {
 }
 .block {
   border: 2px solid #ebeaed;
-  border-bottom-left-radius: 10px;
 }
 .block.noborder_right {
   border-right: none;

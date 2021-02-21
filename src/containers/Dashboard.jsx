@@ -13,14 +13,13 @@ const Dashboard = () => {
 
   const [user, setUser] = useState({})
   const license_photo = useRef()
-  const city = useRef()
-  const country = useRef()
+  const [location, setLocation] = useState({ city: '', country: '' })
 
   const getUser = () => {
     UserApi.getUserLastLocation()
       .then((res) => {
         setUser(res.data)
-        console.log(res.data)
+        setLocation({ city: res.data.city, country: res.data.country })
       })
       .catch((err) => {
         global.setAlert({ type: 'danger', message: err.response.data.message })
@@ -59,13 +58,38 @@ const Dashboard = () => {
         })
       })
   }
-  const handleAutoDetect = () => {
-    console.log('Auto detecting...')
+  const handleChange = (e) => {
+    setLocation({ ...location, [e.target.name]: e.target.value })
   }
-  const handleChangeLocation = () => {
+  const handleAutoDetect = () => {
+    //if html5 geolocation api supports in browser
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude
+        const lng = position.coords.longitude
+
+        UserApi.getLocation(lat, lng)
+          .then((res) => {
+            setLocation({
+              city: res.data.address.city,
+              country: res.data.address.country,
+            })
+          })
+          .catch((err) => {
+            global.setAlert({
+              type: 'danger',
+              message: err.response.data.message,
+            })
+          })
+      })
+    } else {
+      console.log('Browser dont support')
+    }
+  }
+  const handleUpdateLocation = () => {
     const locationData = {
-      city: city.current.value,
-      country: country.current.value,
+      city: location.city,
+      country: location.country,
     }
     UserApi.updateLocation(locationData)
       .then((res) => {
@@ -89,15 +113,15 @@ const Dashboard = () => {
         {/* driver notifications */}
         <>
           {user.type == 1 && !user.approved && (
-            <div className='block radius10 text-center mb-2'>
-              <h5 className='p-2'>
+            <div className='text-center mb-4'>
+              <span className='h5 block radius10 alert alert-danger'>
                 Your account is not approved yet, adding vehicle not allowed!
-              </h5>
+              </span>
             </div>
           )}
           {user.type == 1 && user.license_photo == null && (
-            <div className='block radius10 mt-10 mb-2'>
-              <h5 className='p-2 d-flex justify-content-center align-items-center'>
+            <div className='mt-10 mb-4'>
+              <span className='h5 block radius10 alert alert-danger d-flex justify-content-center align-items-center'>
                 Driving license not uploaded yet! &nbsp;
                 <input
                   type='file'
@@ -117,7 +141,7 @@ const Dashboard = () => {
                 >
                   Upload now
                 </button>
-              </h5>
+              </span>
             </div>
           )}
         </>
@@ -126,8 +150,8 @@ const Dashboard = () => {
           <div className='col-lg-5 block radius10 text-center py-3'>
             <h4 className='py-3'>Update Current Location</h4>
             <input
-              ref={city}
-              defaultValue={user.city}
+              value={location.city}
+              onChange={handleChange}
               type='text'
               name='city'
               placeholder='City'
@@ -135,8 +159,8 @@ const Dashboard = () => {
               className='input mb-2 border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
             />
             <input
-              ref={country}
-              defaultValue={user.country}
+              value={location.country}
+              onChange={handleChange}
               type='text'
               name='country'
               placeholder='Country'
@@ -156,7 +180,7 @@ const Dashboard = () => {
                 link='# '
                 text='Change Location'
                 type='submit'
-                event={handleChangeLocation}
+                event={handleUpdateLocation}
               />
             </div>
           </div>

@@ -22,6 +22,10 @@ const ProfileEdit = () => {
   const country = useRef(null)
   const profile_photo = useRef(null)
 
+  const handleChangePhoto = () => {
+    profile_photo.current.click()
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -92,9 +96,17 @@ const ProfileEdit = () => {
           />
           <input
             ref={profile_photo}
+            style={{ display: 'none' }}
             className='mt-15 form-control input'
             type='file'
             name='profile_photo'
+          />
+          <Button
+            className='btn mt-15 border-gray action-1'
+            link='# '
+            text='Change Photo'
+            type='button'
+            event={handleChangePhoto}
           />
         </div>
         <div className='col-lg-9'>
@@ -149,7 +161,6 @@ const ProfileEdit = () => {
               className='btn float-end mt-30 border-gray action-2'
               link='# '
               text='Update'
-              type='button'
               event={handleSubmit}
             />
           </div>
