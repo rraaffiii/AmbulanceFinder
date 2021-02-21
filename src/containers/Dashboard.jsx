@@ -89,17 +89,16 @@ const Dashboard = () => {
         {/* driver notifications */}
         <>
           {user.type == 1 && !user.approved && (
-            <div className='block radius10 text-center'>
+            <div className='block radius10 text-center mb-2'>
               <h5 className='p-2'>
-                Your account is not approved yet, not allowed to list vehicle
-                now!
+                Your account is not approved yet, adding vehicle not allowed!
               </h5>
             </div>
           )}
           {user.type == 1 && user.license_photo == null && (
-            <div className='block radius10 mt-10'>
+            <div className='block radius10 mt-10 mb-2'>
               <h5 className='p-2 d-flex justify-content-center align-items-center'>
-                Driving license not uploaded yet &nbsp;
+                Driving license not uploaded yet! &nbsp;
                 <input
                   type='file'
                   style={{ display: 'none' }}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { GlobalContext } from '../context/GlobalContext'
 import Cookies from 'js-cookie'
 import { Link } from 'react-router-dom'

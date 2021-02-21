@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ButtonSm = ({ className, link, text, event, btnParams }) => {
-  // console.log(btnParams)
+const ButtonSm = ({ className, link, text, event, btnParams, target }) => {
   return (
     <>
       {(!link && (
         <button
           className={`btn ${className} border-gray color-main medium f-16`}
+          target={target || null}
           onClick={event || null}
         >
           {text}
@@ -17,6 +17,7 @@ const ButtonSm = ({ className, link, text, event, btnParams }) => {
           <Link
             to={link}
             className={`btn ${className} border-gray color-main medium f-16`}
+            target={target || null}
             onClick={(e) => event(btnParams, e) || null}
           >
             {text}
@@ -25,6 +26,7 @@ const ButtonSm = ({ className, link, text, event, btnParams }) => {
           <Link
             to={link}
             className={`btn ${className} border-gray color-main medium f-16`}
+            target={target || null}
             onClick={event || null}
           >
             {text}

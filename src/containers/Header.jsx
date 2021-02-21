@@ -32,8 +32,7 @@ const Header = () => {
     { link: '/#', btnText: 'Signout', event: handleSignout },
   ]
   const adminNavs = [
-    { link: '/approve/driver', btnText: 'Approve' },
-    { link: '/stats', btnText: 'Stats' },
+    { link: '/approve/driver', btnText: 'Drivers' },
     { link: '/#', btnText: 'Signout', event: handleSignout },
   ]
 

@@ -143,6 +143,18 @@ exports.set_availability = (req, res) => {
       res.status(500).json({ message: 'Server error' })
     })
 }
+exports.set_account_status = (req, res) => {
+  const id = req.query.id
+  const approved = req.query.approved
+
+  User.findOneAndUpdate({ _id: id }, { approved: approved }, { new: true })
+    .then((user) => {
+      res.status(200).json({ message: 'Updated successfully', user })
+    })
+    .catch(() => {
+      res.status(500).json({ message: 'Server error' })
+    })
+}
 exports.update_location = (req, res) => {
   User.updateOne(
     { _id: req.userId },
@@ -168,6 +180,7 @@ exports.update_profile = (req, res) => {
 }
 exports.update_fields = (req, res) => {
   const data = JSON.parse(req.query.data)
+
   User.updateOne({ _id: req.userId }, { $set: data })
     .then(() => {
       res.status(200).json({ message: 'Updated successfully' })
@@ -217,4 +230,11 @@ exports.update_profile_rating = (req, res) => {
   )
     .then(() => res.status(200).json({ message: 'Updated successfully' }))
     .catch(() => res.status(500).json({ message: 'Server error' }))
+}
+exports.get_driver = (req, res) => {
+  User.find({ type: 1 })
+    .select('_id first_name last_name driving_license approved license_photo')
+    .sort('-createdAt')
+    .then((drivers) => res.status(200).send(drivers))
+    .catch((err) => res.status(500).json({ message: 'Server error' }))
 }
