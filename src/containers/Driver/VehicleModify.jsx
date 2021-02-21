@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
-import { Redirect, useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { GlobalContext } from '../../context/GlobalContext'
-import Cookies from 'js-cookie'
 import Section from '../../components/Section'
 import Button from '../../components/Button'
 import PageTitle from '../../components/PageTitle'
 import VehicleApi from '../../api/vehicle'
 
 const VehicleModify = () => {
-  const id = Cookies.get('userId')
+  const history = useHistory()
   const global = useContext(GlobalContext)
   const vehicleId = useParams()
 
@@ -55,7 +54,7 @@ const VehicleModify = () => {
       VehicleApi.updateVehicleWithImg(formData)
         .then((res) => {
           global.setAlert({ type: 'success', message: res.data.message })
-          global.setRedirect('/vehicle')
+          history.push('/vehicle')
         })
         .catch((err) =>
           global.setAlert({
@@ -68,7 +67,7 @@ const VehicleModify = () => {
       VehicleApi.updateVehicle(formData)
         .then((res) => {
           global.setAlert({ type: 'success', message: res.data.message })
-          global.setRedirect('/vehicle')
+          history.push('/vehicle')
         })
         .catch((err) =>
           global.setAlert({
@@ -96,15 +95,9 @@ const VehicleModify = () => {
   useEffect(() => {
     getVehicle(vehicleId)
   }, [])
-  useEffect(() => {
-    return global.setRedirect(null)
-  }, [global.redirect])
 
   return (
     <>
-      {/* redirect */}
-      {global.redirect && <Redirect to={global.redirect} />}
-
       <Section className='bg-light vehicle-add' align='center'>
         <PageTitle title='Modify Vehicle' />
 

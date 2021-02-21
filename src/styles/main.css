@@ -289,6 +289,11 @@ strong {
   left: 50%;
   transform: translate(-50%, 0);
 }
+.locationDetect {
+  position: absolute;
+  right: 25px;
+  top: 7px;
+}
 
 /* 2. Common responsive styles */
 /* Smaller than 1200px */
