@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
+const locationiqKey = process.env.REACT_APP_LOCATIONIQ_API_KEY
 const api_url = `http://localhost:3001/api/user`
 
 const getToken = () => {
@@ -105,7 +106,6 @@ const UserApi = {
     })
   },
   updateFields(data) {
-    // console.log(data)
     return axios.get(`${api_url}/updateFields`, {
       headers: { authorization: getToken() },
       params: { data },
@@ -115,6 +115,11 @@ const UserApi = {
     return axios.get(`${api_url}/getDriver`, {
       headers: { authorization: getToken() },
     })
+  },
+  getLocation(lat, lng) {
+    return axios.get(
+      `https://us1.locationiq.com/v1/reverse.php?key=${locationiqKey}&lat=${lat}&lon=${lng}&format=json`
+    )
   },
 }
 export default UserApi
