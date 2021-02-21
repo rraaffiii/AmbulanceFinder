@@ -52,6 +52,12 @@ const UserApi = {
       params: { id, available },
     })
   },
+  setAccountStatus({ id, approved }) {
+    return axios.get(`${api_url}/setAccountStatus`, {
+      headers: { authorization: getToken() },
+      params: { id, approved },
+    })
+  },
   updateProfile(formData) {
     return axios.post(`${api_url}/updateProfile`, formData, {
       headers: {
@@ -99,10 +105,15 @@ const UserApi = {
     })
   },
   updateFields(data) {
-    console.log(data)
+    // console.log(data)
     return axios.get(`${api_url}/updateFields`, {
       headers: { authorization: getToken() },
       params: { data },
+    })
+  },
+  getDriver() {
+    return axios.get(`${api_url}/getDriver`, {
+      headers: { authorization: getToken() },
     })
   },
 }

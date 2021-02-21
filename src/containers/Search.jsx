@@ -116,7 +116,7 @@ const Search = () => {
               {...driver.vehicles[0]}
             >
               <div className='d-flex align-items-center'>
-                <Link to={`/profile/${driver._id}`}>
+                <Link to={`/user/${driver._id}`}>
                   Driver: <span className='underline'>{driver.first_name}</span>
                 </Link>
                 <div className='ml-15 me-auto'>

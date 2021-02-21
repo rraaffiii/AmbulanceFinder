@@ -1,8 +1,10 @@
 import React from 'react'
+import Cookies from 'js-cookie'
 import { Link } from 'react-router-dom'
 import SocialLink from '../components/SocialLink'
 
 const Footer = () => {
+  const type = Cookies.get('type')
   return (
     <>
       <footer className='py-3 bg-dark text-center footer_1'>
@@ -16,20 +18,24 @@ const Footer = () => {
               >
                 Home
               </Link>
-              <Link
-                to='/signin'
-                className='link color-white f-18 mx-15'
-                activeClassName='action-2'
-              >
-                Signin
-              </Link>
-              <Link
-                to='/signup'
-                className='link color-white f-18 mx-15'
-                activeClassName='action-2'
-              >
-                Signup
-              </Link>
+              {!type && (
+                <>
+                  <Link
+                    to='/signup'
+                    className='link color-white f-18 mx-15'
+                    activeClassName='action-2'
+                  >
+                    Signup
+                  </Link>
+                  <Link
+                    to='/admin/signin'
+                    className='link color-white f-18 mx-15'
+                    activeClassName='action-2'
+                  >
+                    Admin
+                  </Link>
+                </>
+              )}
             </div>
             <div className='mb-10 mb-lg-0 col-lg-auto order-0'>
               <div className='color-heading text-adaptive'>

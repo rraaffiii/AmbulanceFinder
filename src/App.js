@@ -26,6 +26,7 @@ import ProfileDriver from './containers/Driver/Profile'
 import ProfileEditDriver from './containers/Driver/ProfileEdit'
 // admin
 import ApproveDriver from './containers/Admin/ApproveDriver'
+import AdminSignin from './containers/Admin/Signin'
 
 const App = () => {
   const global = useContext(GlobalContext)
@@ -42,11 +43,12 @@ const App = () => {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/search' component={Search} />
-          <Route exact path='/profile/:id' component={PublicProfile} />
+          <Route exact path='/user/:id' children={<PublicProfile />} />
         </Switch>
         {/* non logged in routes */}
         {!type && (
           <Switch>
+            <Route exact path='/admin/signin' component={AdminSignin} />
             <Route exact path='/signin' component={Signin} />
             <Route exact path='/signup' component={Signup} />
           </Switch>
@@ -61,8 +63,8 @@ const App = () => {
               path='/booking/:id'
               children={<BookingSingleClient />}
             />
-            <Route exact path='/profile' component={ProfileClient} />
             <Route exact path='/profile/edit' component={ProfileEditClient} />
+            <Route exact path='/profile' component={ProfileClient} />
           </Switch>
         )}
         {/* driver routes */}
