@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { useState, useRef, useContext } from 'react'
 import { GlobalContext } from '../../context/GlobalContext'
 import Cookies from 'js-cookie'
 import Section from '../../components/Section'

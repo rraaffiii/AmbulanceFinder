@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { GlobalContext } from '../context/GlobalContext'
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
-import { Link, useLocation, Redirect } from 'react-router-dom'
 import Section from '../components/Section'
 import Vehicle from '../components/Vehicle'
 import Select from '../components/Select'
@@ -11,6 +11,8 @@ import UserApi from '../api/user'
 import BookingApi from '../api/booking'
 
 const Search = () => {
+  const global = useContext(GlobalContext)
+  const history = useHistory()
   const userType = Cookies.get('type')
 
   const pickup = new URLSearchParams(useLocation().search).get('p')
@@ -19,8 +21,6 @@ const Search = () => {
   const [drivers, setDrivers] = useState([])
   const [filteredDrivers, setFilteredDrivers] = useState([])
   const [vehicleType, setVehicleType] = useState('0')
-
-  const global = useContext(GlobalContext)
 
   const handleChange = (e) => {
     setVehicleType(e.target.value)
@@ -45,7 +45,7 @@ const Search = () => {
               message: err.response.data.message,
             })
           })
-          global.setRedirect('/booking')
+          history.push('/booking')
         })
         .catch((err) => {
           global.setAlert({
@@ -56,7 +56,7 @@ const Search = () => {
     } else {
       const redirectUrl = `/signup?p=${pickup}&d=${destination}&driver=${driverId}`
       Cookies.set('redirectUrl', redirectUrl, { expires: 1 })
-      global.setRedirect('/signup?u=client')
+      history.push(redirectUrl)
     }
   }
 
@@ -83,20 +83,11 @@ const Search = () => {
     )
     if (vehicleType == '0') {
       return setFilteredDrivers(drivers)
-      // setFilteredDrivers(drivers)
-      // console.log(filteredDrivers)
     }
   }, [vehicleType])
 
-  useEffect(() => {
-    return global.setRedirect(null)
-  }, [global.redirect])
-
   return (
     <>
-      {/* redirect */}
-      {global.redirect && <Redirect to={global.redirect} />}
-
       <Section className='bg-light ecommerce_2' align='center'>
         <div className='d-flex'>
           <PageTitle title='Search Result' />

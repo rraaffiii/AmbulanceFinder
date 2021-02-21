@@ -12,8 +12,8 @@ const Dashboard = () => {
   const history = useHistory()
 
   const [user, setUser] = useState({})
-  const license_photo = useRef()
   const [location, setLocation] = useState({ city: '', country: '' })
+  const license_photo = useRef()
 
   const getUser = () => {
     UserApi.getUserLastLocation()

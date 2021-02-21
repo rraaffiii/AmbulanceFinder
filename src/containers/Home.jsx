@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import FormSmall from '../components/FormSmall'
+import React from 'react'
+import FormSearch from '../components/FormSearch'
 import Section from '../components/Section'
 import SubHeadingTitle from '../components/SubHeadingTitle'
 import IconParagraph from '../components/IconParagraph'
@@ -7,16 +7,6 @@ import Testimonial from '../components/Testimonial'
 import staticImg from '../assets/testimonial_1_img.jpg'
 
 const Home = () => {
-  const [form, setForm] = useState({ pickup: '', destination: '' })
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
-
-  const inputs = [
-    { label: 'pickup', type: 'text' },
-    { label: 'destination', type: 'text' },
-  ]
   return (
     <>
       <Section className='bg-dark content_1' align='left'>
@@ -26,13 +16,7 @@ const Home = () => {
             We help you rent ambulance everywhere!
           </div>
 
-          <FormSmall
-            btnText='Search'
-            btnLink={`/search?p=${form.pickup}&d=${form.destination}`}
-            inputs={inputs}
-            setForm={setForm}
-            handleChange={handleChange}
-          />
+          <FormSearch btnText='Search' />
         </div>
       </Section>
 

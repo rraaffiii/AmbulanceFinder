@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { GlobalContext } from '../../context/GlobalContext'
-import Cookies from 'js-cookie'
 import Section from '../../components/Section'
 import PageTitle from '../../components/PageTitle'
 import RowProfileEdit from '../../components/RowProfileEdit'
@@ -9,8 +8,8 @@ import Button from '../../components/Button'
 import UserApi from '../../api/user'
 
 const ProfileEdit = () => {
-  const id = Cookies.get('userId')
   const global = useContext(GlobalContext)
+  const history = useHistory()
   const [user, setUser] = useState({})
 
   const fname = useRef(null)
@@ -32,7 +31,7 @@ const ProfileEdit = () => {
     UserApi.updateProfile(formData)
       .then((res) => {
         global.setAlert({ type: 'success', message: res.data.message })
-        global.setRedirect('/profile')
+        history.push('/profile')
       })
       .catch((err) =>
         global.setAlert({
@@ -53,15 +52,9 @@ const ProfileEdit = () => {
   useEffect(() => {
     getProfileData()
   }, [])
-  useEffect(() => {
-    return global.setRedirect(null)
-  }, [global.redirect])
 
   return (
     <>
-      {/* redirect */}
-      {global.redirect && <Redirect to={global.redirect} />}
-
       <Section className='bg-light d-flex align-items-center' align='center'>
         <PageTitle title='Edit Profile' />
 

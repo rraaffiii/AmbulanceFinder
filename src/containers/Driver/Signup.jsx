@@ -1,7 +1,7 @@
 import React, { useRef, useState, useContext, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { GlobalContext } from '../../context/GlobalContext'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import Section from '../../components/Section'
 import PageTitle from '../../components/PageTitle'
