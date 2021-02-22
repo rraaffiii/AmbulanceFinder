@@ -10,7 +10,7 @@ const Footer = () => {
       <footer className='py-3 bg-dark text-center footer_1'>
         <div className='container px-xl-0'>
           <div className='row justify-content-between align-items-center lh-40 links'>
-            <div className='col-lg-4 col-sm-6 text-sm-right text-lg-left order-1 order-lg-0'>
+            <div className='bg-dark col-lg-4 col-sm-6 text-sm-right text-lg-left order-1 order-lg-0'>
               <Link
                 to='/'
                 className='link color-white f-18 mx-15'
@@ -37,12 +37,12 @@ const Footer = () => {
                 </>
               )}
             </div>
-            <div className='mb-10 mb-lg-0 col-lg-auto order-0'>
+            <div className='bg-dark mb-10 mb-lg-0 col-lg-auto order-0'>
               <div className='color-heading text-adaptive'>
                 &copy; 2021 All rights reserved.
               </div>
             </div>
-            <div className='col-lg-4 col-sm-6 text-sm-left text-lg-right order-2 order-lg-0'>
+            <div className='bg-dark col-lg-4 col-sm-6 text-sm-left text-lg-right order-2 order-lg-0'>
               <SocialLink
                 link='https://facebook.com'
                 color='white'

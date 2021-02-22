@@ -30,6 +30,7 @@ const Home = () => {
           to='/signup?u=client'
         />
         <SubHeadingTitle
+          className='mt-4 mt-sm-0'
           subheading='Start Earning!'
           heading='Sign Up to Drive'
           size='h2'

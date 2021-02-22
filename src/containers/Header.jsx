@@ -1,6 +1,5 @@
 import React from 'react'
 import Cookies from 'js-cookie'
-import Logo from '../components/Logo'
 import NavBar from '../components/NavBar'
 
 const Header = () => {
@@ -35,6 +34,13 @@ const Header = () => {
     { link: '/approve/driver', btnText: 'Drivers' },
     { link: '/#', btnText: 'Signout', event: handleSignout },
   ]
+  const currentNav = !type
+    ? generalNavs
+    : type == 0
+    ? clientNavs
+    : type == 1
+    ? driverNavs
+    : adminNavs
 
   return (
     <>
@@ -73,22 +79,7 @@ const Header = () => {
         <nav className='header_menu_2 transparent pt-15 pb-15'>
           <div className='container px-xl-0'>
             <div className='row justify-content-between align-items-baseline'>
-              <div className='col-md-4'>
-                <Logo name='Ambulance Finder' />
-              </div>
-              <div className='col-md-6 nav-inner d-flex justify-content-end align-items-center'>
-                {/* general nav */}
-                {!type && <NavBar navs={generalNavs} />}
-
-                {/* client nav */}
-                {type && type == 0 && <NavBar navs={clientNavs} />}
-
-                {/* driver nav */}
-                {type && type == 1 && <NavBar navs={driverNavs} />}
-
-                {/* admin nav */}
-                {type && type == 2 && <NavBar navs={adminNavs} />}
-              </div>
+              <NavBar navs={currentNav} />
             </div>
           </div>
         </nav>
