@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { GlobalContext } from '../context/GlobalContext'
 import { useHistory } from 'react-router-dom'
 import Button from './Button'
 import UserApi from '../api/user'
 
 const FormSearch = ({ btnText, style = null }) => {
+  const global = useContext(GlobalContext)
   const history = useHistory()
   const [form, setForm] = useState({ pickup: '', destination: '' })
 
