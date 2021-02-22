@@ -3,12 +3,20 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
-const port = process.env.PORT || 5000
+const path = require('path')
+const port = process.env.PORT || 3001
 const uri = process.env.DB_URI
 
 // middlewares
 app.use(cors({ exposedHeaders: 'authorization' }))
 app.use(express.json())
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')))
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+  })
+}
 
 // DB connection
 mongoose
@@ -24,17 +32,6 @@ mongoose
   })
   .catch((err) => console.log(err))
 mongoose.set('useFindAndModify', false)
-
-// CORS handling
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*')
-//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept, authorization, access-control-allow-origin'
-//   )
-//   next()
-// })
 
 // API routes
 app.use('/api/user', require('./api/routes/user'))

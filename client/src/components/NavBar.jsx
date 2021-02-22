@@ -36,20 +36,16 @@ const NavBar = ({ navs, children }) => {
           </div>
           <div className='col-md-6 nav-inner d-flex justify-content-end align-items-center'>
             {navs.map((nav, index) => (
-              <ul className='mb-0 pl-0'>
-                <li>
-                  <NavLink
-                    exact
-                    to={nav.link}
-                    key={index}
-                    className='link color-white f-18 mx-15'
-                    activeClassName='active'
-                    onClick={nav.event || null}
-                  >
-                    {nav.btnText}
-                  </NavLink>
-                </li>
-              </ul>
+              <NavLink
+                exact
+                to={nav.link}
+                key={index}
+                className='link color-white f-18 mx-15'
+                activeClassName='active'
+                onClick={nav.event || null}
+              >
+                {nav.btnText}
+              </NavLink>
             ))}
             {children}
           </div>
