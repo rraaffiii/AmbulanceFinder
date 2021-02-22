@@ -147,7 +147,7 @@ const Dashboard = () => {
         </>
 
         <div className='row justify-content-center'>
-          <div className='col-lg-5 block radius10 text-center py-3'>
+          <div className='col-lg-5 block radius10 text-center py-3 '>
             <h4 className='py-3'>Update Current Location</h4>
             <div className='position-relative px-0'>
               <i
@@ -183,7 +183,7 @@ const Dashboard = () => {
               />
             </div>
           </div>
-          <div className='col-lg-5 block radius10 text-center ml-15 py-3'>
+          <div className='col-lg-5 block radius10 text-center py-3 ml-0 ml-lg-2'>
             <h4 className='py-3'>Current Booking</h4>
             {(user.last_booking && (
               <>
