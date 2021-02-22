@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-const api_uri = `${process.env.REACT_APP_API_URI}/vehicle`
+const api_uri = `/api/vehicle`
 
 const getToken = () => {
   const token = Cookies.get('token')

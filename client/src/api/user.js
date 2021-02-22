@@ -2,7 +2,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 const locationiqKey = process.env.REACT_APP_LOCATIONIQ_API_KEY
-const api_uri = `${process.env.REACT_APP_API_URI}/user`
+const api_uri = `/api/user`
 
 const getToken = () => {
   const token = Cookies.get('token')

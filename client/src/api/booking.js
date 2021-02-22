@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-const api_uri = `${process.env.REACT_APP_API_URI}/booking`
+const api_uri = `/api/booking`
 
 const getToken = () => {
   const token = Cookies.get('token')
