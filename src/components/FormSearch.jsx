@@ -53,7 +53,7 @@ const FormSearch = ({ btnText, style = null }) => {
       >
         <div className='position-relative px-0'>
           <i
-            class='fas fa-crosshairs float-end mr-2 color-white f-24 locationDetect clickable'
+            className='fas fa-crosshairs float-end mr-2 color-white f-24 locationDetect clickable'
             onClick={handleAutoDetect}
           ></i>
           <input
