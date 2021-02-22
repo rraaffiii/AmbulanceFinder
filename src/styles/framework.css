@@ -1205,6 +1205,9 @@ input[type='radio'] + label:before {
 
 /* Classes for all elements */
 /* Margins and paddings */
+.mt-n2 {
+  margin-top: -0.5rem;
+}
 .mt-0 {
   margin-top: 0px;
 }

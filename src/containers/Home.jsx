@@ -4,7 +4,7 @@ import Section from '../components/Section'
 import SubHeadingTitle from '../components/SubHeadingTitle'
 import IconParagraph from '../components/IconParagraph'
 import Testimonial from '../components/Testimonial'
-import staticImg from '../assets/testimonial_1_img.jpg'
+import staticImg from '../assets/team_1_img_2.jpg'
 
 const Home = () => {
   return (

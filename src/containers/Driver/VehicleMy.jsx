@@ -25,7 +25,6 @@ const VehicleMy = () => {
         })
       })
   }
-
   useEffect(() => {
     getVehicles(id)
   }, [])
@@ -35,17 +34,15 @@ const VehicleMy = () => {
       <Section className='bg-light vehicle-add ecommerce_2' align='center'>
         <div className='d-flex'>
           <PageTitle title='My Vehicle' />
-          {(vehicles.length > 0 &&
-            vehicles[0].user_id.approved === true &&
-            vehicles[0].user_id.vehicles.length == 0 && (
-              <Button
-                link={`/vehicle/add`}
-                className='action-1 ms-auto'
-                text='Add Vehicle'
-              />
-            )) || (
+          {(vehicles.length == 0 && (
             <Button
-              link={`#`}
+              link={`/vehicle/add`}
+              className='action-1 ms-auto'
+              text='Add Vehicle'
+            />
+          )) || (
+            <Button
+              link='# '
               className='action-1 ms-auto disabled'
               text='Add Vehicle'
             />
@@ -55,12 +52,7 @@ const VehicleMy = () => {
         {(vehicles.length > 0 &&
           vehicles.map((vehicle) => {
             return (
-              <Vehicle
-                btnText='Modify'
-                btnLink={`/vehicle/modify/${vehicle._id}`}
-                key={vehicle._id}
-                {...vehicle}
-              >
+              <Vehicle btnText='Modify' key={vehicle._id} {...vehicle}>
                 <div className='d-flex justify-content-end'>
                   <Button
                     link={`/vehicle/modify/${vehicle._id}`}

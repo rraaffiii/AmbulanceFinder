@@ -4,6 +4,7 @@ import { GlobalContext } from './context/GlobalContext'
 import Cookies from 'js-cookie'
 
 import Alert from './components/Alert'
+import NotFound from './containers/NotFound'
 import Header from './containers/Header'
 import Footer from './containers/Footer'
 import Home from './containers/Home'
@@ -77,13 +78,13 @@ const App = () => {
               path='/booking/:id'
               children={<BookingSingleDriver />}
             />
-            <Route exact path='/vehicle' component={VehicleMy} />
-            <Route exact path='/vehicle/add' component={VehicleAdd} />
             <Route
               exact
               path='/vehicle/modify/:vehicleId'
               component={VehicleModify}
             />
+            <Route exact path='/vehicle/add' component={VehicleAdd} />
+            <Route exact path='/vehicle' component={VehicleMy} />
             <Route exact path='/profile' component={ProfileDriver} />
             <Route exact path='/profile/edit' component={ProfileEditDriver} />
           </Switch>

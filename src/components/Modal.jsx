@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../components/Button'
 
-const Modal = ({ title, closeEvent, submitEvent, children }) => {
+const Modal = ({ title, closeEvent, children }) => {
   return (
     <>
       <div className='modal'>
@@ -17,14 +17,6 @@ const Modal = ({ title, closeEvent, submitEvent, children }) => {
               />
             </div>
             <div className='modal-body'>{children}</div>
-            <div className='modal-footer'>
-              <Button
-                className={`sm action-1`}
-                link='# '
-                text='Submit'
-                event={submitEvent}
-              />
-            </div>
           </div>
         </div>
       </div>

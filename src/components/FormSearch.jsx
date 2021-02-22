@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import Button from './Button'
 import UserApi from '../api/user'
 
 const FormSearch = ({ btnText, style = null }) => {
+  const history = useHistory()
   const [form, setForm] = useState({ pickup: '', destination: '' })
 
   const handleChange = (e) => {
@@ -30,16 +32,26 @@ const FormSearch = ({ btnText, style = null }) => {
       console.log('Browser dont support')
     }
   }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!e.target.checkValidity()) {
+      return
+    }
+    history.push(`/search?p=${form.pickup}&d=${form.destination}`)
+  }
   const className =
     style == 'dark'
       ? 'border-gray focus-action-1 color-heading placeholder-main'
       : 'border-transparent-white focus-white color-white placeholder-transparent-white'
   return (
     <>
-      <form className='row align-items-center no-gutters'>
+      <form
+        onSubmit={handleSubmit}
+        className='row align-items-center no-gutters'
+      >
         <div className='position-relative px-0'>
           <i
-            class='fas fa-crosshairs float-end mr-2 color-white f-24 locationDetect'
+            class='fas fa-crosshairs float-end mr-2 color-white f-24 locationDetect clickable'
             onClick={handleAutoDetect}
           ></i>
           <input
@@ -47,7 +59,7 @@ const FormSearch = ({ btnText, style = null }) => {
             type='text'
             name='pickup'
             placeholder='Pickup Point'
-            required='required'
+            required
             className={`input mb-15 w-full d-block text-center text-md-left ${className}`}
             onChange={handleChange}
           />
@@ -57,14 +69,14 @@ const FormSearch = ({ btnText, style = null }) => {
           type='text'
           name='destination'
           placeholder='destination'
-          required='required'
+          required
           className={`input mb-15 d-block text-center text-md-left ${className}`}
           onChange={handleChange}
         />
         <Button
           className='action-2 mx-auto w-250 text-center'
-          link={`/search?p=${form.pickup}&d=${form.destination}`}
           text={btnText}
+          type='submit'
         />
       </form>
     </>

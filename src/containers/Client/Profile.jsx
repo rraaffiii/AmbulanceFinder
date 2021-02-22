@@ -52,7 +52,7 @@ const Profile = () => {
         <ProfileClient user={user}>
           {/* user can edit own profile if logged in*/}
           <Button
-            className='btn mb-2 border-gray action-1'
+            className='btn border border-gray action-1'
             link={`/profile/edit`}
             text='Edit Profile'
             type='submit'

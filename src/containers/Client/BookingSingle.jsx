@@ -33,7 +33,11 @@ const BookingSingle = () => {
   const [rating, setRating] = useState(4)
   const review_details = useRef(null)
 
-  const submitModal = () => {
+  const submitModal = (e) => {
+    e.preventDefault()
+    if (!e.target.checkValidity()) {
+      return
+    }
     const reviewData = {
       receiver: booking.driver._id,
       rating: rating + 1,
@@ -109,13 +113,9 @@ const BookingSingle = () => {
         <div className='col-lg-12'>
           {showModal && (
             <>
-              <Modal
-                title='Submit Review'
-                closeEvent={closeModal}
-                submitEvent={submitModal}
-              >
+              <Modal title='Submit Review' closeEvent={closeModal}>
                 {/* modal body */}
-                <form>
+                <form onSubmit={submitModal}>
                   <div className='mb-3'>
                     <label htmlFor='recipient-name' className='col-form-label'>
                       Rating:
@@ -134,8 +134,14 @@ const BookingSingle = () => {
                     </label>
                     <textarea
                       ref={review_details}
+                      required
                       className='input w-full radius10 border-gray focus-action-1 color-heading placeholder-main text-left'
                     ></textarea>
+                    <Button
+                      className={`sm action-1 float-end mt-2`}
+                      text='Submit'
+                      type='submit'
+                    />
                   </div>
                 </form>
               </Modal>
