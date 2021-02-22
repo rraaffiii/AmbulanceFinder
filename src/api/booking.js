@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
-// require('dotenv')
-const api_url = `http://localhost:3001/api/booking`
+
+const api_uri = `${process.env.REACT_APP_API_URI}/booking`
 
 const getToken = () => {
   const token = Cookies.get('token')
@@ -11,7 +11,7 @@ const getToken = () => {
 
 const BookingApi = {
   bookDriver(bookingData) {
-    return axios.post(`${api_url}/bookDriver`, bookingData, {
+    return axios.post(`${api_uri}/bookDriver`, bookingData, {
       headers: { authorization: getToken() },
     })
   },
@@ -24,24 +24,24 @@ const BookingApi = {
       destination,
       driver,
     }
-    return axios.post(`${api_url}/bookDriver`, bookingData, {
+    return axios.post(`${api_uri}/bookDriver`, bookingData, {
       headers: { authorization: getToken() },
     })
   },
   findBookingsByUserId(userType) {
-    return axios.get(`${api_url}/findBookingsByUserId`, {
+    return axios.get(`${api_uri}/findBookingsByUserId`, {
       headers: { authorization: getToken() },
       params: { userType },
     })
   },
   findBookingVehicleByBookingId(bookingId) {
-    return axios.get(`${api_url}/findBookingVehicleByBookingId`, {
+    return axios.get(`${api_uri}/findBookingVehicleByBookingId`, {
       headers: { authorization: getToken() },
       params: { bookingId },
     })
   },
   updateStatus(bookingId, newStatus) {
-    return axios.get(`${api_url}/updateStatus`, {
+    return axios.get(`${api_uri}/updateStatus`, {
       headers: { authorization: getToken() },
       params: { bookingId, newStatus },
     })

@@ -7,6 +7,7 @@ import Testimonial from '../components/Testimonial'
 import staticImg from '../assets/team_1_img_2.jpg'
 
 const Home = () => {
+  console.log(process.env)
   return (
     <>
       <Section className='bg-dark content_1' align='left'>

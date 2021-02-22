@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-const api_url = `http://localhost:3001/api/vehicle`
+const api_uri = `${process.env.REACT_APP_API_URI}/vehicle`
 
 const getToken = () => {
   const token = Cookies.get('token')
@@ -11,7 +11,7 @@ const getToken = () => {
 
 const VehicleApi = {
   createVehicle(vehicleData) {
-    return axios.post(`${api_url}/create`, vehicleData, {
+    return axios.post(`${api_uri}/create`, vehicleData, {
       headers: {
         authorization: getToken(),
         'content-type': 'multipart/form-data',
@@ -19,7 +19,7 @@ const VehicleApi = {
     })
   },
   updateVehicle(vehicleData) {
-    return axios.patch(`${api_url}/updateVehicle`, vehicleData, {
+    return axios.patch(`${api_uri}/updateVehicle`, vehicleData, {
       headers: {
         authorization: getToken(),
         'content-type': 'multipart/form-data',
@@ -27,7 +27,7 @@ const VehicleApi = {
     })
   },
   updateVehicleWithImg(vehicleData) {
-    return axios.patch(`${api_url}/updateVehicleWithImg`, vehicleData, {
+    return axios.patch(`${api_uri}/updateVehicleWithImg`, vehicleData, {
       headers: {
         authorization: getToken(),
         'content-type': 'multipart/form-data',
@@ -35,12 +35,12 @@ const VehicleApi = {
     })
   },
   getVehiclesByUserId(userId) {
-    return axios.post(`${api_url}/getVehiclesByUserId`, userId, {
+    return axios.post(`${api_uri}/getVehiclesByUserId`, userId, {
       headers: { authorization: getToken() },
     })
   },
   getVehicleById(vehicleId) {
-    return axios.post(`${api_url}/getVehicleById`, vehicleId, {
+    return axios.post(`${api_uri}/getVehicleById`, vehicleId, {
       headers: { authorization: getToken() },
     })
   },
