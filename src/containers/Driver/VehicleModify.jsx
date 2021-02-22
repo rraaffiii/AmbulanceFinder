@@ -33,7 +33,10 @@ const VehicleModify = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(vehicle.type)
+
+    if (!e.target.checkValidity()) {
+      return
+    }
     const features = {
       wheelchair,
       oxygen,
@@ -101,127 +104,127 @@ const VehicleModify = () => {
       <Section className='bg-light vehicle-add' align='center'>
         <PageTitle title='Modify Vehicle' />
 
-        <div className='col-lg-12'>
-          <div className='row'>
-            <div className='col-lg-6'>
-              <input
-                ref={name}
-                defaultValue={vehicle && vehicle.name}
-                type='text'
-                name='name'
-                placeholder='Name'
-                required='required'
-                className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-              />
-              <input
-                ref={cost}
-                defaultValue={vehicle && vehicle.cost}
-                type='text'
-                name='cost'
-                placeholder='Fare/KM'
-                required='required'
-                className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-              />
-
-              <input
-                ref={seat}
-                defaultValue={vehicle && vehicle.seat}
-                type='text'
-                name='seat'
-                placeholder='Seat'
-                required='required'
-                className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-              />
-              <input
-                ref={numberPlate}
-                defaultValue={vehicle && vehicle.number_plate}
-                type='text'
-                name='numberPlate'
-                placeholder='Number Plate'
-                required='required'
-                className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-              />
-            </div>
-
-            <div className='col-lg-6'>
-              <select
-                ref={type}
-                defaultValue={vehicle && vehicle.type}
-                className='input w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-                aria-label='Default select example'
-                id='type'
-              >
-                <option value='DEFAULT' disabled>
-                  Type
-                </option>
-                <option value='0'>Non AC</option>
-                <option value='1'>AC</option>
-                <option value='2'>Freezer</option>
-                <option value='3'>ICU</option>
-              </select>
-
-              <div className='input-group mt-15'>
-                <span className='f-18 bold'>Vehicle Photo:</span>
+        <form onSubmit={handleSubmit}>
+          <div className='col-lg-12'>
+            <div className='row'>
+              <div className='col-lg-6'>
                 <input
-                  ref={vehiclePhoto}
-                  defaultValue={vehicle && vehicle.vehiclePhoto}
-                  type='file'
-                  className='input form-control'
-                  id='inputGroupFile02'
+                  ref={name}
+                  defaultValue={vehicle && vehicle.name}
+                  name='name'
+                  placeholder='Name'
+                  required='required'
+                  type='text'
+                  className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+                />
+                <input
+                  ref={cost}
+                  defaultValue={vehicle && vehicle.cost}
+                  name='cost'
+                  placeholder='Fare/KM'
+                  required='required'
+                  type='number'
+                  className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+                />
+
+                <input
+                  ref={seat}
+                  defaultValue={vehicle && vehicle.seat}
+                  name='seat'
+                  placeholder='Seat'
+                  required='required'
+                  type='number'
+                  className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+                />
+                <input
+                  ref={numberPlate}
+                  defaultValue={vehicle && vehicle.number_plate}
+                  name='numberPlate'
+                  placeholder='Number Plate'
+                  required='required'
+                  type='text'
+                  className='input mb-15 w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
                 />
               </div>
 
-              <div className='d-inline-flex w-full mt-20'>
-                <span className='f-18 bold'>Features:</span>
-                <div>
-                  <div className='form-check'>
-                    <input
-                      onClick={(e) => handleSelectedChange(e)}
-                      defaultChecked={wheelchair}
-                      type='checkbox'
-                      name='wheelchair'
-                      id='wheelchair'
-                      className='input form-check-input d-none border-transparent-white focus-action-1'
-                    />
-                    <label htmlFor='wheelchair'>Wheelchair</label>
-                  </div>
+              <div className='col-lg-6'>
+                <select
+                  ref={type}
+                  defaultValue={vehicle && vehicle.type}
+                  className='input w-full border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+                  aria-label='Default select example'
+                  id='type'
+                >
+                  <option value='DEFAULT' disabled>
+                    Type
+                  </option>
+                  <option value='0'>Non AC</option>
+                  <option value='1'>AC</option>
+                  <option value='2'>Freezer</option>
+                  <option value='3'>ICU</option>
+                </select>
 
-                  <div className='form-check'>
-                    <input
-                      onClick={(e) => handleSelectedChange(e)}
-                      defaultChecked={oxygen}
-                      type='checkbox'
-                      name='oxygen'
-                      id='oxygen'
-                      className='input d-none border-transparent-white focus-action-1'
-                    />
-                    <label htmlFor='oxygen'>Oxygen</label>
-                  </div>
+                <div className='input-group mt-15'>
+                  <span className='f-18 bold'>Vehicle Photo:</span>
+                  <input
+                    ref={vehiclePhoto}
+                    defaultValue={vehicle && vehicle.vehiclePhoto}
+                    type='file'
+                    className='input form-control'
+                    id='inputGroupFile02'
+                  />
+                </div>
 
-                  <div className='form-check'>
-                    <input
-                      onClick={(e) => handleSelectedChange(e)}
-                      defaultChecked={stretcher}
-                      type='checkbox'
-                      name='stretcher'
-                      id='stretcher'
-                      className='input d-none border-transparent-white focus-action-1'
-                    />
-                    <label htmlFor='stretcher'>Stretcher</label>
+                <div className='d-inline-flex w-full mt-20'>
+                  <span className='f-18 bold'>Features:</span>
+                  <div>
+                    <div className='form-check'>
+                      <input
+                        onClick={(e) => handleSelectedChange(e)}
+                        defaultChecked={wheelchair}
+                        type='checkbox'
+                        name='wheelchair'
+                        id='wheelchair'
+                        className='input form-check-input d-none border-transparent-white focus-action-1'
+                      />
+                      <label htmlFor='wheelchair'>Wheelchair</label>
+                    </div>
+
+                    <div className='form-check'>
+                      <input
+                        onClick={(e) => handleSelectedChange(e)}
+                        defaultChecked={oxygen}
+                        type='checkbox'
+                        name='oxygen'
+                        id='oxygen'
+                        className='input d-none border-transparent-white focus-action-1'
+                      />
+                      <label htmlFor='oxygen'>Oxygen</label>
+                    </div>
+
+                    <div className='form-check'>
+                      <input
+                        onClick={(e) => handleSelectedChange(e)}
+                        defaultChecked={stretcher}
+                        type='checkbox'
+                        name='stretcher'
+                        id='stretcher'
+                        className='input d-none border-transparent-white focus-action-1'
+                      />
+                      <label htmlFor='stretcher'>Stretcher</label>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <Button
-                className='float-end mt-15 mr-15 btn border-gray action-2'
-                link='# '
-                text='Confirm'
-                type='submit'
-                event={handleSubmit}
-              />
+                <Button
+                  className='float-end mt-15 mr-15 btn border-gray action-2'
+                  text='Confirm'
+                  type='submit'
+                />
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </Section>
     </>
   )

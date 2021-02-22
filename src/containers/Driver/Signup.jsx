@@ -22,7 +22,16 @@ const SignupDriver = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
+    if (!e.target.checkValidity()) {
+      return
+    }
+    if (password.current.value.trim().length < 6) {
+      global.setAlert({
+        type: 'danger',
+        message: 'Password must be min 6 characters long',
+      })
+      return
+    }
     const userData = {
       type: 1,
       available: true,
@@ -57,16 +66,16 @@ const SignupDriver = () => {
     <>
       <Section className='bg-light form_2' align='center'>
         <div className='col-lg-8 col-md-9 col-sm-12 text-center'>
-          <form onSubmit={handleSubmit}>
-            <PageTitle title='Sign Up to Drive' />
+          <PageTitle title='Sign Up to Drive' />
 
+          <form onSubmit={handleSubmit}>
             <div className='input-group mb-15'>
               <input
                 ref={fname}
                 type='text'
                 name='fname'
                 placeholder='First Name'
-                required='required'
+                required
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
               <input
@@ -74,7 +83,7 @@ const SignupDriver = () => {
                 type='text'
                 name='lname'
                 placeholder='Last Name'
-                required='required'
+                required
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
             </div>
@@ -84,7 +93,7 @@ const SignupDriver = () => {
                 type='text'
                 name='phone'
                 placeholder='Phone'
-                required='required'
+                required
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
               <input
@@ -92,7 +101,7 @@ const SignupDriver = () => {
                 type='password'
                 name='password'
                 placeholder='Password'
-                required='required'
+                required
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
             </div>
@@ -102,7 +111,7 @@ const SignupDriver = () => {
                 type='text'
                 name='drivingLicense'
                 placeholder='Driving License'
-                required='required'
+                required
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
               <DatePicker
@@ -121,7 +130,7 @@ const SignupDriver = () => {
                 type='text'
                 name='city'
                 placeholder='City'
-                required='required'
+                required
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
               <input
@@ -129,7 +138,7 @@ const SignupDriver = () => {
                 type='text'
                 name='country'
                 placeholder='Country'
-                required='required'
+                required
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
             </div>

@@ -30,6 +30,16 @@ const ProfileEdit = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    if (!e.target.checkValidity()) {
+      return
+    }
+    if (password.current.value.trim().length < 6) {
+      global.setAlert({
+        type: 'danger',
+        message: 'Password must be min 6 characters long',
+      })
+      return
+    }
     const formData = new FormData()
     formData.append('password', password.current.value)
     formData.append('first_name', fname.current.value)
@@ -104,60 +114,60 @@ const ProfileEdit = () => {
           />
         </div>
         <div className='col-lg-9'>
-          <div className='block radius10 p-3'>
-            <table className='table table-borderless'>
-              <tbody>
-                <RowProfileEdit
-                  label='user Id'
-                  value={user._id}
-                  ref={userId}
-                  disabled={true}
-                />
-                <RowProfileEdit
-                  label='phone'
-                  value={user.phone}
-                  ref={phone}
-                  disabled={true}
-                />
-                <RowProfileEdit
-                  label='date of birth'
-                  value={
-                    user.date_of_birth &&
-                    user.date_of_birth.toString().slice(0, 10)
-                  }
-                  disabled={true}
-                />
-                <RowProfileEdit
-                  label='password'
-                  value={user.password}
-                  ref={password}
-                />
-                <RowProfileEdit
-                  label='first name'
-                  value={user.first_name}
-                  ref={fname}
-                />
-                <RowProfileEdit
-                  label='last name'
-                  value={user.last_name}
-                  ref={lname}
-                />
-                <RowProfileEdit label='city' value={user.city} ref={city} />
-                <RowProfileEdit
-                  label='country'
-                  value={user.country}
-                  ref={country}
-                />
-              </tbody>
-            </table>
-            <Button
-              type='submit'
-              className='btn float-end mt-30 border-gray action-2'
-              link='# '
-              text='Update'
-              event={handleSubmit}
-            />
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className='block radius10 p-3'>
+              <table className='table table-borderless'>
+                <tbody>
+                  <RowProfileEdit
+                    label='user Id'
+                    value={user._id}
+                    ref={userId}
+                    disabled={true}
+                  />
+                  <RowProfileEdit
+                    label='phone'
+                    value={user.phone}
+                    ref={phone}
+                    disabled={true}
+                  />
+                  <RowProfileEdit
+                    label='date of birth'
+                    value={
+                      user.date_of_birth &&
+                      user.date_of_birth.toString().slice(0, 10)
+                    }
+                    disabled={true}
+                  />
+                  <RowProfileEdit
+                    label='password'
+                    value={user.password}
+                    ref={password}
+                  />
+                  <RowProfileEdit
+                    label='first name'
+                    value={user.first_name}
+                    ref={fname}
+                  />
+                  <RowProfileEdit
+                    label='last name'
+                    value={user.last_name}
+                    ref={lname}
+                  />
+                  <RowProfileEdit label='city' value={user.city} ref={city} />
+                  <RowProfileEdit
+                    label='country'
+                    value={user.country}
+                    ref={country}
+                  />
+                </tbody>
+              </table>
+              <Button
+                type='submit'
+                className='btn float-end mt-30 border-gray action-2'
+                text='Update'
+              />
+            </div>
+          </form>
         </div>
       </Section>
     </>

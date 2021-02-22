@@ -18,6 +18,11 @@ const Signin = () => {
     e.preventDefault()
     const number = phone.current.value
 
+    if (number.trim().length == 0) {
+      global.setAlert({ type: 'danger', message: 'Invalid input' })
+      return
+    }
+
     UserApi.isUserExist(number)
       .then((res) => {
         //client found, send code to signin
@@ -45,7 +50,7 @@ const Signin = () => {
 
                       // check if redirected from booking page
                       if (!Cookies.get('redirectUrl')) {
-                        window.location.replace('/')
+                        window.location.replace('/dashboard')
                       } else {
                         BookingApi.bookDriverFromRedirect(
                           Cookies.get('redirectUrl')
@@ -91,19 +96,23 @@ const Signin = () => {
         //user not found, show error
         else {
           global.setAlert({ type: 'danger', message: res.data.message })
-          console.log(JSON.stringify(res.data.message))
         }
       })
       //server error
       .catch((err) => {
         global.setAlert({ type: 'danger', message: err.response.data.message })
-        console.log(JSON.stringify(err.response.data.message))
       })
   }
   const handlePassSubmit = (e) => {
     e.preventDefault()
     const number = phone.current.value
     const password = pass.current.value
+
+    if (number.trim().length == 0 || password.trim().length == 0) {
+      global.setAlert({ type: 'danger', message: 'Invalid input' })
+      return
+    }
+
     UserApi.checkCredentials({ phone: number, password })
       .then((res) => {
         //driver login
@@ -111,7 +120,7 @@ const Signin = () => {
           Cookies.set('userId', res.data.user._id, { expires: 1 })
           Cookies.set('type', res.data.user.type, { expires: 1 })
           Cookies.set('token', res.headers.authorization, { expires: 1 })
-          window.location.replace('/')
+          window.location.replace('/dashboard')
         } else {
           global.setAlert({ type: 'danger', message: res.data.message })
         }
@@ -121,7 +130,6 @@ const Signin = () => {
           type: 'danger',
           message: err.response.data.message,
         })
-        console.log(JSON.stringify(err.response.data.message))
       })
   }
 

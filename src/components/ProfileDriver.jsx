@@ -7,9 +7,9 @@ const ProfileDriver = ({ user, children }) => {
       <div className='col-lg-3 profile text-center'>
         <img
           src={`/photos/profile/${user.profile_photo}`}
-          className='img-fluid rounded mb-2'
+          className='img-fluid rounded border'
         />
-        <div className='pl-5'>
+        <div className='pl-5 mt-2'>
           <h3>{user.first_name}</h3>
           {(user.rating && (
             <Rating rating={user.rating} rating_count={user.rating_count} />

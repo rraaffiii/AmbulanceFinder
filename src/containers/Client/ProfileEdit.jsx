@@ -20,6 +20,9 @@ const ProfileEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (!e.target.checkValidity()) {
+      return
+    }
 
     const formData = new FormData()
     formData.append('first_name', fname.current.value)
@@ -60,40 +63,40 @@ const ProfileEdit = () => {
 
         <div className='col-lg-9'>
           <div className='block radius10 p-3'>
-            <table className='table table-borderless'>
-              <tbody>
-                <RowProfileEdit label='ID' value={user._id} disabled={true} />
-                <RowProfileEdit
-                  label='phone'
-                  value={user.phone}
-                  ref={phone}
-                  disabled={true}
-                />
-                <RowProfileEdit
-                  label='first name'
-                  value={user.first_name}
-                  ref={fname}
-                />
-                <RowProfileEdit
-                  label='last name'
-                  value={user.last_name}
-                  ref={lname}
-                />
-                <RowProfileEdit label='city' value={user.city} ref={city} />
-                <RowProfileEdit
-                  label='country'
-                  value={user.country}
-                  ref={country}
-                />
-              </tbody>
-            </table>
-            <Button
-              className='btn float-end mt-30 border-gray action-2'
-              link='# '
-              text='Update'
-              type='button'
-              event={handleSubmit}
-            />
+            <form onSubmit={handleSubmit}>
+              <table className='table table-borderless'>
+                <tbody>
+                  <RowProfileEdit label='ID' value={user._id} disabled={true} />
+                  <RowProfileEdit
+                    label='phone'
+                    value={user.phone}
+                    ref={phone}
+                    disabled={true}
+                  />
+                  <RowProfileEdit
+                    label='first name'
+                    value={user.first_name}
+                    ref={fname}
+                  />
+                  <RowProfileEdit
+                    label='last name'
+                    value={user.last_name}
+                    ref={lname}
+                  />
+                  <RowProfileEdit label='city' value={user.city} ref={city} />
+                  <RowProfileEdit
+                    label='country'
+                    value={user.country}
+                    ref={country}
+                  />
+                </tbody>
+              </table>
+              <Button
+                className='btn float-end mt-30 border-gray action-2'
+                text='Update'
+                type='submit'
+              />
+            </form>
           </div>
         </div>
       </Section>
