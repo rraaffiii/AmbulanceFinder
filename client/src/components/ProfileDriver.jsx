@@ -4,7 +4,7 @@ import Rating from '../components/Rating'
 const ProfileDriver = ({ user, children }) => {
   return (
     <>
-      <div className='col-lg-3 profile text-center'>
+      <div className='col-lg-3 col-md-3 col-sm-3 profile text-center'>
         <img
           src={`/photos/profile/${user.profile_photo}`}
           className='img-fluid rounded border'
@@ -17,7 +17,7 @@ const ProfileDriver = ({ user, children }) => {
         </div>
         {children}
       </div>
-      <div className='col-lg-9'>
+      <div className='col-lg-9 col-md-9 col-sm-9 '>
         <div className='block radius10 p-3'>
           <div className='item'>
             ID: <b>{user._id}</b>

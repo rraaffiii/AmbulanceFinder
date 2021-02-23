@@ -39,7 +39,10 @@ const RowApproveDriver = ({
         <td className='clickable' onClick={handleClickProfile}>
           {first_name + ' ' + last_name}
         </td>
-        <td className='clickable' onClick={handleClickProfile}>
+        <td
+          className='clickable d-none d-sm-block'
+          onClick={handleClickProfile}
+        >
           {driving_license}
         </td>
         <td className='clickable' onClick={handleClickProfile}>

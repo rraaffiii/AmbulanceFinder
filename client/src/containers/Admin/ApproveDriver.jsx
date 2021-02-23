@@ -29,7 +29,7 @@ const ApproveDriver = () => {
             <thead>
               <tr className='text-center'>
                 <th>Name</th>
-                <th>Driving License</th>
+                <th className='d-none d-sm-block'>Driving License</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>

@@ -142,7 +142,6 @@ const Signin = () => {
           <div className='input-group mb-15'>
             <input
               ref={phone}
-              defaultValue='+8801748410491'
               type='text'
               name='phone'
               placeholder='Phone'
@@ -171,7 +170,6 @@ const Signin = () => {
               <div className='input-group mb-15'>
                 <input
                   ref={pass}
-                  defaultValue='1234'
                   type='password'
                   name='password'
                   placeholder='Password'
