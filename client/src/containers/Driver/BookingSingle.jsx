@@ -177,7 +177,8 @@ const BookingSingle = () => {
           )}
           <div className='row justify-content-center'>
             <div className='col-lg-12'>
-              <h2>Booking #{id}</h2>
+              <h2>Booking</h2>
+              <small>#{id}</small>
               <h5 className='pt-2'>
                 Status: <BookingStatus status={status} />
               </h5>
@@ -260,7 +261,7 @@ const BookingSingle = () => {
               )}
               {booking && <UserCard title='Client' {...booking.client} />}
             </div>
-            <div className='col-lg-6'>
+            <div className='col-lg-6 mt-3 mt-lg-0'>
               {rowsBooking && (
                 <Block heading='Booking Details' rows={rowsBooking} />
               )}

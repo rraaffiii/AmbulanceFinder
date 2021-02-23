@@ -36,7 +36,7 @@ const BookingRecent = () => {
                 <tr className='text-center'>
                   {(userType == 0 && <th>Driver</th>) || <th>Client</th>}
                   <th>Date</th>
-                  <th>Time</th>
+                  <th className='d-none d-sm-block'>Time</th>
                   <th>Status</th>
                 </tr>
               </thead>

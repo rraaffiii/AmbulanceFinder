@@ -3,6 +3,7 @@ import { GlobalContext } from '../../context/GlobalContext'
 import Cookies from 'js-cookie'
 import Section from '../../components/Section'
 import Button from '../../components/Button'
+import Tooltip from '../../components/Tooltip'
 import PageTitle from '../../components/PageTitle'
 import VehicleApi from '../../api/vehicle'
 import Vehicle from '../../components/Vehicle'
@@ -41,11 +42,13 @@ const VehicleMy = () => {
               text='Add Vehicle'
             />
           )) || (
-            <Button
-              link='# '
-              className='action-1 ms-auto disabled'
-              text='Add Vehicle'
-            />
+            <Tooltip text='Only one vehicle allowed' className='ms-auto'>
+              <Button
+                link='# '
+                className='action-1 disabled'
+                text='Add Vehicle'
+              />
+            </Tooltip>
           )}
         </div>
 
