@@ -11,13 +11,6 @@ const uri = process.env.DB_URI
 app.use(cors({ exposedHeaders: 'authorization' }))
 app.use(express.json())
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')))
-  app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
-  })
-}
-
 // DB connection
 mongoose
   .connect(uri, {
@@ -38,3 +31,11 @@ app.use('/api/user', require('./api/routes/user'))
 app.use('/api/booking', require('./api/routes/booking'))
 app.use('/api/vehicle', require('./api/routes/vehicle'))
 app.use('/api/review', require('./api/routes/review'))
+
+// React routes redirect
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')))
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+  })
+}
