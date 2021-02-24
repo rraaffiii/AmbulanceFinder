@@ -208,41 +208,42 @@ const BookingSingle = () => {
                   </div>
                 </>
               )}
-              {status >= 1 && status <= 4 && (
-                <>
-                  <div className='row pb-4'>
-                    <div className='col-lg-12 d-flex'>
-                      <Button
-                        className={`sm mr-5 primary ${
-                          status >= 3 && 'disabled'
-                        }`}
-                        link='# '
-                        text='Mark as Arrived'
-                        event={handleStatus}
-                        btnParams={3}
-                      />
-                      <Button
-                        className={`sm mr-5 action-1 ${
-                          status >= 4 && 'disabled'
-                        }`}
-                        link='# '
-                        text='Mark as Started'
-                        event={handleStatus}
-                        btnParams={4}
-                      />
-                      <Button
-                        className={`sm mr-5 action-2 ${
-                          status >= 5 && 'disabled'
-                        }`}
-                        link='# '
-                        text='Mark as Completed'
-                        event={handleStatus}
-                        btnParams={5}
-                      />
+              {status == 1 ||
+                (status >= 3 && status <= 4 && (
+                  <>
+                    <div className='row pb-4'>
+                      <div className='col-lg-12 d-flex'>
+                        <Button
+                          className={`sm mr-5 primary ${
+                            status >= 3 && 'disabled'
+                          }`}
+                          link='# '
+                          text='Mark as Arrived'
+                          event={handleStatus}
+                          btnParams={3}
+                        />
+                        <Button
+                          className={`sm mr-5 action-1 ${
+                            status >= 4 && 'disabled'
+                          }`}
+                          link='# '
+                          text='Mark as Started'
+                          event={handleStatus}
+                          btnParams={4}
+                        />
+                        <Button
+                          className={`sm mr-5 action-2 ${
+                            status >= 5 && 'disabled'
+                          }`}
+                          link='# '
+                          text='Mark as Completed'
+                          event={handleStatus}
+                          btnParams={5}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </>
-              )}
+                  </>
+                ))}
 
               {/* review modal */}
               {status == 5 && (

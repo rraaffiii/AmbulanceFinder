@@ -2,6 +2,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 const api_uri = `/api/booking`
+const userType = parseInt(Cookies.get('type'))
 
 const getToken = () => {
   const token = Cookies.get('token')
@@ -11,9 +12,11 @@ const getToken = () => {
 
 const BookingApi = {
   bookDriver(bookingData) {
-    return axios.post(`${api_uri}/bookDriver`, bookingData, {
-      headers: { authorization: getToken() },
-    })
+    if (userType !== 1) {
+      return axios.post(`${api_uri}/bookDriver`, bookingData, {
+        headers: { authorization: getToken() },
+      })
+    }
   },
   bookDriverFromRedirect(redirectUrl) {
     const pickup = redirectUrl.split('?p=').pop().split('&d')[0]

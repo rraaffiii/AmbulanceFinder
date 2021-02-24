@@ -14,7 +14,12 @@ exports.create_vehicle = (req, res) => {
         { _id: vehicle.user_id },
         { $push: { vehicles: vehicle._id } }
       )
-      res.status(201).json({ message: 'Registered successfully' })
+        .then((response) => {
+          res.status(201).json({ message: 'Registered successfully' })
+        })
+        .catch(() => {
+          res.status(500).json({ message: 'Registration failed' })
+        })
     })
     .catch(() => {
       res.status(500).json({ message: 'Server error' })

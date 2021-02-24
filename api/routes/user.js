@@ -45,5 +45,6 @@ router.get(
   authToken,
   userController.get_user_last_booking
 )
+router.get('/getDriverStatus', authToken, userController.get_driver_status)
 
 module.exports = router

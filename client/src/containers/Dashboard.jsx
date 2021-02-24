@@ -135,13 +135,13 @@ const Dashboard = () => {
                     name='license_photo'
                   />
                   <button
-                    className='btn action-1 sm mt-n2'
+                    className='btn action-1 sm mt-2 mt-sm-0'
                     onClick={handleUploadChange}
                   >
                     Select image
                   </button>
                   <button
-                    className='btn action-2 sm ml-5 mt-n2'
+                    className='btn action-2 sm ml-5 mt-2 mt-sm-0'
                     onClick={handleUploadSubmit}
                   >
                     Upload now
@@ -152,7 +152,7 @@ const Dashboard = () => {
           </>
         </div>
         <div className='row justify-content-center'>
-          <div className='col-lg-5 block radius10 text-center py-3 mb-3 mb-lg-0'>
+          <div className='col-lg-5 col-md-5 col-sm-12 block radius10 text-center py-3 mb-3 mb-lg-0'>
             <h4 className='py-3'>Current Booking</h4>
             {(user.last_booking && (
               <>
@@ -188,41 +188,37 @@ const Dashboard = () => {
               </>
             )) || <h5>No booking found</h5>}
           </div>
-          <div className='col-lg-5 block radius10 text-center py-3 ml-15 rm-ml-lg'>
+          <div className='col-lg-5 col-md-5 col-sm-12 block radius10 text-center py-3 ml-15 rm-ml-md form-2'>
             <h4 className='py-3'>Current Location</h4>
-            <div className='position-relative px-0'>
-              <i
-                className='fas fa-crosshairs float-end mr-2 f-24 locationDetect clickable'
-                onClick={handleAutoDetect}
-              ></i>
+            <form onSubmit={handleUpdateLocation}>
+              <div className='position-relative px-0'>
+                <i
+                  className='fas fa-crosshairs float-end mr-2 f-24 locationDetect clickable'
+                  onClick={handleAutoDetect}
+                ></i>
+                <input
+                  value={location.city}
+                  onChange={handleChange}
+                  type='text'
+                  name='city'
+                  placeholder='City'
+                  required='required'
+                  className='input w-full mb-2 border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+                />
+              </div>
               <input
-                value={location.city}
+                value={location.country}
                 onChange={handleChange}
                 type='text'
-                name='city'
-                placeholder='City'
+                name='country'
+                placeholder='Country'
                 required='required'
                 className='input w-full mb-2 border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
-            </div>
-            <input
-              value={location.country}
-              onChange={handleChange}
-              type='text'
-              name='country'
-              placeholder='Country'
-              required='required'
-              className='input w-full mb-2 border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-            />
-            <div className='d-inline-flex my-2'>
-              <Button
-                className='action-2'
-                link='# '
-                text='Update'
-                type='submit'
-                event={handleUpdateLocation}
-              />
-            </div>
+              <div className='d-inline-flex my-2'>
+                <Button className='action-2' text='Update' type='submit' />
+              </div>
+            </form>
           </div>
         </div>
       </Section>

@@ -592,6 +592,9 @@ textarea.input {
   .ecommerce_1 .main_info .btn {
     margin-top: 30px;
   }
+  .mt-n2 {
+    margin-top: -0.5rem;
+  }
 }
 /* Smaller than 992px */
 @media (max-width: 991.98px) {
@@ -645,9 +648,6 @@ textarea.input {
   }
   .showcase_1 .description {
     margin: 10px 0 0 0;
-  }
-  .rm-ml-lg {
-    margin-left: 0;
   }
   .input-group:not(.has-validation)
     > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
@@ -754,6 +754,9 @@ textarea.input {
     border: none;
     border-top: 2px solid #ebeaed;
     border-bottom: 2px solid #ebeaed;
+  }
+  .rm-ml-md {
+    margin-left: 0;
   }
 }
 /* Smaller than 576px */
