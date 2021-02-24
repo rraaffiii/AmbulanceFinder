@@ -29,7 +29,6 @@ const Profile = () => {
   const getReviews = () => {
     ReviewApi.getReviewsByReceiver(id)
       .then((res) => {
-        console.log(res.data)
         setReviews(res.data)
       })
       .catch((err) => {

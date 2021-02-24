@@ -29,8 +29,7 @@ const Dashboard = () => {
     if (user.type !== null) {
       const name = user.first_name || user.phone
       const hour = new Date().getHours()
-      console.log(name)
-      console.log(hour)
+
       if (hour < 5) {
         return 'Good Night ' + name
       } else if (hour < 12) {
@@ -85,7 +84,10 @@ const Dashboard = () => {
           })
       })
     } else {
-      console.log('Browser dont support')
+      global.setAlert({
+        type: 'danger',
+        message: 'Browser not supported',
+      })
     }
   }
   const handleUpdateLocation = () => {

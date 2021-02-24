@@ -18,7 +18,6 @@ const Checkout = () => {
       const paymentData = {
         amount: amount.current.innerText,
       }
-      console.log(paymentData)
     }
   }
 

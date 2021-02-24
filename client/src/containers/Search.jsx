@@ -37,7 +37,7 @@ const Search = () => {
             type: 'success',
             message: res.data.message,
           })
-          console.log(res.data)
+
           const data = { last_booking: res.data.booking._id }
           UserApi.updateFields(data).catch((err) => {
             global.setAlert({

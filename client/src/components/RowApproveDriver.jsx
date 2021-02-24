@@ -40,7 +40,7 @@ const RowApproveDriver = ({
           {first_name + ' ' + last_name}
         </td>
         <td
-          className='clickable d-none d-sm-block'
+          className='clickable d-none d-sm-table-cell'
           onClick={handleClickProfile}
         >
           {driving_license}

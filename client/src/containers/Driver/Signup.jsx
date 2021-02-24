@@ -70,9 +70,7 @@ const SignupDriver = () => {
         window.location.replace('/')
       })
       .catch((err) => {
-        console.log(err)
         global.setAlert({ type: 'danger', message: err.response.data.message })
-        console.log(err)
       })
   }
 
