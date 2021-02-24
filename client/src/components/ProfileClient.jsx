@@ -17,7 +17,7 @@ const ProfileClient = ({ user, children }) => {
         </div>
         {children}
       </div>
-      <div className='col-lg-9 col-md-9 col-sm-9 '>
+      <div className='col-lg-9 col-md-9 col-sm-9 mt-3 mt-sm-0'>
         <div className='block radius10 p-3'>
           <div className='item'>
             ID: <b>{user._id}</b>

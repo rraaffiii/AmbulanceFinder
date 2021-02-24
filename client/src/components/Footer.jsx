@@ -1,7 +1,7 @@
 import React from 'react'
 import Cookies from 'js-cookie'
 import { Link } from 'react-router-dom'
-import SocialLink from '../components/SocialLink'
+import SocialLink from './SocialLink'
 
 const Footer = () => {
   const type = Cookies.get('type')

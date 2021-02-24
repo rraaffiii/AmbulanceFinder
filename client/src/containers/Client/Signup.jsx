@@ -113,7 +113,7 @@ const Signup = () => {
     <>
       <Section className='bg-light form_2' align='center'>
         <div className='col-lg-5 col-md-6 col-sm-10 text-center'>
-          <PageTitle title='Sign Up to Book' />
+          <PageTitle title='Sign Up as Client' />
 
           <form onSubmit={handleSubmit}>
             <div className='input-group mb-15'>
