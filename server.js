@@ -32,7 +32,7 @@ app.use('/api/booking', require('./api/routes/booking'))
 app.use('/api/vehicle', require('./api/routes/vehicle'))
 app.use('/api/review', require('./api/routes/review'))
 
-// React routes redirect
+// Redirect React routes in production build
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')))
   app.get('*', function (req, res) {

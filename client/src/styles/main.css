@@ -649,6 +649,10 @@ textarea.input {
   .rm-ml-lg {
     margin-left: 0;
   }
+  .input-group:not(.has-validation)
+    > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+    margin-right: 0;
+  }
 }
 /* Smaller than 768px */
 @media (max-width: 767.98px) {
@@ -828,6 +832,12 @@ textarea.input {
     position: absolute;
     top: -10px;
     right: 5px;
+  }
+  .react-datepicker-wrapper {
+    display: contents !important;
+  }
+  .react-datepicker-wrapper input {
+    width: 100%;
   }
 }
 @media (max-width: 467.98px) {

@@ -65,7 +65,7 @@ const FormSearch = ({ btnText, style = null }) => {
             name='pickup'
             placeholder='Pickup Point'
             required
-            className={`input mb-15 w-full d-block text-center text-md-left ${className}`}
+            className={`input mb-15 w-full d-block text-center text-md-left text-capitalize ${className}`}
             onChange={handleChange}
           />
         </div>
@@ -75,7 +75,7 @@ const FormSearch = ({ btnText, style = null }) => {
           name='destination'
           placeholder='destination'
           required
-          className={`input mb-15 d-block text-center text-md-left ${className}`}
+          className={`input mb-15 d-block text-center text-md-left text-capitalize ${className}`}
           onChange={handleChange}
         />
         <Button

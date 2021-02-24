@@ -16,7 +16,9 @@ const Home = () => {
             We help you rent ambulance everywhere!
           </div>
 
-          <FormSearch btnText='Search' />
+          <div className='form_2'>
+            <FormSearch btnText='Search' />
+          </div>
         </div>
       </Section>
 
@@ -74,7 +76,7 @@ const Home = () => {
           <i className='fas fa-quote-left f-36 color-gray'></i>
         </div>
         <Testimonial
-          details='Great web application! It comes in very handy to just open the app and request ambulance ride at any moments notice with just a few clicks. So far all the drivers we have experienced, have been curtious and very friendly. The drivers are always on time and get us to our destination safe and in a timely manner. We use Ambulance Finder often and will keep using them!'
+          details='Great web application! It comes in very handy to just open the web and request ambulance  at any moments notice with just a few clicks. So far all the drivers we have experienced, have been curtious and very friendly. The drivers are always on time and get us to our destination safe and in a timely manner. We use Ambulance Finder often and will keep using them!'
           propic={staticImg}
           name='John Doe'
           city='Dhaka'

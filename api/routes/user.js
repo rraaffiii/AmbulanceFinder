@@ -41,9 +41,9 @@ router.get(
   userController.update_profile_rating
 )
 router.get(
-  '/getUserLastLocation',
+  '/getUserLastBooking',
   authToken,
-  userController.get_user_last_location
+  userController.get_user_last_booking
 )
 
 module.exports = router
