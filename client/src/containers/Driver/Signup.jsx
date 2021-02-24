@@ -32,6 +32,20 @@ const SignupDriver = () => {
       })
       return
     }
+    if (city.current.value.trim() == '') {
+      global.setAlert({
+        type: 'danger',
+        message: `Invalid ${city.current.name}`,
+      })
+      return
+    }
+    if (country.current.value.trim() == '') {
+      global.setAlert({
+        type: 'danger',
+        message: `Invalid ${country.current.name}`,
+      })
+      return
+    }
     const userData = {
       type: 1,
       available: true,
