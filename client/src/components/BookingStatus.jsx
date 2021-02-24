@@ -4,8 +4,8 @@ const BookingStatus = ({ status }) => {
   return (
     <>
       {(status == 0 && 'Pending') ||
-        (status == 1 && 'Accepted') ||
-        (status == 2 && 'Rejected') ||
+        (status == 1 && 'Rejected') ||
+        (status == 2 && 'Accepted') ||
         (status == 3 && 'Arrived') ||
         (status == 4 && 'Started') ||
         (status == 5 && 'Completed') ||
