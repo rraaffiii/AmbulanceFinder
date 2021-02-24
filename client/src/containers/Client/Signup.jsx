@@ -64,7 +64,10 @@ const Signup = () => {
                             window.location.replace('/booking')
                           })
                           .catch((err) => {
-                            global.setAlert(err.response.data.message)
+                            global.setAlert({
+                              type: 'success',
+                              message: res.data.message,
+                            })
                           })
                       }
                     })

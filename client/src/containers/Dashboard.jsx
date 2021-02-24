@@ -112,42 +112,43 @@ const Dashboard = () => {
       <Section className='bg-light' align='center'>
         <PageTitle title={getGreeting()} />
 
-        {/* driver notifications */}
-        <>
-          {user.type == 1 && !user.approved && (
-            <div className='text-center mt-2 mb-5'>
-              <span className='h5 block radius10 alert alert-danger'>
-                Your account is not approved yet, adding vehicle not allowed!
-              </span>
-            </div>
-          )}
-          {user.type == 1 && user.license_photo == null && (
-            <div className='text-center mt-2 mb-5'>
-              <span className='h5 block radius10 alert alert-danger'>
-                Driving license not uploaded yet! &nbsp;
-                <input
-                  type='file'
-                  style={{ display: 'none' }}
-                  ref={license_photo}
-                  name='license_photo'
-                />
-                <button
-                  className='btn action-1 sm mt-n2'
-                  onClick={handleUploadChange}
-                >
-                  Select image
-                </button>
-                <button
-                  className='btn action-2 sm ml-5 mt-n2'
-                  onClick={handleUploadSubmit}
-                >
-                  Upload now
-                </button>
-              </span>
-            </div>
-          )}
-        </>
-
+        <div className='col-lg-12'>
+          {/* driver notifications */}
+          <>
+            {user.type == 1 && !user.approved && (
+              <div className='text-center my-2'>
+                <div className='h5 block radius10 alert alert-danger'>
+                  Your account is not approved yet, adding vehicle not allowed!
+                </div>
+              </div>
+            )}
+            {user.type == 1 && user.license_photo == null && (
+              <div className='text-center my-2'>
+                <div className='h5 block radius10 alert alert-danger'>
+                  Driving license not uploaded yet! &nbsp;
+                  <input
+                    type='file'
+                    style={{ display: 'none' }}
+                    ref={license_photo}
+                    name='license_photo'
+                  />
+                  <button
+                    className='btn action-1 sm mt-n2'
+                    onClick={handleUploadChange}
+                  >
+                    Select image
+                  </button>
+                  <button
+                    className='btn action-2 sm ml-5 mt-n2'
+                    onClick={handleUploadSubmit}
+                  >
+                    Upload now
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
+        </div>
         <div className='row justify-content-center'>
           <div className='col-lg-5 block radius10 text-center py-3 mb-3 mb-lg-0'>
             <h4 className='py-3'>Update Current Location</h4>
