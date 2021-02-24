@@ -5,14 +5,16 @@ import Section from '../../components/Section'
 import Button from '../../components/Button'
 import Tooltip from '../../components/Tooltip'
 import PageTitle from '../../components/PageTitle'
-import VehicleApi from '../../api/vehicle'
 import Vehicle from '../../components/Vehicle'
+import VehicleApi from '../../api/vehicle'
+import UserApi from '../../api/user'
 
 const VehicleMy = () => {
   const id = Cookies.get('userId')
   const global = useContext(GlobalContext)
 
   const [vehicles, setVehicles] = useState([])
+  const [driverStatus, setDriverStatus] = useState()
 
   const getVehicles = (id) => {
     VehicleApi.getVehiclesByUserId(id)
@@ -26,23 +28,39 @@ const VehicleMy = () => {
         })
       })
   }
+  const getDriverStatus = (id) => {
+    UserApi.getDriverStatus(id)
+      .then((res) => {
+        setDriverStatus(res.data)
+      })
+      .catch((err) => {
+        global.setAlert({
+          type: 'danger',
+          message: err.response.data.message,
+        })
+      })
+  }
   useEffect(() => {
     getVehicles(id)
+    getDriverStatus(id)
   }, [])
 
+  const tooltipText = !driverStatus
+    ? 'Account not approved'
+    : 'Only one vehicle allowed'
   return (
     <>
       <Section className='bg-light vehicle-add ecommerce_2' align='center'>
         <div className='d-flex'>
           <PageTitle title='My Vehicle' />
-          {(vehicles.length == 0 && (
+          {(vehicles.length == 0 && driverStatus && (
             <Button
               link={`/vehicle/add`}
               className='action-1 ms-auto'
               text='Add Vehicle'
             />
           )) || (
-            <Tooltip text='Only one vehicle allowed' className='ms-auto'>
+            <Tooltip text={tooltipText} className='ms-auto'>
               <Button
                 link='# '
                 className='action-1 disabled'

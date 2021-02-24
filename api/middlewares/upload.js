@@ -3,7 +3,7 @@ const path = require('path')
 
 const storageProfile = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../public/photos/profile')
+    cb(null, './client/public/photos/profile')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname))
@@ -12,7 +12,7 @@ const storageProfile = multer.diskStorage({
 
 const storageVehicle = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../public/photos/vehicle')
+    cb(null, './client/public/photos/vehicle')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname))
@@ -21,7 +21,7 @@ const storageVehicle = multer.diskStorage({
 
 const storageLicense = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../public/photos/license')
+    cb(null, './client/public/photos/license')
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname))

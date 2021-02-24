@@ -116,13 +116,15 @@ const Search = () => {
                   {driver.rating_count && <span>({driver.rating_count})</span>}
                 </div>
 
-                <Button
-                  className='action-2 float-end sm'
-                  text='Book'
-                  link='# '
-                  event={handleSubmit}
-                  btnParams={driver.vehicles[0].user_id}
-                />
+                {parseInt(userType) !== 1 && (
+                  <Button
+                    className='action-2 float-end sm'
+                    text='Book'
+                    link='# '
+                    event={handleSubmit}
+                    btnParams={driver.vehicles[0].user_id}
+                  />
+                )}
               </div>
             </Vehicle>
           )

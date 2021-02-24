@@ -9,8 +9,8 @@ const Footer = () => {
     <>
       <footer className='py-3 bg-dark text-center footer_1'>
         <div className='container-fluid px-xl-0'>
-          <div className='row justify-content-between align-items-center lh-40 links'>
-            <div className='bg-dark col-lg-6 col-sm-6 text-sm-right text-lg-left order-1 order-lg-0'>
+          <div className='row d-flex bg-dark lh-40 links'>
+            <div className='col-lg-4 col-md-4 col-sm-6 text-sm-right'>
               <Link
                 to='/'
                 className='link color-white f-18 mx-15'
@@ -37,7 +37,10 @@ const Footer = () => {
                 </>
               )}
             </div>
-            <div className='bg-dark col-lg-6 col-sm-6 text-sm-left text-lg-right order-2 order-lg-0'>
+            <div className='col-lg-4 col-md-4 col-sm-12 order-2 order-md-1 pb-2 text-center color-heading'>
+              &copy; 2021 All rights reserved.
+            </div>
+            <div className='col-lg-4 col-md-4 col-sm-6 order-1 order-md-2 text-sm-left'>
               <SocialLink
                 link='https://facebook.com'
                 color='white'
@@ -55,70 +58,8 @@ const Footer = () => {
               />
             </div>
           </div>
-          <div className='row'>
-            <div className='bg-dark col-lg-12 pb-25 order-0'>
-              <div className='color-heading text-adaptive'>
-                &copy; 2021 All rights reserved.
-              </div>
-            </div>
-          </div>
         </div>
       </footer>
-
-      {/* forms alerts */}
-      {/* <div
-        className='alert alert-success alert-dismissible fixed-top alert-form-success'
-        role='alert'
-      >
-        <button
-          type='button'
-          className='close'
-          data-dismiss='alert'
-          aria-label='Close'
-        >
-          <span aria-hidden='true'>&times;</span>
-        </button>
-        Thanks for your message!
-      </div>
-      <div
-        className='alert alert-warning alert-dismissible fixed-top alert-form-check-fields'
-        role='alert'
-      >
-        <button
-          type='button'
-          className='close'
-          data-dismiss='alert'
-          aria-label='Close'
-        >
-          <span aria-hidden='true'>&times;</span>
-        </button>
-        Please, fill in required fields.
-      </div>
-      <div
-        className='alert alert-danger alert-dismissible fixed-top alert-form-error'
-        role='alert'
-      >
-        <button
-          type='button'
-          className='close'
-          data-dismiss='alert'
-          aria-label='Close'
-        >
-          <span aria-hidden='true'>&times;</span>
-        </button>
-        <div className='message'>
-          An error occurred while sending data :( Please, check if your hosting
-          supports PHP and check how to set form data sending{' '}
-          <a
-            href='https://designmodo.com/startup/documentation/#form-handler'
-            target='_blank'
-            className='link color-transparent-white'
-          >
-            here
-          </a>
-          .
-        </div>
-      </div> */}
     </>
   )
 }

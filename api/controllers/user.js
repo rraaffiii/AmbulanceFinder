@@ -238,3 +238,10 @@ exports.get_driver = (req, res) => {
     .then((drivers) => res.status(200).send(drivers))
     .catch((err) => res.status(500).json({ message: 'Server error' }))
 }
+exports.get_driver_status = (req, res) => {
+  const id = req.query.id
+  User.findOne({ _id: id })
+    .select('approved')
+    .then((drivers) => res.status(200).send(drivers.approved))
+    .catch((err) => res.status(500).json({ message: 'Server error' }))
+}

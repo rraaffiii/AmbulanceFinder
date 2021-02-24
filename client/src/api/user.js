@@ -116,6 +116,12 @@ const UserApi = {
       headers: { authorization: getToken() },
     })
   },
+  getDriverStatus(id) {
+    return axios.get(`${api_uri}/getDriverStatus`, {
+      headers: { authorization: getToken() },
+      params: { id },
+    })
+  },
   getLocation(lat, lng) {
     return axios.get(
       `https://us1.locationiq.com/v1/reverse.php?key=${locationiqKey}&lat=${lat}&lon=${lng}&format=json`

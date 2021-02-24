@@ -13,6 +13,10 @@ const Signin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    if (!e.target.checkValidity()) {
+      return
+    }
     const number = phone.current.value
     const password = pass.current.value
     UserApi.checkCredentials({ phone: number, password })
@@ -41,35 +45,36 @@ const Signin = () => {
         <div className='col-lg-5 col-md-6 col-sm-10 text-center'>
           <PageTitle title='Sign In' />
 
-          <div className='input-group mb-15'>
-            <input
-              ref={phone}
-              type='text'
-              name='phone'
-              placeholder='Username'
-              required='required'
-              className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-            />
-          </div>
-          <div className='input-group mb-15'>
-            <input
-              ref={pass}
-              type='password'
-              name='password'
-              placeholder='Password'
-              required='required'
-              className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-            />
-          </div>
-          <div className='d-flex flex-wrap justify-content-center align-items-center buttons mt-25'>
-            <button
-              onClick={handleSubmit}
-              className='btn mr-20 mb-20 mb-xl-0 w-210 action-2'
-              type='submit'
-            >
-              Signin
-            </button>
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className='input-group mb-15'>
+              <input
+                ref={phone}
+                type='text'
+                name='phone'
+                placeholder='Username'
+                required='required'
+                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+              />
+            </div>
+            <div className='input-group mb-15'>
+              <input
+                ref={pass}
+                type='password'
+                name='password'
+                placeholder='Password'
+                required='required'
+                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+              />
+            </div>
+            <div className='d-flex flex-wrap justify-content-center align-items-center buttons mt-25'>
+              <button
+                className='btn mr-20 mb-20 mb-xl-0 w-210 action-2'
+                type='submit'
+              >
+                Signin
+              </button>
+            </div>
+          </form>
         </div>
       </Section>
     </>
