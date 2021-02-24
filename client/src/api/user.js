@@ -100,8 +100,8 @@ const UserApi = {
       },
     })
   },
-  getUserLastLocation() {
-    return axios.get(`${api_uri}/getUserLastLocation`, {
+  getUserLastBooking() {
+    return axios.get(`${api_uri}/getUserLastBooking`, {
       headers: { authorization: getToken() },
     })
   },

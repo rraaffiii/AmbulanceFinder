@@ -116,7 +116,7 @@ exports.find_user_by_token = (req, res) => {
       res.status(500).json({ message: 'Server error' })
     })
 }
-exports.get_user_last_location = (req, res) => {
+exports.get_user_last_booking = (req, res) => {
   User.findOne({ _id: req.userId })
     .select('-password')
     .populate('last_booking')

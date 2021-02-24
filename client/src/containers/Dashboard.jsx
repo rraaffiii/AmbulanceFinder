@@ -16,7 +16,7 @@ const Dashboard = () => {
   const license_photo = useRef()
 
   const getUser = () => {
-    UserApi.getUserLastLocation()
+    UserApi.getUserLastBooking()
       .then((res) => {
         setUser(res.data)
         setLocation({ city: res.data.city, country: res.data.country })
@@ -153,42 +153,6 @@ const Dashboard = () => {
         </div>
         <div className='row justify-content-center'>
           <div className='col-lg-5 block radius10 text-center py-3 mb-3 mb-lg-0'>
-            <h4 className='py-3'>Update Current Location</h4>
-            <div className='position-relative px-0'>
-              <i
-                class='fas fa-crosshairs float-end mr-2 f-24 locationDetect clickable'
-                onClick={handleAutoDetect}
-              ></i>
-              <input
-                value={location.city}
-                onChange={handleChange}
-                type='text'
-                name='city'
-                placeholder='City'
-                required='required'
-                className='input w-full mb-2 border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-              />
-            </div>
-            <input
-              value={location.country}
-              onChange={handleChange}
-              type='text'
-              name='country'
-              placeholder='Country'
-              required='required'
-              className='input w-full mb-2 border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-            />
-            <div className='d-inline-flex my-2'>
-              <Button
-                className='action-2'
-                link='# '
-                text='Change Location'
-                type='submit'
-                event={handleUpdateLocation}
-              />
-            </div>
-          </div>
-          <div className='col-lg-5 block radius10 text-center py-3 ml-15 rm-ml-lg'>
             <h4 className='py-3'>Current Booking</h4>
             {(user.last_booking && (
               <>
@@ -223,6 +187,42 @@ const Dashboard = () => {
                 </div>
               </>
             )) || <h5>No booking found</h5>}
+          </div>
+          <div className='col-lg-5 block radius10 text-center py-3 ml-15 rm-ml-lg'>
+            <h4 className='py-3'>Current Location</h4>
+            <div className='position-relative px-0'>
+              <i
+                className='fas fa-crosshairs float-end mr-2 f-24 locationDetect clickable'
+                onClick={handleAutoDetect}
+              ></i>
+              <input
+                value={location.city}
+                onChange={handleChange}
+                type='text'
+                name='city'
+                placeholder='City'
+                required='required'
+                className='input w-full mb-2 border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+              />
+            </div>
+            <input
+              value={location.country}
+              onChange={handleChange}
+              type='text'
+              name='country'
+              placeholder='Country'
+              required='required'
+              className='input w-full mb-2 border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+            />
+            <div className='d-inline-flex my-2'>
+              <Button
+                className='action-2'
+                link='# '
+                text='Update'
+                type='submit'
+                event={handleUpdateLocation}
+              />
+            </div>
           </div>
         </div>
       </Section>
