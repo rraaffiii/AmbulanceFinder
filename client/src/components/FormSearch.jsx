@@ -31,7 +31,10 @@ const FormSearch = ({ btnText, style = null }) => {
           })
       })
     } else {
-      console.log('Browser dont support')
+      global.setAlert({
+        type: 'danger',
+        message: 'Browser not supported',
+      })
     }
   }
   const handleSubmit = (e) => {

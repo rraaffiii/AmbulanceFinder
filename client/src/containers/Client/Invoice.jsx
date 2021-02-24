@@ -9,7 +9,10 @@ const Invoice = () => {
   const { bookId } = useParams()
 
   const handleDownload = () => {
-    console.log('Downloading Invoice...')
+    global.setAlert({
+      type: 'success',
+      message: 'Downloading invoice',
+    })
   }
   const rowsBooking = [
     { label: 'Vehicle Name', value: 'Rocket Ambulance' },

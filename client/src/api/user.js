@@ -101,7 +101,6 @@ const UserApi = {
     })
   },
   getUserLastLocation() {
-    console.log(getToken())
     return axios.get(`${api_uri}/getUserLastLocation`, {
       headers: { authorization: getToken() },
     })
