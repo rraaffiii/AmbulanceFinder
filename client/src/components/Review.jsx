@@ -15,7 +15,7 @@ const Review = ({
     <>
       <div className='py-2 border-top'>
         <div className='row'>
-          <div className='col-md-2 col-sm-2 text-center'>
+          <div className='col-md-2 col-sm-2 text-lg-center'>
             <img
               className='col-md-6 rounded-circle w-70'
               src={`/photos/profile/${recieverPhoto}`}

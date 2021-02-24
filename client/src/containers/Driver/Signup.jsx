@@ -78,7 +78,7 @@ const SignupDriver = () => {
     <>
       <Section className='bg-light form_2' align='center'>
         <div className='col-lg-8 col-md-9 col-sm-12 text-center'>
-          <PageTitle title='Sign Up to Drive' />
+          <PageTitle title='Sign Up as Driver' />
 
           <form onSubmit={handleSubmit}>
             <div className='input-group mb-15'>

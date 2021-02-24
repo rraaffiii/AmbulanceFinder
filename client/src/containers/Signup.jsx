@@ -17,14 +17,14 @@ const Signup = () => {
         >
           <SubHeadingTitle
             subheading='Find an Ambulance!'
-            heading='Sign Up to Book'
+            heading='Sign Up as Client'
             size='h1 big'
             to='/signup?u=client'
           />
           <SubHeadingTitle
             className='mt-5 mt-sm-0'
             subheading='Start Earning!'
-            heading='Sign Up to Drive'
+            heading='Sign Up as Driver'
             size='h1 big'
             to='/signup?u=driver'
           />

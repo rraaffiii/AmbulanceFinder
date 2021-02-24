@@ -24,14 +24,14 @@ const Home = () => {
       <Section className='bg-light' align='center'>
         <SubHeadingTitle
           subheading='Find an Ambulance!'
-          heading='Sign Up to Book'
+          heading='Sign Up as Client'
           size='h2'
           to='/signup?u=client'
         />
         <SubHeadingTitle
           className='mt-4 mt-sm-0'
           subheading='Start Earning!'
-          heading='Sign Up to Drive'
+          heading='Sign Up as Driver'
           size='h2'
           to='/signup?u=driver'
         />
@@ -43,22 +43,22 @@ const Home = () => {
           <h2 className='mb-45'>How it works</h2>
           <div className='row justify-content-center'>
             <IconParagraph
-              logo='briefcase'
-              title='Find an ambulance'
+              logo='search'
+              title='Find an Ambulance'
               paragraph='Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industrys standard dummy text ever
           since the 1500s'
             />
             <IconParagraph
-              logo='compress-arrows-alt'
-              title='Book an ambulance'
+              logo='calendar-check'
+              title='Book an Ambulance'
               paragraph='Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industrys standard dummy text ever
           since the 1500s'
             />
             <IconParagraph
-              logo='desktop'
-              title='Easy payment'
+              logo='smile'
+              title='Rate Your Experience'
               paragraph='Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industrys standard dummy text
                 ever since the 1500s'
@@ -74,11 +74,9 @@ const Home = () => {
           <i className='fas fa-quote-left f-36 color-gray'></i>
         </div>
         <Testimonial
-          details='The most important part of the Startup Framework is the samples. The
-          samples form a set of 25 usable pages you can use as is or you can add
-          new blocks from UI Kit.'
+          details='Great web application! It comes in very handy to just open the app and request ambulance ride at any moments notice with just a few clicks. So far all the drivers we have experienced, have been curtious and very friendly. The drivers are always on time and get us to our destination safe and in a timely manner. We use Ambulance Finder often and will keep using them!'
           propic={staticImg}
-          name='Jessey Kirk'
+          name='John Doe'
           city='Dhaka'
         />
       </Section>

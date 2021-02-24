@@ -19,7 +19,7 @@ const RowBookingRecent = ({
       {first_name && <td>{first_name}</td>}
       {phone && <td>{phone}</td>}
       <td>{createdAt && createdAt.slice(0, 19).split('T')[0]}</td>
-      <td className='d-none d-sm-block'>
+      <td className='d-none d-sm-table-cell'>
         {createdAt && createdAt.slice(0, 19).split('T')[1]}
       </td>
       <td>
