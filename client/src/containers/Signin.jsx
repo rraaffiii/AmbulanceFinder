@@ -8,17 +8,20 @@ import firebase from '../firebase'
 import UserApi from '../api/user'
 import BookingApi from '../api/booking'
 
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
+
 const Signin = () => {
   const global = useContext(GlobalContext)
   const [showPass, setShowPass] = useState(false)
-  const phone = useRef(null)
+  const [phone, setPhone] = useState()
   const pass = useRef(null)
 
   const handlePhoneSubmit = (e) => {
     e.preventDefault()
-    const number = phone.current.value
+    const number = phone
 
-    if (number.trim().length == 0) {
+    if (!number) {
       global.setAlert({ type: 'danger', message: 'Invalid input' })
       return
     }
@@ -105,7 +108,7 @@ const Signin = () => {
   }
   const handlePassSubmit = (e) => {
     e.preventDefault()
-    const number = phone.current.value
+    const number = phone
     const password = pass.current.value
 
     if (number.trim().length == 0 || password.trim().length == 0) {
@@ -141,12 +144,13 @@ const Signin = () => {
 
           <form>
             <div className='input-group mb-15'>
-              <input
-                ref={phone}
-                type='text'
-                name='phone'
+              <PhoneInput
                 placeholder='Phone'
-                required='required'
+                value={phone}
+                onChange={setPhone}
+                defaultCountry='BD'
+                international
+                countryCallingCodeEditable={false}
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
             </div>

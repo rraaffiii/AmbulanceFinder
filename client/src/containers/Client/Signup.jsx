@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import Cookies from 'js-cookie'
 import { GlobalContext } from '../../context/GlobalContext'
 import { Link } from 'react-router-dom'
@@ -8,18 +8,21 @@ import firebase from '../../firebase'
 import UserApi from '../../api/user'
 import BookingApi from '../../api/booking'
 
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
+
 const Signup = () => {
   const global = useContext(GlobalContext)
-  const phone = useRef(null)
+  const [phone, setPhone] = useState()
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    const number = phone
 
-    if (!e.target.checkValidity()) {
+    if (!number) {
+      global.setAlert({ type: 'danger', message: 'Invalid input' })
       return
     }
-    const number = phone.current.value
-
     UserApi.isUserExist(number)
       .then((res) => {
         //user not found, send code to signup
@@ -117,14 +120,23 @@ const Signup = () => {
 
           <form onSubmit={handleSubmit}>
             <div className='input-group mb-15'>
-              <input
+              <PhoneInput
+                placeholder='Phone'
+                value={phone}
+                onChange={setPhone}
+                defaultCountry='BD'
+                international
+                countryCallingCodeEditable={false}
+                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+              />
+              {/* <input
                 ref={phone}
                 type='text'
                 name='phone'
                 placeholder='Phone'
                 required
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-              />
+              /> */}
             </div>
             <div className='d-flex flex-wrap justify-content-center align-items-center buttons mt-25'>
               <button

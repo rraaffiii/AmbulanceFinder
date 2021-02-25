@@ -8,13 +8,16 @@ import PageTitle from '../../components/PageTitle'
 import UserApi from '../../api/user'
 import 'react-datepicker/dist/react-datepicker.css'
 
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
+
 const SignupDriver = () => {
   const global = useContext(GlobalContext)
   const [dob, setDob] = useState()
+  const [phone, setPhone] = useState()
 
   const fname = useRef(null)
   const lname = useRef(null)
-  const phone = useRef(null)
   const password = useRef(null)
   const drivingLicense = useRef(null)
   const city = useRef(null)
@@ -32,20 +35,18 @@ const SignupDriver = () => {
       })
       return
     }
-    if (city.current.value.trim() == '') {
+    if (
+      phone ||
+      city.current.value.trim() == '' ||
+      country.current.value.trim() == ''
+    ) {
       global.setAlert({
         type: 'danger',
         message: `Invalid ${city.current.name}`,
       })
       return
     }
-    if (country.current.value.trim() == '') {
-      global.setAlert({
-        type: 'danger',
-        message: `Invalid ${country.current.name}`,
-      })
-      return
-    }
+
     const userData = {
       type: 1,
       available: true,
@@ -54,7 +55,7 @@ const SignupDriver = () => {
       license_photo: null,
       first_name: fname.current.value,
       last_name: lname.current.value,
-      phone: phone.current.value,
+      phone: phone,
       password: password.current.value,
       driving_license: drivingLicense.current.value,
       date_of_birth: dob,
@@ -100,12 +101,13 @@ const SignupDriver = () => {
               />
             </div>
             <div className='input-group mb-15'>
-              <input
-                ref={phone}
-                type='text'
-                name='phone'
+              <PhoneInput
                 placeholder='Phone'
-                required
+                value={phone}
+                onChange={setPhone}
+                defaultCountry='BD'
+                international
+                countryCallingCodeEditable={false}
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
               <input
