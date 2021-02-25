@@ -22,7 +22,7 @@ const Tooltip = ({ text, className = null, children }) => {
       >
         {children}
         <div
-          className='text-center bg-dark color-white rounded'
+          className='text-center bg-dark color-white rounded px-1'
           style={tooltipStyle}
         >
           {text}
