@@ -8,6 +8,7 @@ import UserCard from '../../components/UserCard'
 import BookingStatus from '../../components/BookingStatus'
 import Modal from '../../components/Modal'
 import RatingStar from '../../components/RatingStar'
+import Tooltip from '../../components/Tooltip'
 import BookingApi from '../../api/booking'
 import ReviewApi from '../../api/review'
 import UserApi from '../../api/user'
@@ -17,6 +18,7 @@ const BookingSingle = () => {
   const global = useContext(GlobalContext)
 
   const [booking, setBooking] = useState()
+  const [validAccept, setValidAccept] = useState(false)
 
   // status section
   const [status, setStatus] = useState()
@@ -24,8 +26,8 @@ const BookingSingle = () => {
     BookingApi.updateStatus(id, newStatus)
       .then(() => {
         setStatus(newStatus)
-        // set driver availability
-        if (newStatus == 1) {
+        // set driver availability if booking accepted or completed
+        if (newStatus == 2) {
           const data = { last_booking: booking._id, available: false }
           UserApi.updateFields(data).catch((err) => {
             global.setAlert({
@@ -110,12 +112,44 @@ const BookingSingle = () => {
       })
     closeModal()
   }
-
+  const getLastBookingStatus = () => {
+    UserApi.getUserLastBooking()
+      .then((res) => {
+        console.log(res.data)
+        if (res.data) {
+          //check if last booking active
+          if (
+            res.data.last_booking.status >= 2 &&
+            res.data.last_booking.status <= 4
+          ) {
+            setValidAccept(false)
+          } else {
+            setValidAccept(true)
+          }
+        }
+        // if no last booking found
+        else {
+          setValidAccept(true)
+        }
+      })
+      .catch((err) => {
+        // console.log('2res.data.user.status')
+        global.setAlert({
+          type: 'danger',
+          message: err.response.data.message,
+        })
+      })
+  }
   useEffect(() => {
     BookingApi.findBookingVehicleByBookingId(id)
       .then((res) => {
         setBooking(res.data)
         setStatus(res.data.status)
+
+        //when single booking status pending, get last booking status and check if user already accepted another booking
+        if (res.data.status == 0) {
+          getLastBookingStatus()
+        }
       })
       .catch((err) => {
         global.setAlert({ type: 'danger', message: err.response.data.message })
@@ -190,13 +224,22 @@ const BookingSingle = () => {
                 <>
                   <div className='row pb-4'>
                     <div className='col-lg-12 d-flex'>
-                      <Button
-                        className={`sm mr-5 action-1`}
-                        link='# '
-                        text='Accept'
-                        event={handleStatus}
-                        btnParams={2}
-                      />
+                      {(validAccept === true && (
+                        <Button
+                          className={`sm mr-5 action-1`}
+                          link='# '
+                          text='Accept'
+                          event={handleStatus}
+                          btnParams={2}
+                        />
+                      )) || (
+                        <Tooltip text='Already have active booking'>
+                          <Button
+                            className={`sm mr-5 action-1 disabled`}
+                            text='Accept'
+                          />
+                        </Tooltip>
+                      )}
                       <Button
                         className={`sm mr-5 action-2`}
                         link='# '
