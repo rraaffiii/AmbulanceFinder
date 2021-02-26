@@ -6,6 +6,8 @@ import DatePicker from 'react-datepicker'
 import PhoneInput from 'react-phone-number-input'
 import Section from '../../components/Section'
 import PageTitle from '../../components/PageTitle'
+import SelectCountry from '../../components/SelectCountry'
+import en from 'react-phone-number-input/locale/en.json'
 import UserApi from '../../api/user'
 import 'react-datepicker/dist/react-datepicker.css'
 import 'react-phone-number-input/style.css'
@@ -14,13 +16,13 @@ const SignupDriver = () => {
   const global = useContext(GlobalContext)
   const [dob, setDob] = useState()
   const [phone, setPhone] = useState()
+  const [country, setCountry] = useState()
 
   const fname = useRef(null)
   const lname = useRef(null)
   const password = useRef(null)
   const drivingLicense = useRef(null)
   const city = useRef(null)
-  const country = useRef(null)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -34,11 +36,7 @@ const SignupDriver = () => {
       })
       return
     }
-    if (
-      phone ||
-      city.current.value.trim() == '' ||
-      country.current.value.trim() == ''
-    ) {
+    if (phone || city.current.value.trim() == '' || country == null) {
       global.setAlert({
         type: 'danger',
         message: `Invalid ${city.current.name}`,
@@ -59,7 +57,7 @@ const SignupDriver = () => {
       driving_license: drivingLicense.current.value,
       date_of_birth: dob,
       city: city.current.value,
-      country: country.current.value,
+      country: country,
       vehicles: [],
     }
     UserApi.createDriver(userData)
@@ -146,12 +144,10 @@ const SignupDriver = () => {
                 required
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
-              <input
-                ref={country}
-                type='text'
-                name='country'
-                placeholder='Country'
-                required
+              <SelectCountry
+                labels={en}
+                value={country}
+                onChange={(country) => setCountry(country)}
                 className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
               />
             </div>
