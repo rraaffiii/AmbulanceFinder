@@ -1,15 +1,14 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import Cookies from 'js-cookie'
 import { GlobalContext } from '../../context/GlobalContext'
 import { Link } from 'react-router-dom'
+import PhoneInput from 'react-phone-number-input'
 import Section from '../../components/Section'
 import PageTitle from '../../components/PageTitle'
 import firebase from '../../firebase'
 import UserApi from '../../api/user'
 import BookingApi from '../../api/booking'
-
 import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 
 const Signup = () => {
   const global = useContext(GlobalContext)
@@ -121,22 +120,13 @@ const Signup = () => {
           <form onSubmit={handleSubmit}>
             <div className='input-group mb-15'>
               <PhoneInput
-                placeholder='Phone'
-                value={phone}
-                onChange={setPhone}
-                defaultCountry='BD'
                 international
                 countryCallingCodeEditable={false}
-                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+                defaultCountry='BD'
+                value={phone}
+                onChange={(phone) => setPhone(phone)}
+                className='input d-flex flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left PhoneInput'
               />
-              {/* <input
-                ref={phone}
-                type='text'
-                name='phone'
-                placeholder='Phone'
-                required
-                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
-              /> */}
             </div>
             <div className='d-flex flex-wrap justify-content-center align-items-center buttons mt-25'>
               <button
