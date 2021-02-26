@@ -16,7 +16,7 @@ const SignupDriver = () => {
   const global = useContext(GlobalContext)
   const [dob, setDob] = useState()
   const [phone, setPhone] = useState()
-  const [country, setCountry] = useState()
+  const [country, setCountry] = useState('BD')
 
   const fname = useRef(null)
   const lname = useRef(null)
@@ -26,6 +26,7 @@ const SignupDriver = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
     if (!e.target.checkValidity()) {
       return
     }
@@ -36,10 +37,10 @@ const SignupDriver = () => {
       })
       return
     }
-    if (phone || city.current.value.trim() == '' || country == null) {
+    if (!phone || city.current.value.trim() == '' || !country) {
       global.setAlert({
         type: 'danger',
-        message: `Invalid ${city.current.name}`,
+        message: `Invalid input`,
       })
       return
     }
@@ -148,7 +149,7 @@ const SignupDriver = () => {
                 labels={en}
                 value={country}
                 onChange={(country) => setCountry(country)}
-                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left mw-100'
               />
             </div>
 
