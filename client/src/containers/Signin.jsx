@@ -2,14 +2,13 @@ import React, { useState, useRef, useContext } from 'react'
 import { GlobalContext } from '../context/GlobalContext'
 import Cookies from 'js-cookie'
 import { Link } from 'react-router-dom'
+import PhoneInput from 'react-phone-number-input'
 import Section from '../components/Section'
 import PageTitle from '../components/PageTitle'
 import firebase from '../firebase'
 import UserApi from '../api/user'
 import BookingApi from '../api/booking'
-
 import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 
 const Signin = () => {
   const global = useContext(GlobalContext)
@@ -115,7 +114,6 @@ const Signin = () => {
       global.setAlert({ type: 'danger', message: 'Invalid input' })
       return
     }
-
     UserApi.checkCredentials({ phone: number, password })
       .then((res) => {
         //driver login
@@ -151,7 +149,7 @@ const Signin = () => {
                 defaultCountry='BD'
                 international
                 countryCallingCodeEditable={false}
-                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+                className='input d-flex flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left PhoneInput'
               />
             </div>
             {(!showPass && (

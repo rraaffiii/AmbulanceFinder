@@ -1,15 +1,14 @@
-import React, { useRef, useState, useContext, useEffect } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import Cookies from 'js-cookie'
 import { GlobalContext } from '../../context/GlobalContext'
 import { Link } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
+import PhoneInput from 'react-phone-number-input'
 import Section from '../../components/Section'
 import PageTitle from '../../components/PageTitle'
 import UserApi from '../../api/user'
 import 'react-datepicker/dist/react-datepicker.css'
-
 import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 
 const SignupDriver = () => {
   const global = useContext(GlobalContext)
@@ -108,7 +107,7 @@ const SignupDriver = () => {
                 defaultCountry='BD'
                 international
                 countryCallingCodeEditable={false}
-                className='input flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left'
+                className='input d-flex flex-fill border-gray focus-action-1 color-heading placeholder-main text-center text-md-left PhoneInput'
               />
               <input
                 ref={password}
