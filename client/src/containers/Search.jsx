@@ -7,6 +7,7 @@ import Vehicle from '../components/Vehicle'
 import Select from '../components/Select'
 import PageTitle from '../components/PageTitle'
 import Button from '../components/Button'
+import { capitalize } from '../util'
 import UserApi from '../api/user'
 import BookingApi from '../api/booking'
 
@@ -15,8 +16,10 @@ const Search = () => {
   const history = useHistory()
   const userType = Cookies.get('type')
 
-  const pickup = new URLSearchParams(useLocation().search).get('p')
-  const destination = new URLSearchParams(useLocation().search).get('d')
+  const pickup = capitalize(new URLSearchParams(useLocation().search).get('p'))
+  const destination = capitalize(
+    new URLSearchParams(useLocation().search).get('d')
+  )
 
   const [drivers, setDrivers] = useState([])
   const [filteredDrivers, setFilteredDrivers] = useState([])

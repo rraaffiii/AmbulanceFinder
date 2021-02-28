@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { GlobalContext } from '../context/GlobalContext'
 import { useHistory } from 'react-router-dom'
 import Button from './Button'
+import { capitalize } from '../util'
 import UserApi from '../api/user'
 
 const FormSearch = ({ btnText, style = null }) => {
@@ -42,7 +43,9 @@ const FormSearch = ({ btnText, style = null }) => {
     if (!e.target.checkValidity()) {
       return
     }
-    history.push(`/search?p=${form.pickup}&d=${form.destination}`)
+    history.push(
+      `/search?p=${capitalize(form.pickup)}&d=${capitalize(form.destination)}`
+    )
   }
   const className =
     style == 'dark'

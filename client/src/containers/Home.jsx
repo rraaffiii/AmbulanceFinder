@@ -1,4 +1,5 @@
 import React from 'react'
+import Cookies from 'js-cookie'
 import FormSearch from '../components/FormSearch'
 import Section from '../components/Section'
 import SubHeadingTitle from '../components/SubHeadingTitle'
@@ -7,6 +8,7 @@ import Testimonial from '../components/Testimonial'
 import staticImg from '../assets/team_1_img_2.jpg'
 
 const Home = () => {
+  const type = Cookies.get('type')
   return (
     <>
       <Section className='bg-dark content_1' align='left'>
@@ -23,25 +25,27 @@ const Home = () => {
       </Section>
 
       {/* Content */}
-      <Section className='bg-light' align='center'>
-        <SubHeadingTitle
-          subheading='Find an Ambulance!'
-          heading='Sign Up as Client'
-          size='h2'
-          to='/signup?u=client'
-        />
-        <SubHeadingTitle
-          className='mt-4 mt-sm-0'
-          subheading='Start Earning!'
-          heading='Sign Up as Driver'
-          size='h2'
-          to='/signup?u=driver'
-        />
-      </Section>
+      {!type && (
+        <Section className='bg-light' align='center'>
+          <SubHeadingTitle
+            subheading='Find an Ambulance!'
+            heading='Sign Up as Client'
+            size='h2'
+            to='/signup?u=client'
+          />
+          <SubHeadingTitle
+            className='mt-4 mt-sm-0'
+            subheading='Start Earning!'
+            heading='Sign Up as Driver'
+            size='h2'
+            to='/signup?u=driver'
+          />
+        </Section>
+      )}
 
       {/* Feature */}
-      <Section className='bg-dark feature_1' align='center'>
-        <div className='col-xl-10 color-white text-center'>
+      <Section className='bg-offwhite feature_1' align='center'>
+        <div className='col-xl-10 color-main text-center'>
           <h2 className='mb-45'>How it works</h2>
           <div className='row justify-content-center'>
             <IconParagraph
