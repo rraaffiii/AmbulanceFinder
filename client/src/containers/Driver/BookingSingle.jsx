@@ -177,11 +177,7 @@ const BookingSingle = () => {
           {/* modal section */}
           {showModal && (
             <>
-              <Modal
-                title='Submit Review'
-                closeEvent={closeModal}
-                submitEvent={submitModal}
-              >
+              <Modal title='Submit Review' closeEvent={closeModal}>
                 {/* modal body */}
                 <form>
                   <div className='mb-3'>
@@ -205,6 +201,12 @@ const BookingSingle = () => {
                       className='input w-full radius10 border-gray focus-action-1 color-heading placeholder-main text-left'
                     ></textarea>
                   </div>
+                  <Button
+                    className={`sm action-1`}
+                    link='# '
+                    text='Submit'
+                    event={submitModal}
+                  />
                 </form>
               </Modal>
             </>
