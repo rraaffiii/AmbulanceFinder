@@ -19,8 +19,8 @@ const BookingApi = {
     }
   },
   bookDriverFromRedirect(redirectUrl) {
-    const pickup = redirectUrl.split('?p=').pop().split('&d')[0]
-    const destination = redirectUrl.split('&d').pop().split('&driver')[0]
+    const pickup = redirectUrl.split('?p=').pop().split('&d=')[0]
+    const destination = redirectUrl.split('&d=').pop().split('&driver=')[0]
     const driver = redirectUrl.split('&driver=').pop()
     const bookingData = {
       pickup,

@@ -71,10 +71,14 @@ const Signin = () => {
                       }
                     })
                     .catch((err) => {
-                      global.setAlert({
-                        type: 'danger',
-                        message: err.response.data.message,
-                      })
+                      if (err.response) {
+                        global.setAlert({
+                          type: 'danger',
+                          message: err.response.data.message,
+                        })
+                      } else {
+                        window.location.replace('/signin')
+                      }
                     })
                 })
                 .catch((err) => {
@@ -85,10 +89,14 @@ const Signin = () => {
                 })
             })
             .catch((err) => {
-              global.setAlert({
-                type: 'danger',
-                message: err.response.data.message,
-              })
+              if (err.response) {
+                global.setAlert({
+                  type: 'danger',
+                  message: err.response.data.message,
+                })
+              } else {
+                window.location.replace('/signin')
+              }
             })
         }
         //driver found, show password
